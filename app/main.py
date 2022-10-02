@@ -42,3 +42,46 @@ def put():
 
     return response
 
+@webapp.route('/clear',methods=['POST'])
+def clear():
+    memcache.clear()
+
+    response = webapp.response_class(
+        response=json.dumps("OK"),
+        status=200,
+        mimetype='application/json'
+    )
+
+    return response
+
+@webapp.route('/invalidateKey',methods=['POST'])
+def invalidateKey():
+    key = request.form.get('key')
+    if key in memcache:
+        memcache.pop(key)
+        response = webapp.response_class(
+            response=json.dumps("OK"),
+            status=200,
+            mimetype='application/json'
+        )
+    else:
+        response = webapp.response_class(
+            response=json.dumps("Unknown key"),
+            status=400,
+            mimetype='application/json'
+        )
+
+    return response
+
+@webapp.route('/refreshConfiguration',methods=['POST'])
+def refreshConfiguration():
+    # TODO: refresh config?
+    memcache.refreshConfiguration()
+
+    response = webapp.response_class(
+        response=json.dumps("OK"),
+        status=200,
+        mimetype='application/json'
+    )
+
+    return response
