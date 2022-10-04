@@ -11,11 +11,11 @@ def main():
 @webapp.route('/get',methods=['POST'])
 def get():
     key = request.form.get('key')
+    result = memcache.get(key)
 
-    if key in memcache:
-        value = memcache[key]
+    if result != -1:
         response = webapp.response_class(
-            response=json.dumps(value),
+            response=json.dumps(result),
             status=200,
             mimetype='application/json'
         )
@@ -32,13 +32,20 @@ def get():
 def put():
     key = request.form.get('key')
     value = request.form.get('value')
-    memcache[key] = value
+    success_code = memcache.put(key, value)
 
-    response = webapp.response_class(
-        response=json.dumps("OK"),
-        status=200,
-        mimetype='application/json'
-    )
+    if success_code != -1:
+        response = webapp.response_class(
+            response=json.dumps("OK"),
+            status=200,
+            mimetype='application/json'
+        )
+    else:
+        response = webapp.response_class(
+            response=json.dumps("Image is too large"),
+            status=400,
+            mimetype='application/json'
+        )
 
     return response
 
@@ -57,8 +64,9 @@ def clear():
 @webapp.route('/invalidateKey',methods=['POST'])
 def invalidateKey():
     key = request.form.get('key')
-    if key in memcache:
-        memcache.pop(key)
+    success_code = memcache.invalidateKey(key)
+    
+    if success_code != -1:
         response = webapp.response_class(
             response=json.dumps("OK"),
             status=200,
