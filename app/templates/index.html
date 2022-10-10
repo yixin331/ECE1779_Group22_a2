@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
@@ -13,13 +13,18 @@
     <p style="text-align: center;">
         Junyun Ruan  1004388851<br>
                           <br>
+        Yixin Wang  1009226375<br>
+                          <br>
+        Yinfei Song  1004537487<br>
+                          <br>
+
                     <br>
     </p>
 
     <table border="1" >
         <tr>
             <td>
-                <a href="put.html">put</a>
+                <a href="{{ url_for('put')}}">put</a>
             </td>
 
         </tr>
@@ -31,7 +36,7 @@
     <table border="1" >
         <tr>
             <td>
-                <a href="get.html">get</a>
+                <a href="{{ url_for('get')}}">get</a>
             </td>
 
         </tr>
@@ -70,7 +75,7 @@
     </table>
 
 <iframe id="myIframe" name="hideIframe" style="display:none;"></iframe>
-<script type="text/javascript" src="../js/index.js"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
 
 
 

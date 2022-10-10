@@ -6,9 +6,10 @@ from flask import json
 
 @webapp.route('/')
 def main():
-    return render_template("main.html")
+    # change the home page
+    return render_template("index.html")
 
-@webapp.route('/get',methods=['POST'])
+@webapp.route('/get',methods=['GET'])
 def get():
     key = request.form.get('key')
     result = memcache.get(key)
@@ -25,8 +26,9 @@ def get():
             status=400,
             mimetype='application/json'
         )
-
-    return response
+    # frontend
+    return render_template("get.html")
+    # return response
 
 @webapp.route('/put',methods=['POST'])
 def put():
@@ -47,7 +49,8 @@ def put():
             mimetype='application/json'
         )
 
-    return response
+    #return response
+    return render_template("put.html")
 
 @webapp.route('/clear',methods=['POST'])
 def clear():
