@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from pathlib import Path
 import os
+import base64
 
 
 @webapp.teardown_appcontext
@@ -45,9 +46,10 @@ def get():
         else:
             # todo: cache
             webapp.logger.warning(result)
-            return render_template("get.html")
+            
+            return render_template("get.html", user_image=result.decode('utf-8'))
     else:
-        return render_template("get.html")
+        return render_template("get.html", user_image=None)
 
     #
     # if result != -1:
