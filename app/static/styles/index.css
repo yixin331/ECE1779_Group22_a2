@@ -16,3 +16,7 @@ body{
     background-color:#deab8a;
 }
 
+img{
+    max-width:150px;max-height:150px;
+}
+

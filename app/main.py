@@ -139,6 +139,34 @@ def clear():
     return response
 
 
+<<<<<<< HEAD
+@webapp.route('/invalidateKey', methods=['POST'])
+def invalidateKey():
+    key = request.form.get('key')
+    success_code = memcache.invalidateKey(key)
+
+    if success_code != -1:
+        response = webapp.response_class(
+            response=json.dumps("OK"),
+            status=200,
+            mimetype='application/json'
+        )
+    else:
+        response = webapp.response_class(
+            response=json.dumps("Unknown key"),
+            status=400,
+            mimetype='application/json'
+        )
+
+    return response
+
+@webapp.route('/key', methods=['GET'])
+def key():
+    cursor = dbconnection.list_keys()
+    return render_template("key.html", cursor=cursor)
+
+=======
+>>>>>>> 0b7c6a74f200702dd994dfe4b2f57cd690a296ce
 @webapp.route('/refreshConfiguration', methods=['POST'])
 def refreshConfiguration():
     # TODO: refresh config?
