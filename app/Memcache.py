@@ -3,6 +3,7 @@ import os
 import random
 from app import dbconnection
 import sys
+import base64
 
 
 class Memcache:
@@ -52,6 +53,7 @@ class Memcache:
         # add image into cache
         self.num_item += 1
         self.total_size += item_size
+        value = base64.b64encode(value.read())
         self.cache[key] = value
 
         if self.policy == "LRU":
