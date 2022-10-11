@@ -29,9 +29,9 @@ class Memcache:
             self.num_miss += 1
             return -1
 
-    def put(self, key, value):
+    def put(self, key, value, path):
         self.num_request += 1
-        item_size = os.stat(value).st_size
+        item_size = os.stat(path).st_size
 
         if item_size > self.capacity * 1024 * 1024:
             # image is too large

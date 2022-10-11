@@ -29,14 +29,15 @@
             <input type="submit" value="get" />
           </td>
         </tr>
-        <tr id="imageCell" style="display:none">
+{#        <tr id="imageCell" style="display:none">#}
+            <tr id="imageCell" >
             <td>
                     <!-- TODO: check what if user_image is None              -->
-              <img id="showimg" src="user_image" style="display:none;" />
+{#              <img id="showimg" src="{{ user_image }}" style="display:none;" />#}
+
             </td>
         </tr>
     </form>
-
-
+<img id="showimg" src="{{ user_image }}"/>
 </body>
 </html>
