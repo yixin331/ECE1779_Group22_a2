@@ -1,10 +1,12 @@
 from collections import OrderedDict
 import os
 import random
+from app import dbconnection
 
 class Memcache:
     def __init__(self, capacity = 128, policy = "LRU"):
         self.cache = OrderedDict()
+        self.db = dbconnection.get_db()
         # configuration
         self.capacity = capacity
         self.policy = policy
@@ -37,16 +39,9 @@ class Memcache:
             return -1
 
         if key in self.cache:
-            self.invalidateKey(key)
+            self.invalidate_key(key)
 
-        # remove items until the new image can fit into the cache
-        while item_size + self.total_size > self.capacity * 1024 * 1024:
-            if self.policy == "LRU":
-                item_to_remove = self.cache.popitem(last=False)
-            else:
-                item_to_remove = self.cache.pop(random.choice(self.cache.keys()))
-            self.num_item -= 1
-            self.total_size -= os.stat(item_to_remove).st_size
+        self.free_cache(item_size)
 
         # add image into cache
         self.num_item += 1
@@ -57,6 +52,16 @@ class Memcache:
             self.cache.move_to_end(key)
 
         return 1
+    
+    def free_cache(self, item_size):
+        # remove items until the new image can fit into the cache
+        while item_size + self.total_size > self.capacity * 1024 * 1024:
+            if self.policy == "LRU":
+                item_to_remove = self.cache.popitem(last=False)
+            else:
+                item_to_remove = self.cache.pop(random.choice(self.cache.keys()))
+            self.num_item -= 1
+            self.total_size -= os.stat(item_to_remove).st_size
 
     def clear(self):
         self.num_request += 1
@@ -64,7 +69,7 @@ class Memcache:
         self.total_size = 0
         self.cache.clear()
 
-    def invalidateKey(self, key):
+    def invalidate_key(self, key):
         self.num_request += 1
         if key in self.cache:
             item_to_remove = self.cache.pop(key)
