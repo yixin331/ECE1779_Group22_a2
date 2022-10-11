@@ -1,6 +1,7 @@
 import mysql.connector
 from app.config import db_config
 from datetime import datetime
+from flask import g
 
 
 def get_db():
@@ -8,6 +9,7 @@ def get_db():
     if db is None:
         db = g._database = connect_to_database()
     return db
+
 
 def connect_to_database():
     return mysql.connector.connect(user=db_config['user'],
@@ -64,3 +66,13 @@ def show_stat():
     cursor.execute(query)
 
     return cursor
+
+
+def put_stat(num_item, total_size, num_request, num_get, num_miss):
+    cnx = get_db()
+
+    cursor = cnx.cursor()
+    query = "INSERT INTO memcache_stat (updated_time, num_item, total_size, num_request, miss_rate, hit_rate) VALUES (%s, %d, %d, %d, %f %f);"
+    cursor.execute(query, (datetime.now(), num_item, total_size, num_request, num_miss/num_get, 1- num_miss/num_get))
+
+    cnx.commit()

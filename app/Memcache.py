@@ -6,7 +6,6 @@ from app import dbconnection
 class Memcache:
     def __init__(self, capacity = 128, policy = "LRU"):
         self.cache = OrderedDict()
-        self.db = dbconnection.get_db()
         # configuration
         self.capacity = capacity
         self.policy = policy
