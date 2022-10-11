@@ -143,6 +143,10 @@ def invalidateKey():
 
     return response
 
+@webapp.route('/key', methods=['GET'])
+def key():
+    cursor = dbconnection.list_keys()
+    return render_template("key.html", cursor=cursor)
 
 @webapp.route('/refreshConfiguration', methods=['POST'])
 def refreshConfiguration():
