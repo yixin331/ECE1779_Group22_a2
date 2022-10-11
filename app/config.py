@@ -1,4 +1,5 @@
+
 db_config = {'user': 'root',
-             'password': '',
+             'password': 'Sh02162325321!',
              'host': '127.0.0.1',
              'database': 'ECE1779A1'}

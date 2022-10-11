@@ -1,7 +1,7 @@
-from flask import render_template, url_for, request, redirect, flash, g, json
+from flask import render_template, url_for, request, redirect, flash, g, json, send_from_directory
 from app import webapp, memcache, dbconnection
 from werkzeug.utils import secure_filename
-from werkzeug.datastructures import FileStorage
+from os.path import join, dirname, realpath
 import os
 
 
@@ -10,7 +10,7 @@ def teardown_db(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
-        
+
 
 @webapp.route('/')
 def main():
@@ -25,22 +25,26 @@ def get():
 
         # find value in cache
         result = memcache.get(key)
+        webapp.logger.warning(result)
 
-        # not in cache
         if result == -1:
-            # find value in DB
-            # TODO: Return cursor (rows) instead of success code ->> 
-           
-            # result = DB.get(key)
-            if result == -1:
+            cursor = dbconnection.get_image(key)
+            result = cursor.fetchone()
+            if result is None:
                 # not in both
                 # flash('Unknown key')
                 return redirect(request.url)
             else:
-        #  TODO: return path -->>> need to find image in local file system
-                result = "TODO"
+                path = result[0]
 
-        return render_template("get.html", user_image=result)
+                path = 'images/' + path
+                webapp.logger.warning(path)
+                # webapp.logger.warning(os.path.join("../images",path))
+                # return render_template("get.html", user_image=path)
+                return render_template("get.html",user_image=url_for('static',filename = path))
+        else:
+            # todo: cache
+            return render_template("get.html")
     else:
         return render_template("get.html")
 
@@ -84,16 +88,17 @@ def put():
         # check extension
         ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
         if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
-            # TODO: add a config file for the folder path;
-            # needs to figure out how to write path
-            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            file.save(os.path.join("D:", filename))
-            path = os.path.join("D:", filename)
+            # TODO: need to change path when using EC2
+            # create directory if not exists
+            # Path("D:/images").mkdir(parents=True, exist_ok=True)
+            # consider: 是否允许重名,是否要check
+            UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
+            path = os.path.join(UPLOADS_PATH,filename)
             webapp.logger.warning(path)
             dbconnection.put_image(key, path)
             # put in cache
             success_code = memcache.put(key, file)
-            # 
+            #
             #
             return render_template("put.html")
         # else: pop up msg for error

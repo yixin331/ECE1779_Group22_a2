@@ -30,7 +30,7 @@ class Memcache:
             self.num_miss += 1
             return -1
 
-    def put(self, key, value):
+    def put(self, key, value, path):
         self.num_request += 1
         ## TODO get file size
         # item_size = os.stat(value).st_size
@@ -54,7 +54,7 @@ class Memcache:
             self.cache.move_to_end(key)
 
         return 1
-    
+
     def free_cache(self, item_size):
         # remove items until the new image can fit into the cache
         while item_size + self.total_size > self.capacity * 1024 * 1024:
