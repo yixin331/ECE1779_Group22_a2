@@ -52,7 +52,7 @@ def put_config(capacity, policy):
     cnx = get_db()
 
     cursor = cnx.cursor()
-    query = "INSERT INTO memcache_config (updated_time, capacity, policy) VALUES (%s, %d, %s);"
+    query = "INSERT INTO memcache_config (updated_time, capacity, policy) VALUES (%s, %s, %s);"
     cursor.execute(query, (datetime.now(), capacity, policy))
 
     cnx.commit()
@@ -72,7 +72,11 @@ def put_stat(num_item, total_size, num_request, num_get, num_miss):
     cnx = get_db()
 
     cursor = cnx.cursor()
-    query = "INSERT INTO memcache_stat (updated_time, num_item, total_size, num_request, miss_rate, hit_rate) VALUES (%s, %d, %d, %d, %f %f);"
-    cursor.execute(query, (datetime.now(), num_item, total_size, num_request, num_miss/num_get, 1- num_miss/num_get))
+    if num_get == 0:
+        query = "INSERT INTO memcache_stat (updated_time, num_item, total_size, num_request, miss_rate, hit_rate) VALUES (%s, %s, %s, %s, %s, %s);"
+        cursor.execute(query, (datetime.now(), num_item, total_size, num_request, 0, 0))
+    else:
+        query = "INSERT INTO memcache_stat (updated_time, num_item, total_size, num_request, miss_rate, hit_rate) VALUES (%s, %s, %s, %s, %s, %s);"
+        cursor.execute(query, (datetime.now(), num_item, total_size, num_request, num_miss/num_get, (num_get- num_miss)/num_get))
 
     cnx.commit()

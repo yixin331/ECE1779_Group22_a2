@@ -5,6 +5,17 @@ from os.path import join, dirname, realpath
 from pathlib import Path
 import os
 import base64
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.interval import IntervalTrigger
+
+scheduler = BackgroundScheduler()
+@scheduler.scheduled_job(IntervalTrigger(seconds=5))
+def period_update():
+    with webapp.app_context():
+        memcache.period_update()
+
+
+scheduler.start()
 
 
 @webapp.teardown_appcontext
@@ -101,11 +112,16 @@ def put():
             dbconnection.put_image(key, path)
             # put in cache
             success_code = memcache.put(key, file)
+            if success_code == -1:
+                # file is too large to put into cache
+                return redirect(request.url)
             webapp.logger.warning(memcache.cache)
             #
             #
             return render_template("put.html")
         # else: pop up msg for error
+        else:
+            return redirect(request.url)
     else:
         return render_template("put.html")
 
@@ -119,27 +135,6 @@ def clear():
         status=200,
         mimetype='application/json'
     )
-
-    return response
-
-
-@webapp.route('/invalidateKey', methods=['POST'])
-def invalidateKey():
-    key = request.form.get('key')
-    success_code = memcache.invalidateKey(key)
-
-    if success_code != -1:
-        response = webapp.response_class(
-            response=json.dumps("OK"),
-            status=200,
-            mimetype='application/json'
-        )
-    else:
-        response = webapp.response_class(
-            response=json.dumps("Unknown key"),
-            status=400,
-            mimetype='application/json'
-        )
 
     return response
 
