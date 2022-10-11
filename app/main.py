@@ -2,6 +2,7 @@ from flask import render_template, url_for, request, redirect, flash, g, json, s
 from app import webapp, memcache, dbconnection
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
+from pathlib import Path
 import os
 
 
@@ -36,12 +37,11 @@ def get():
                 return redirect(request.url)
             else:
                 path = result[0]
-
                 path = 'images/' + path
                 webapp.logger.warning(path)
                 # webapp.logger.warning(os.path.join("../images",path))
                 # return render_template("get.html", user_image=path)
-                return render_template("get.html",user_image=url_for('static',filename = path))
+                return render_template("get.html", user_image=url_for('static', filename=path))
         else:
             # todo: cache
             webapp.logger.warning(result)
@@ -90,11 +90,10 @@ def put():
         ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
         if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
             # TODO: need to change path when using EC2
-            # create directory if not exists
-            # Path("D:/images").mkdir(parents=True, exist_ok=True)
-            # consider: 是否允许重名,是否要check
+            # consider: duplicate file names
             UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
-            path = os.path.join(UPLOADS_PATH,filename)
+            Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
+            path = os.path.join(UPLOADS_PATH, filename)
             webapp.logger.warning(path)
             file.save(path)
             dbconnection.put_image(key, path)
