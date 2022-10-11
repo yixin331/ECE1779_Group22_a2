@@ -1,6 +1,5 @@
-from flask import render_template, url_for, request, redirect, flash
-from app import webapp, memcache
-from flask import json
+from flask import render_template, url_for, request, redirect, flash, g, json
+from app import webapp, memcache, dbconnection
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 import os
@@ -11,7 +10,7 @@ def teardown_db(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
-
+        
 
 @webapp.route('/')
 def main():
@@ -24,24 +23,22 @@ def get():
         key = request.form.get('key')
         webapp.logger.warning(key)
 
-        # key invalid
-        if not (key is not None and len(key) > 0):
-            # todo: find a way for popout msg -> flash()
-            # flash('Please input a valid key')
-            return redirect(request.url)
-
         # find value in cache
         result = memcache.get(key)
 
         # not in cache
         if result == -1:
             # find value in DB
-
+            # TODO: Return cursor (rows) instead of success code ->> 
+           
             # result = DB.get(key)
             if result == -1:
                 # not in both
                 # flash('Unknown key')
                 return redirect(request.url)
+            else:
+        #  TODO: return path -->>> need to find image in local file system
+                result = "TODO"
 
         return render_template("get.html", user_image=result)
     else:
@@ -66,9 +63,7 @@ def get():
 def put():
     if request.method == 'POST':
         # check key
-        webapp.logger.warning('')
         webapp.logger.warning(request.form['key'])
-        webapp.logger.warning('not understanding')
         key = request.form.get('key')
         webapp.logger.warning(key)
         # key invalid
@@ -95,8 +90,10 @@ def put():
             file.save(os.path.join("D:", filename))
             path = os.path.join("D:", filename)
             webapp.logger.warning(path)
+            dbconnection.put_image(key, path)
             # put in cache
-            # success_code = memcache.put(key, value)
+            # success_code = memcache.put(key, file)
+            # 
             #
             return render_template("put.html")
         # else: pop up msg for error
