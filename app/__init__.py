@@ -1,5 +1,5 @@
 from flask import Flask
-from app import Memcache
+from app import Memcache, dbconnection
 
 global memcache
 

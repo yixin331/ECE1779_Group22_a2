@@ -101,7 +101,16 @@ class Memcache:
             return -1
 
 
-    def refreshConfiguration(self):
-        # TODO: connect to DB and get value
-        self.capacity = 0
-        self.policy = 1
+    def set_config(self, capacity, policy):
+        dbconnection.put_config(capacity, policy)
+        self.capacity = capacity
+        self.policy = policy
+        self.free_cache(0)
+
+
+    def show_stat(self):
+        return dbconnection.show_stat()
+
+
+    def period_update(self):
+        dbconnection.put_stat(self.num_item, self.total_size, self.num_request, self.num_get, self.num_miss)
