@@ -2,6 +2,7 @@ from collections import OrderedDict
 import os
 import random
 from app import dbconnection
+import sys
 
 class Memcache:
     def __init__(self, capacity = 128, policy = "LRU"):
@@ -31,7 +32,9 @@ class Memcache:
 
     def put(self, key, value):
         self.num_request += 1
-        item_size = os.stat(value).st_size
+        ## TODO get file size
+        # item_size = os.stat(value).st_size
+        item_size = sys.getsizeof(value)
 
         if item_size > self.capacity * 1024 * 1024:
             # image is too large
@@ -60,7 +63,8 @@ class Memcache:
             else:
                 item_to_remove = self.cache.pop(random.choice(self.cache.keys()))
             self.num_item -= 1
-            self.total_size -= os.stat(item_to_remove).st_size
+            self.total_size -= sys.getsizeof(item_to_remove)
+            # self.total_size -= os.stat(item_to_remove).st_size
 
     def clear(self):
         self.num_request += 1

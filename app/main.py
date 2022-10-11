@@ -92,7 +92,7 @@ def put():
             webapp.logger.warning(path)
             dbconnection.put_image(key, path)
             # put in cache
-            # success_code = memcache.put(key, file)
+            success_code = memcache.put(key, file)
             # 
             #
             return render_template("put.html")
