@@ -1,7 +1,10 @@
-
-from flask import render_template, url_for, request
+from flask import render_template, url_for, request, redirect, flash
 from app import webapp, memcache
 from flask import json
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
+import os
+
 
 @webapp.teardown_appcontext
 def teardown_db(exception):
@@ -9,55 +12,99 @@ def teardown_db(exception):
     if db is not None:
         db.close()
 
+
 @webapp.route('/')
 def main():
-    # change the home page
     return render_template("index.html")
 
-@webapp.route('/get',methods=['GET'])
+
+@webapp.route('/get', methods=['GET', 'POST'])
 def get():
-    key = request.form.get('key')
-    result = memcache.get(key)
+    if request.method == 'POST':
+        key = request.form.get('key')
+        webapp.logger.warning(key)
 
-    if result != -1:
-        response = webapp.response_class(
-            response=json.dumps(result),
-            status=200,
-            mimetype='application/json'
-        )
+        # key invalid
+        if not (key is not None and len(key) > 0):
+            # todo: find a way for popout msg -> flash()
+            # flash('Please input a valid key')
+            return redirect(request.url)
+
+        # find value in cache
+        result = memcache.get(key)
+
+        # not in cache
+        if result == -1:
+            # find value in DB
+
+            # result = DB.get(key)
+            if result == -1:
+                # not in both
+                # flash('Unknown key')
+                return redirect(request.url)
+
+        return render_template("get.html", user_image=result)
     else:
-        response = webapp.response_class(
-            response=json.dumps("Unknown key"),
-            status=400,
-            mimetype='application/json'
-        )
-    # frontend
-    return render_template("get.html")
-    # return response
+        return render_template("get.html")
 
-@webapp.route('/put',methods=['POST'])
+    #
+    # if result != -1:
+    #     response = webapp.response_class(
+    #         response=json.dumps(result),
+    #         status=200,
+    #         mimetype='application/json'
+    #     )
+    # else:
+    #     response = webapp.response_class(
+    #         response=json.dumps("Unknown key"),
+    #         status=400,
+    #         mimetype='application/json'
+    #     )
+
+
+@webapp.route('/put', methods=['GET', 'POST'])
 def put():
-    key = request.form.get('key')
-    value = request.form.get('value')
-    success_code = memcache.put(key, value)
-
-    if success_code != -1:
-        response = webapp.response_class(
-            response=json.dumps("OK"),
-            status=200,
-            mimetype='application/json'
-        )
+    if request.method == 'POST':
+        # check key
+        webapp.logger.warning('')
+        webapp.logger.warning(request.form['key'])
+        webapp.logger.warning('not understanding')
+        key = request.form.get('key')
+        webapp.logger.warning(key)
+        # key invalid
+        if not (key is not None and len(key) > 0):
+            # todo: find a way for popout msg -> flash()
+            # flash('Please input a valid key')
+            return redirect(request.url)
+        # check file
+        if 'file' not in request.files:
+            # flash('Please select a file')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            # flash('No selected file')
+            return redirect(request.url)
+        webapp.logger.warning(file)
+        filename = secure_filename(file.filename)
+        # check extension
+        ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+        if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+            # TODO: add a config file for the folder path;
+            # needs to figure out how to write path
+            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join("D:", filename))
+            path = os.path.join("D:", filename)
+            webapp.logger.warning(path)
+            # put in cache
+            # success_code = memcache.put(key, value)
+            #
+            return render_template("put.html")
+        # else: pop up msg for error
     else:
-        response = webapp.response_class(
-            response=json.dumps("Image is too large"),
-            status=400,
-            mimetype='application/json'
-        )
+        return render_template("put.html")
 
-    #return response
-    return render_template("put.html")
 
-@webapp.route('/clear',methods=['POST'])
+@webapp.route('/clear', methods=['POST'])
 def clear():
     memcache.clear()
 
@@ -69,11 +116,12 @@ def clear():
 
     return response
 
-@webapp.route('/invalidateKey',methods=['POST'])
+
+@webapp.route('/invalidateKey', methods=['POST'])
 def invalidateKey():
     key = request.form.get('key')
     success_code = memcache.invalidateKey(key)
-    
+
     if success_code != -1:
         response = webapp.response_class(
             response=json.dumps("OK"),
@@ -89,7 +137,8 @@ def invalidateKey():
 
     return response
 
-@webapp.route('/refreshConfiguration',methods=['POST'])
+
+@webapp.route('/refreshConfiguration', methods=['POST'])
 def refreshConfiguration():
     # TODO: refresh config?
     memcache.refreshConfiguration()

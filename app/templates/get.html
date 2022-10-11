@@ -7,19 +7,36 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
 </head>
 <body>
-    <table border="1" >
+<!--    <table  border="1" >-->
+<!--        <tr>-->
+<!--          <td>-->
+<!--            <label for="getKey">Key:</label>-->
+<!--            <input id="getKey" type="text" name="key" placeholder="" />-->
+<!--            <button>get</button>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr id="imageCell" style="display:none">-->
+<!--            <td>-->
+<!--              <img id="showimg" src="" style="display:none;" />-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<form action="{{ url_for('get')}}" method=post enctype=multipart/form-data >
         <tr>
           <td>
             <label for="getKey">Key:</label>
-            <input id="getKey" type="text" placeholder="" />
-            <button>get</button>
+            <input id="getKey" type="text" name="key" placeholder="" />
+            <input type="submit" value="get" />
           </td>
         </tr>
         <tr id="imageCell" style="display:none">
             <td>
-              <img id="showimg" src="" style="display:none;" />
+                    <!-- TODO: check what if user_image is None              -->
+              <img id="showimg" src="user_image" style="display:none;" />
             </td>
         </tr>
-    </table>
+    </form>
+
+
 </body>
 </html>
