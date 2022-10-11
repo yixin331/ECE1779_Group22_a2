@@ -44,6 +44,7 @@ def get():
                 return render_template("get.html", user_image=url_for('static', filename=path))
         else:
             # todo: cache
+            webapp.logger.warning(result)
             return render_template("get.html")
     else:
         return render_template("get.html")
@@ -95,9 +96,12 @@ def put():
             path = os.path.join(UPLOADS_PATH, filename)
             webapp.logger.warning(path)
             file.save(path)
-            dbconnection.put_image(key, filename)
-            # TODO: figure out how to get file size and then uncomment this
-            # memcache.put(key, file, path)
+            dbconnection.put_image(key, path)
+            # put in cache
+            success_code = memcache.put(key, file)
+            webapp.logger.warning(memcache.cache)
+            #
+            #
             return render_template("put.html")
         # else: pop up msg for error
     else:
