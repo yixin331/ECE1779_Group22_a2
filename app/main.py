@@ -9,6 +9,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
 scheduler = BackgroundScheduler()
+
+
 @scheduler.scheduled_job(IntervalTrigger(seconds=5))
 def period_update():
     with webapp.app_context():
@@ -58,25 +60,10 @@ def get():
         else:
             # todo: cache
             webapp.logger.warning(result)
-            
+
             return render_template("get.html", user_image_64=result.decode('utf-8'))
     else:
-        return render_template("get.html", user_image=None,method='get')
-
-
-    #
-    # if result != -1:
-    #     response = webapp.response_class(
-    #         response=json.dumps(result),
-    #         status=200,
-    #         mimetype='application/json'
-    #     )
-    # else:
-    #     response = webapp.response_class(
-    #         response=json.dumps("Unknown key"),
-    #         status=400,
-    #         mimetype='application/json'
-    #     )
+        return render_template("get.html", user_image=None, method='get')
 
 
 @webapp.route('/put', methods=['GET', 'POST'])
@@ -133,36 +120,9 @@ def put():
 @webapp.route('/clear', methods=['POST'])
 def clear():
     memcache.clear()
+    msg = "Your cache has been cleared"
+    return render_template("configure.html", result=msg)
 
-    response = webapp.response_class(
-        response=json.dumps("OK"),
-        status=200,
-        mimetype='application/json'
-    )
-
-    return response
-
-
-
-@webapp.route('/invalidateKey', methods=['POST'])
-def invalidateKey():
-    key = request.form.get('key')
-    success_code = memcache.invalidateKey(key)
-
-    if success_code != -1:
-        response = webapp.response_class(
-            response=json.dumps("OK"),
-            status=200,
-            mimetype='application/json'
-        )
-    else:
-        response = webapp.response_class(
-            response=json.dumps("Unknown key"),
-            status=400,
-            mimetype='application/json'
-        )
-
-    return response
 
 @webapp.route('/key', methods=['GET'])
 def key():
@@ -170,20 +130,19 @@ def key():
     return render_template("key.html", cursor=cursor)
 
 
-@webapp.route('/refreshConfiguration', methods=['POST'])
+@webapp.route('/refreshConfiguration', methods=['GET','POST'])
 def refreshConfiguration():
     # TODO: refresh config?
-    memcache.refreshConfiguration()
+    if request.method == 'GET':
+        # actually we can just call db?
+        cursor = memcache.show_stat()
+        return render_template("statistics.html",cursor=cursor)
+    else:
+        policy = request.form['policy']
+        size = request.form['size']
+        webapp.logger.warning(policy)
+        webapp.logger.warning(size)
+        memcache.set_config(int(size),policy)
+        msg = "Your cache has been reset"
+        return render_template("configure.html", result=msg)
 
-    response = webapp.response_class(
-        response=json.dumps("OK"),
-        status=200,
-        mimetype='application/json'
-    )
-
-    return response
-
-
-@webapp.route('/configure', methods=['GET' , 'POST'])
-def configure():
-    return render_template("configure.html")
