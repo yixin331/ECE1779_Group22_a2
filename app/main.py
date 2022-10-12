@@ -47,7 +47,7 @@ def get():
                 # not in both
                 # flash('Unknown key')
                 # return redirect(request.url) ==================================================
-                return render_template("get.html", user_image=None)
+                return render_template("get.html", user_image=None, user_image_64=None)
             else:
                 path = result[0]
                 path = 'images/' + path
@@ -59,7 +59,7 @@ def get():
             # todo: cache
             webapp.logger.warning(result)
             
-            return render_template("get.html", user_image=result.decode('utf-8'))
+            return render_template("get.html", user_image_64=result.decode('utf-8'))
     else:
         return render_template("get.html", user_image=None,method='get')
 
@@ -112,14 +112,12 @@ def put():
             path = os.path.join(UPLOADS_PATH, filename)
             webapp.logger.warning(path)
             file.save(path)
-            dbconnection.put_image(key, path)
+            dbconnection.put_image(key, filename)
             # put in cache
             success_code = memcache.put(key, file)
             if success_code == -1:
                 # file is too large to put into cache
                 return redirect(request.url)
-
-            webapp.logger.warning(memcache.cache)
             #
             #
             result = "Uploaded"
