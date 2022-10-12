@@ -6,7 +6,12 @@
     <!-- change it to the css file it wants!-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
 </head>
+<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
+
 <body>
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+    </form>
 <form action="{{ url_for('get')}}" method=post enctype=multipart/form-data >
     <table  border="1" >
         <tr>
@@ -16,28 +21,27 @@
             <input type="submit" value="get" />
           </td>
         </tr>
+        {% if user_image==None %}
+        <tr id="imageCell" style="display:none" >
+        {% else %}
         <tr id="imageCell" >
+        {% endif %}
             <td>
               <img id="showimg" src="data:image/png;base64, {{ user_image }}"/>
             </td>
         </tr>
     </table>
+    {% if user_image==None and method!='get' %}
+    <h1>Please input a valid key!</h1>
+    {% else %}
+    <h1></h1>
+    {% endif %}
 
-<!--        <tr>-->
-<!--          <td>-->
-<!--            <label for="getKey">Key:</label>-->
-<!--            <input id="getKey" type="text" name="key" placeholder="" />-->
-<!--            <input type="submit" value="get" />-->
-<!--          </td>-->
-<!--        </tr>-->
-<!--        <tr id="imageCell" >-->
-<!--            <td>-->
 
-<!--                <img id="showimg" src="data:image/png;base64, {{ user_image }}"/>-->
-
-<!--            </td>-->
-<!--        </tr>-->
 </form>
-
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return" >
+    </form>
 </body>
+
 </html>

@@ -46,7 +46,8 @@ def get():
             if result is None:
                 # not in both
                 # flash('Unknown key')
-                return redirect(request.url)
+                # return redirect(request.url) ==================================================
+                return render_template("get.html", user_image=None)
             else:
                 path = result[0]
                 path = 'images/' + path
@@ -60,7 +61,8 @@ def get():
             
             return render_template("get.html", user_image=result.decode('utf-8'))
     else:
-        return render_template("get.html", user_image=None)
+        return render_template("get.html", user_image=None,method='get')
+
 
     #
     # if result != -1:
@@ -182,3 +184,8 @@ def refreshConfiguration():
     )
 
     return response
+
+
+@webapp.route('/configure', methods=['GET' , 'POST'])
+def configure():
+    return render_template("configure.html")
