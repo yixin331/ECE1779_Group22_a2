@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ListKey</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css')}}">
 </head>
 <body>
     <form action="{{url_for('main')}}" method="get">
         <input type="submit" value="return">
     </form>
-    <h1>key List</h1>
+    <h1>Key List</h1>
 
     <table />
 
@@ -20,8 +20,5 @@
         </tr>
     {% endfor %}
     </table>
-    <form action="{{url_for('main')}}" method="get">
-        <input type="submit" value="return">
-    </form>
     </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Config</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
 </head>
 <script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
@@ -38,9 +38,6 @@
 <form action="{{ url_for('clear')}}" method="post">
     <input type="submit" value="clear">
 </form>
-    <form action="{{url_for('main')}}" method="get">
-        <input type="submit" value="return">
-    </form>
 </body>
 <!--<script>-->
 <!--function checkSize(){-->
