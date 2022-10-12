@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Config</title>
+    <title>Title</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
 </head>
 <script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
@@ -10,7 +10,7 @@
     <form action="{{url_for('main')}}" method="get">
         <input type="submit" value="return">
     </form>
-<form action="{{ url_for('refreshConfiguration')}}" method=get>
+<form action="{{ url_for('refreshConfiguration')}}" method=post enctype="multipart/form-data">
     <table  border="1" >
         <tr>
           <td>
@@ -28,7 +28,7 @@
         <tr id="imageCell" >
             <td>
                 <h3>Memory Size:</h3>
-                <input type="number" id="memSize">
+                <input type="number" name="size" id="memSize">
             </td>
         </tr>
     </table>
@@ -38,6 +38,14 @@
 <form action="{{ url_for('clear')}}" method="post">
     <input type="submit" value="clear">
 </form>
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+    </form>
+{% if result %}
+  <h1>{{ result }}!</h1>
+{% else %}
+  <h1></h1>
+{% endif %}
 </body>
 <!--<script>-->
 <!--function checkSize(){-->

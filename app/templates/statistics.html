@@ -2,11 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Stats</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css')}}">
 </head>
 <body>
-{% for row in cursor %}
-            <h3>{{ row[0]}}</h3>
-{% endfor %}
+<h1>Statistics within 10 minutes</h1>
+<table />
+         <tr>
+            <th>Updated Time</th>
+            <th>Number of items</th>
+             <th>Total Size</th>
+            <th>Number of request sent</th>
+             <th>Miss rate</th>
+            <th>Hit rate</th>
+         </tr>
+    {% for row in cursor %}
+        <tr>
+            <td>{{ row[0]}}</td>
+        <td>{{ row[1]}}</td>
+        <td>{{ row[2]}}</td>
+        <td>{{ row[3]}}</td>
+        <td>{{ row[4]}}</td>
+        <td>{{ row[5]}}</td>
+        </tr>
+    {% endfor %}
+    </table>
 </body>
 </html>
