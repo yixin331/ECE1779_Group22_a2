@@ -133,9 +133,7 @@ def key():
 @webapp.route('/refreshConfiguration', methods=['GET','POST'])
 def refreshConfiguration():
     if request.method == 'GET':
-        # actually we can just call db?
-        cursor = memcache.show_stat()
-        return render_template("statistics.html",cursor=cursor)
+        return render_template("configure.html")
     else:
         policy = request.form['policy']
         size = request.form['size']
@@ -145,3 +143,7 @@ def refreshConfiguration():
         msg = "Your cache has been reset"
         return render_template("configure.html", result=msg)
 
+@webapp.route('/stat', methods=['GET'])
+def stat():
+    cursor = memcache.show_stat()
+    return render_template("statistics.html", cursor=cursor)

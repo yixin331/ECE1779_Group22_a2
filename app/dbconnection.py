@@ -62,7 +62,7 @@ def show_stat():
     cnx = get_db()
 
     cursor = cnx.cursor()
-    query = "SELECT * FROM memcache_stat WHERE updated_time > = DATE_SUB(NOW(), INTERVAL 10 MINUTE);"
+    query = "SELECT * FROM memcache_stat WHERE updated_time >= DATE_SUB(NOW(), INTERVAL 10 MINUTE);"
     cursor.execute(query)
 
     return cursor
