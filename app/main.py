@@ -132,7 +132,6 @@ def key():
 
 @webapp.route('/refreshConfiguration', methods=['GET','POST'])
 def refreshConfiguration():
-    # TODO: refresh config?
     if request.method == 'GET':
         # actually we can just call db?
         cursor = memcache.show_stat()
