@@ -20,6 +20,8 @@ CREATE TABLE memcache_config (
 	policy VARCHAR(10) DEFAULT 'LRU'
 );
 
+INSERT INTO memcache_config (updated_time, capacity, policy) VALUES (DEFAULT,  DEFAULT,  DEFAULT);
+
 DROP TABLE IF EXISTS memcache_stat;
 
 CREATE TABLE memcache_stat (
