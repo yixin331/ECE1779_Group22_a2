@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Get</title>
     <!-- change it to the css file it wants!-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
 </head>
@@ -27,7 +27,11 @@
         <tr id="imageCell" >
         {% endif %}
             <td>
-              <img id="showimg" src="data:image/png;base64, {{ user_image }}"/>
+              {% if pathType=="db" %}
+              <img id="showimg" src="{{user_image}}"/>
+              {% else %}
+              <img id="showimg" src="data:image/png;base64, {{ user_image_64 }}"/>
+              {% endif %}
             </td>
         </tr>
     </table>
@@ -39,9 +43,6 @@
 
 
 </form>
-    <form action="{{url_for('main')}}" method="get">
-        <input type="submit" value="return" >
-    </form>
 </body>
 
 </html>
