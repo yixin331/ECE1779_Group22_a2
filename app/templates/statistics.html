@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-
+{% for row in cursor %}
+            <h3>{{ row[0]}}</h3>
+{% endfor %}
 </body>
 </html>
