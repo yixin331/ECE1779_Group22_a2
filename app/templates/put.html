@@ -7,13 +7,15 @@
 </head>
 <body>
     <form class="container" action="{{ url_for('put')}}"
-          enctype="multipart/form-data" method="post" id="formBox"
-              name="form" target="hideIframe">
+          enctype="multipart/form-data" method=post id="formBox"
+              name="form" >
+<!--        target="hideIframe">-->
             <table border="1" >
                 <tr>
                     <td>
                         <label for="getKey">Key:</label>
                         <input id="getKey" type="text" name="key" placeholder="" />
+                        {{status}}
                     </td>
                 </tr>
                 <tr>
@@ -28,17 +30,18 @@
                     </td>
                 </tr>
             </table>
-            <input type="submit"  value="submit" onclick="noJump();"/><br>
+            <input type=submit value=Upload>
         </form>
+{% if result %}
+  <h1>{{ result }}!</h1>
+{% else %}
+  <h1></h1>
+{% endif %}
 </body>
-<!--<form action="{{ url_for('put')}}" method=post enctype=multipart/form-data >-->
-<!--      <label>key:</label>-->
-<!--      <input type="text" name="key" />-->
-<!--      <label>Image:</label>-->
-<!--      <input type=file name=file>-->
-<!--      <input type=submit value=Upload></form>-->
-<!--</body>-->
-<iframe id="myIframe" name="hideIframe" style="display:none;"></iframe>
+
+
+
+<!--<iframe id="myIframe" name="hideIframe" style="display:none;"></iframe>-->
 <!--<script type="text/javascript" src="../js/index.js"></script>-->
 <script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
 </html>

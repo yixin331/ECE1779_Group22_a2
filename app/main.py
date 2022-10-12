@@ -79,6 +79,7 @@ def get():
 
 @webapp.route('/put', methods=['GET', 'POST'])
 def put():
+    result = ""
     if request.method == 'POST':
         # check key
         webapp.logger.warning(request.form['key'])
@@ -115,13 +116,16 @@ def put():
             if success_code == -1:
                 # file is too large to put into cache
                 return redirect(request.url)
+
             webapp.logger.warning(memcache.cache)
             #
             #
-            return render_template("put.html")
+            result = "Uploaded"
+            return render_template("put.html", result=result)
         # else: pop up msg for error
         else:
             return redirect(request.url)
+
     else:
         return render_template("put.html")
 
@@ -139,7 +143,7 @@ def clear():
     return response
 
 
-<<<<<<< HEAD
+
 @webapp.route('/invalidateKey', methods=['POST'])
 def invalidateKey():
     key = request.form.get('key')
@@ -165,8 +169,7 @@ def key():
     cursor = dbconnection.list_keys()
     return render_template("key.html", cursor=cursor)
 
-=======
->>>>>>> 0b7c6a74f200702dd994dfe4b2f57cd690a296ce
+
 @webapp.route('/refreshConfiguration', methods=['POST'])
 def refreshConfiguration():
     # TODO: refresh config?
