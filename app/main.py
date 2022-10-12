@@ -49,19 +49,18 @@ def get():
                 # not in both
                 # flash('Unknown key')
                 # return redirect(request.url) ==================================================
-                return render_template("get.html", user_image=None, user_image_64=None)
+                return render_template("get.html", user_image=None)
             else:
                 path = result[0]
                 path = 'images/' + path
                 webapp.logger.warning(path)
                 # webapp.logger.warning(os.path.join("../images",path))
                 # return render_template("get.html", user_image=path)
-                return render_template("get.html", user_image=url_for('static', filename=path))
+                return render_template("get.html", user_image=url_for('static', filename=path), pathType='db')
         else:
             # todo: cache
-            webapp.logger.warning(result)
 
-            return render_template("get.html", user_image_64=result.decode('utf-8'))
+            return render_template("get.html", user_image=result.decode('utf-8'))
     else:
         return render_template("get.html", user_image=None, method='get')
 
