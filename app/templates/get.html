@@ -27,7 +27,11 @@
         <tr id="imageCell" >
         {% endif %}
             <td>
-              <img id="showimg" src="data:image/png;base64, {{ user_image }}"/>
+              {% if pathType=="db" %}
+              <img id="showimg" src="{{user_image}}"/>
+              {% else %}
+              <img id="showimg" src="data:image/png;base64, {{ user_image_64 }}"/>
+              {% endif %}
             </td>
         </tr>
     </table>
