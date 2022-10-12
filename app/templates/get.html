@@ -6,22 +6,14 @@
     <!-- change it to the css file it wants!-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
 </head>
+<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
+
 <body>
-<!--    <table  border="1" >-->
-<!--        <tr>-->
-<!--          <td>-->
-<!--            <label for="getKey">Key:</label>-->
-<!--            <input id="getKey" type="text" name="key" placeholder="" />-->
-<!--            <button>get</button>-->
-<!--          </td>-->
-<!--        </tr>-->
-<!--        <tr id="imageCell" style="display:none">-->
-<!--            <td>-->
-<!--              <img id="showimg" src="" style="display:none;" />-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--    </table>-->
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+    </form>
 <form action="{{ url_for('get')}}" method=post enctype=multipart/form-data >
+    <table  border="1" >
         <tr>
           <td>
             <label for="getKey">Key:</label>
@@ -29,15 +21,31 @@
             <input type="submit" value="get" />
           </td>
         </tr>
-{#        <tr id="imageCell" style="display:none">#}
-            <tr id="imageCell" >
+        {% if user_image==None %}
+        <tr id="imageCell" style="display:none" >
+        {% else %}
+        <tr id="imageCell" >
+        {% endif %}
             <td>
-                    <!-- TODO: check what if user_image is None              -->
-{#              <img id="showimg" src="{{ user_image }}" style="display:none;" />#}
-
+              {% if pathType=="db" %}
+              <img id="showimg" src="{{user_image}}"/>
+              {% else %}
+              <img id="showimg" src="data:image/png;base64, {{ user_image_64 }}"/>
+              {% endif %}
             </td>
         </tr>
+    </table>
+    {% if user_image==None and method!='get' %}
+    <h1>Please input a valid key!</h1>
+    {% else %}
+    <h1></h1>
+    {% endif %}
+
+
+</form>
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return" >
     </form>
-<img id="showimg" src="data:image/png;base64, {{ user_image }}"/>
 </body>
+
 </html>

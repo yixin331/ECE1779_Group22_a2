@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+</head>
+<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
+<body>
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+    </form>
+<form action="{{ url_for('refreshConfiguration')}}" method=get>
+    <table  border="1" >
+        <tr>
+          <td>
+            <h3>Select a replacement policy:</h3>
+            <div>
+                <input type="radio" name="policy" value="Random" checked="true">
+                <label for="dewey">Random</label>
+            </div>
+            <div>
+                <input type="radio" name="policy" value="LRU">
+                <label for="dewey">LRU</label>
+            </div>
+          </td>
+        </tr>
+        <tr id="imageCell" >
+            <td>
+                <h3>Memory Size:</h3>
+                <input type="number" id="memSize">
+            </td>
+        </tr>
+    </table>
+    <input type="submit" onclick="return checkSize()">
+
+</form>
+<form action="{{ url_for('clear')}}" method="post">
+    <input type="submit" value="clear">
+</form>
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+    </form>
+</body>
+<!--<script>-->
+<!--function checkSize(){-->
+<!--    var memSize = document.getElementById("memSize").value;-->
+<!--    if(typeof(memSize)!="number"){-->
+<!--        alert("Size should be a number!");-->
+<!--        return false;-->
+
+<!--    }-->
+<!--    if(memSize>1025 || memSize<1){-->
+<!--        alert("Size should in range of 1~1014");-->
+<!--            return false;-->
+<!--        }-->
+
+<!--        else{-->
+<!--            return true;-->
+<!--        }-->
+<!--}-->
+<!-- </script>-->
+
+</html>

@@ -15,6 +15,14 @@ function showImg(thisimg) {
 	}
 }
 
+function getImg(Img)
+{
+
+    var cell = document.getElementById("imageCell")
+    cell.style.display = 'block';
+
+}
+
 
 function noJump() {
     location.reload()
@@ -33,4 +41,16 @@ function subFun() {
         }
         });
         return false;
+}
+
+function checkSize(){
+    var memSize = document.getElementById("memSize").value;
+    if(memSize>1025 || memSize<1){
+        alert("Size should in range of 1~1024");
+            return false;
+        }
+
+        else{
+            return true;
+        }
 }

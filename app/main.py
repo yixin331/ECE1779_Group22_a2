@@ -46,7 +46,8 @@ def get():
             if result is None:
                 # not in both
                 # flash('Unknown key')
-                return redirect(request.url)
+                # return redirect(request.url) ==================================================
+                return render_template("get.html", user_image=None, user_image_64=None)
             else:
                 path = result[0]
                 path = 'images/' + path
@@ -58,9 +59,10 @@ def get():
             # todo: cache
             webapp.logger.warning(result)
             
-            return render_template("get.html", user_image=result.decode('utf-8'))
+            return render_template("get.html", user_image_64=result.decode('utf-8'))
     else:
-        return render_template("get.html", user_image=None)
+        return render_template("get.html", user_image=None,method='get')
+
 
     #
     # if result != -1:
@@ -79,6 +81,7 @@ def get():
 
 @webapp.route('/put', methods=['GET', 'POST'])
 def put():
+    result = ""
     if request.method == 'POST':
         # check key
         webapp.logger.warning(request.form['key'])
@@ -109,19 +112,20 @@ def put():
             path = os.path.join(UPLOADS_PATH, filename)
             webapp.logger.warning(path)
             file.save(path)
-            dbconnection.put_image(key, path)
+            dbconnection.put_image(key, filename)
             # put in cache
             success_code = memcache.put(key, file)
             if success_code == -1:
                 # file is too large to put into cache
                 return redirect(request.url)
-            webapp.logger.warning(memcache.cache)
             #
             #
-            return render_template("put.html")
+            result = "Uploaded"
+            return render_template("put.html", result=result)
         # else: pop up msg for error
         else:
             return redirect(request.url)
+
     else:
         return render_template("put.html")
 
@@ -139,7 +143,7 @@ def clear():
     return response
 
 
-<<<<<<< HEAD
+
 @webapp.route('/invalidateKey', methods=['POST'])
 def invalidateKey():
     key = request.form.get('key')
@@ -165,8 +169,7 @@ def key():
     cursor = dbconnection.list_keys()
     return render_template("key.html", cursor=cursor)
 
-=======
->>>>>>> 0b7c6a74f200702dd994dfe4b2f57cd690a296ce
+
 @webapp.route('/refreshConfiguration', methods=['POST'])
 def refreshConfiguration():
     # TODO: refresh config?
@@ -179,3 +182,8 @@ def refreshConfiguration():
     )
 
     return response
+
+
+@webapp.route('/configure', methods=['GET' , 'POST'])
+def configure():
+    return render_template("configure.html")
