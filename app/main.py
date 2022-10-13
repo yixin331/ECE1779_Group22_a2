@@ -3,6 +3,7 @@ from app import webapp, memcache, dbconnection
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from pathlib import Path
+from collections import OrderedDict
 import os
 import base64
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -98,14 +99,15 @@ def put():
             path = os.path.join(UPLOADS_PATH, filename)
             webapp.logger.warning(path)
             file.save(path)
+            size = os.stat(path).st_size
+            webapp.logger.warning(size)
             dbconnection.put_image(key, filename)
             # put in cache
             success_code = memcache.put(key, file)
             if success_code == -1:
-                # file is too large to put into cache
-                return redirect(request.url)
-            #
-            #
+                # file is too large to put into cache -> but it's already in database
+                result = "File is uploaded in the database but not in cache"
+                return render_template("put.html", result=result)
             result = "Uploaded"
             return render_template("put.html", result=result)
         # else: pop up msg for error
@@ -129,7 +131,7 @@ def key():
     return render_template("key.html", cursor=cursor)
 
 
-@webapp.route('/refreshConfiguration', methods=['GET','POST'])
+@webapp.route('/refreshConfiguration', methods=['GET', 'POST'])
 def refreshConfiguration():
     if request.method == 'GET':
         return render_template("configure.html")
@@ -138,11 +140,123 @@ def refreshConfiguration():
         size = request.form['size']
         webapp.logger.warning(policy)
         webapp.logger.warning(size)
-        memcache.set_config(int(size),policy)
+        memcache.set_config(int(size), policy)
         msg = "Your cache has been reset"
         return render_template("configure.html", result=msg)
+
 
 @webapp.route('/stat', methods=['GET'])
 def stat():
     cursor = memcache.show_stat()
     return render_template("statistics.html", cursor=cursor)
+
+
+@webapp.route('/api/upload', methods=['POST'])
+def upload():
+    key = request.form['key']
+    webapp.logger.warning(key)
+
+    file = request.files['file']
+    webapp.logger.warning(file)
+
+    if not (key is not None and len(key) > 0):
+        value = {"success": "false", "error": {"code": 400, "message": "INVALID_ARGUMENT: KEY"}}
+        response = webapp.response_class(
+            response=json.dumps(value),
+            status=400,
+            mimetype='application/json'
+        )
+        return response
+
+    if 'file' not in request.files or file.filename == '' or '.' not in file.filename:
+        value = {"success": "false", "error": {"code": 404, "message": "FILE NOT FOUND"}}
+        response = webapp.response_class(
+            response=json.dumps(value),
+            status=404,
+            mimetype='application/json'
+        )
+        return response
+
+    filename = secure_filename(file.filename)
+
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    if file and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
+        Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
+        path = os.path.join(UPLOADS_PATH, filename)
+        file.save(path)
+        dbconnection.put_image(key, filename)
+        memcache.put(key, file)
+        value = {"success": "true"}
+        response = webapp.response_class(
+            response=json.dumps(value),
+            status=200,
+            mimetype='application/json'
+        )
+        return response
+    else:
+        value = {"success": "false", "error": {"code": 415, "message": "unsupported file type"}}
+        response = webapp.response_class(
+            response=json.dumps(value),
+            status=415,
+            mimetype='application/json'
+        )
+        return response
+
+
+@webapp.route('/api/list_keys', methods=['POST'])
+def list_keys():
+    cursor = dbconnection.list_keys()
+    keys = []
+    for row in cursor:
+        keys.append(row[0])
+    value = {"success": "true",
+             "keys": keys}
+    response = webapp.response_class(
+        response=json.dumps(value),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@webapp.route('/api/key', methods=['POST'])
+def list_key():
+    key = request.form.get('key')
+    webapp.logger.warning(key)
+    result = memcache.get(key)
+    if result == -1:
+        cursor = dbconnection.get_image(key)
+        result = cursor.fetchone()
+        if result is None:
+            value = {"success": "false", "error": {"code": 400, "message": "Key does not exist"}}
+            response = webapp.response_class(
+                response=json.dumps(value),
+                status=400,
+                mimetype='application/json'
+            )
+            return response
+        else:
+            filename = result[0]
+            path = join(dirname(realpath(__file__)), 'static\\images')
+            path = os.path.join(path,filename)
+            webapp.logger.warning(path)
+            f = open(path,"rb")
+            image_string = base64.b64encode(f.read())
+            webapp.logger.warning(image_string)
+            value = {"success": "true", "content": image_string.decode('utf-8')}
+            response = webapp.response_class(
+                response=json.dumps(value),
+                status=200,
+                mimetype='application/json'
+            )
+            return response
+    else:
+        value = {"success": "true", "content": result.decode('utf-8')}
+        response = webapp.response_class(
+            response=json.dumps(value),
+            status=200,
+            mimetype='application/json'
+        )
+        return response
+
+
