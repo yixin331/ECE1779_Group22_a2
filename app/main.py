@@ -99,8 +99,6 @@ def put():
             path = os.path.join(UPLOADS_PATH, filename)
             webapp.logger.warning(path)
             file.save(path)
-            size = os.stat(path).st_size
-            webapp.logger.warning(size)
             dbconnection.put_image(key, filename)
             # put in cache
             success_code = memcache.put(key, file)
@@ -218,6 +216,7 @@ def list_keys():
         mimetype='application/json'
     )
     return response
+
 
 @webapp.route('/api/key', methods=['POST'])
 def list_key():
