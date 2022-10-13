@@ -5,17 +5,20 @@
     <title>Stats</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css')}}">
     <style type="text/css">
-    td,th{text-align:center;border-style:solid;width:200px;overflow:hidden}
+    td,th{text-align:center;border-style:solid;width:250px;overflow:hidden}
     </style>
 </head>
 <body>
+<form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+</form>
 <h1>Statistics within 10 minutes</h1>
 <table />
          <tr>
             <th>Updated Time</th>
             <th>Number of items</th>
              <th>Total Size</th>
-            <th>Number of request sent</th>
+            <th>Number of requests sent</th>
              <th>Miss rate</th>
             <th>Hit rate</th>
          </tr>
