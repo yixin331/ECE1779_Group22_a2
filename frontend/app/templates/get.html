@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get</title>
+    <!-- change it to the css file it wants!-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+</head>
+<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
+
+<body>
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+    </form>
+<form action="{{ url_for('get')}}" method=post enctype=multipart/form-data >
+    <table  border="1" >
+        <tr>
+          <td>
+            <label for="getKey">Key:</label>
+            <input id="getKey" type="text" name="key" placeholder="" />
+            <input type="submit" value="get" />
+          </td>
+        </tr>
+        {% if user_image==None %}
+        <tr id="imageCell" style="display:none" >
+        {% else %}
+        <tr id="imageCell" >
+        {% endif %}
+            <td>
+              {% if pathType=="db" %}
+              <img id="showimg" src="{{user_image}}"/>
+              {% else %}
+              <img id="showimg" src="data:image/png;base64, {{ user_image }}"/>
+              {% endif %}
+            </td>
+        </tr>
+    </table>
+    {% if result %}
+  <h1>{{ result }}!</h1>
+{% else %}
+  <h1></h1>
+{% endif %}
+    {% if user_image==None and method!='get' %}
+    <h1>Unknown key!</h1>
+    {% else %}
+    <h1></h1>
+    {% endif %}
+
+
+</form>
+</body>
+
+</html>

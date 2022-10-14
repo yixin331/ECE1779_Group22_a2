@@ -9,6 +9,7 @@ import io
 
 class Memcache:
     def __init__(self, capacity = 128, policy = "LRU"):
+        Flask(__name__)
         self.cache = OrderedDict()
         # configuration
         self.capacity = capacity
