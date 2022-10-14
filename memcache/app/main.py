@@ -1,5 +1,5 @@
 from flask import render_template, url_for, request, redirect, flash, g, json, send_from_directory
-from app import webapp, memcache, dbconnection
+from app import webapp, dbconnection
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from pathlib import Path
@@ -9,16 +9,16 @@ import base64
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
-scheduler = BackgroundScheduler()
-
-
-@scheduler.scheduled_job(IntervalTrigger(seconds=5))
-def period_update():
-    with webapp.app_context():
-        memcache.period_update()
-
-
-scheduler.start()
+# scheduler = BackgroundScheduler()
+# 
+# 
+# @scheduler.scheduled_job(IntervalTrigger(seconds=5))
+# def period_update():
+#     with webapp.app_context():
+#         memcache.period_update()
+# 
+# 
+# scheduler.start()
 
 
 @webapp.teardown_appcontext
