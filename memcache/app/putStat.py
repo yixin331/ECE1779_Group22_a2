@@ -1,4 +1,4 @@
-from app import webapp, total_size, num_item, dbconnection, num_request, num_get, num_miss
+from app import webapp, dbconnection, memcache_stat
 from flask import request, json, g
 
 
@@ -11,12 +11,7 @@ def teardown_db(exception):
 
 @webapp.route('/putStat', methods=['POST'])
 def putStat():
-    global num_item
-    global total_size
-    global num_request
-    global num_get
-    global num_miss
-    dbconnection.put_stat(num_item, total_size, num_request, num_get, num_miss)
+    dbconnection.put_stat(memcache_stat['num_item'], memcache_stat['total_size'], memcache_stat['num_request'], memcache_stat['num_get'], memcache_stat['num_miss'])
     value = {"success": "true"}
     response = webapp.response_class(
         response=json.dumps(value),

@@ -1,15 +1,12 @@
-from app import webapp, memcache, num_request, num_item, total_size
+from app import webapp, memcache, memcache_stat
 from flask import request, json
 
 
 @webapp.route('/clearCache', methods=['POST'])
 def clearCache():
-    global num_request
-    global num_item
-    global total_size
-    num_request += 1
-    num_item = 0
-    total_size = 0
+    memcache_stat['num_request'] += 1
+    memcache_stat['num_item'] = 0
+    memcache_stat['total_size'] = 0
     memcache.clear()
     value = {"success": "true"}
     response = webapp.response_class(
