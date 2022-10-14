@@ -1,4 +1,4 @@
-from app import webapp, memcache, policy, capacity, total_size, num_item, dbconnection
+from app import webapp, memcache, dbconnection, memcache_config, memcache_stat
 from flask import request, json, g
 import base64
 import io
@@ -14,10 +14,9 @@ def teardown_db(exception):
 
 @webapp.route('/setConfig', methods=['POST'])
 def setConfig():
-    global capacity
-    policy = request.form['policy']
-    capacity = int(request.form['size'])
-    dbconnection.put_config(capacity, policy)
+    memcache_config['policy'] = request.form['policy']
+    memcache_config['capacity'] = int(request.form['size'])
+    dbconnection.put_config(memcache_config['capacity'], memcache_config['policy'])
     free_cache(0)
     value = {"success": "true"}
     response = webapp.response_class(
@@ -29,19 +28,16 @@ def setConfig():
 
 
 def free_cache(item_size):
-    global total_size
-    global capacity
-    global num_item
     # remove items until the new image can fit into the cache
-    while item_size + total_size > int(capacity) * 1024 * 1024:
-        if policy == "LRU":
-            item_to_remove = io.BytesIO(base64.b64decode(memcache.popitem(last=False)))
+    while item_size + memcache_stat['total_size'] > memcache_config['capacity'] * 1024 * 1024:
+        if memcache_config['policy'] == "LRU":
+            item_to_remove = io.BytesIO(base64.b64decode(memcache.popitem(last=False)[1]))
         else:
-            item_to_remove = io.BytesIO(base64.b64decode(memcache.pop(random.choice(memcache.keys()))))
-        num_item -= 1
+            item_to_remove = io.BytesIO(base64.b64decode(memcache.pop(random.choice(list(memcache.keys())))))
+        memcache_stat['num_item'] -= 1
 
         item_to_remove.seek(0, 2)  # seeks the end of the file
         item_to_remove_size = item_to_remove.tell()  # tell at which byte we are
         item_to_remove.seek(0, 0)  # go back to the beginning of the file
 
-        total_size -= item_to_remove_size
+        memcache_stat['total_size'] -= item_to_remove_size
