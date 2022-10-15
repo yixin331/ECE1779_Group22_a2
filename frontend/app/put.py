@@ -22,27 +22,24 @@ def put():
         webapp.logger.warning(key)
         # key invalid
         if not (key is not None and len(key) > 0):
-            # todo: find a way for popout msg -> flash()
-            # flash('Please input a valid key')
             return render_template("put.html", result="Please input a valid key")
         # check file
         if 'file' not in request.files:
-            # flash('Please select a file')
             return render_template("put.html", result="Please select a file")
         file = request.files['file']
         webapp.logger.warning(file)
         filename = secure_filename(file.filename)
         # check extension
         ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-        if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        extension = filename.rsplit('.', 1)[1].lower()
+        if file and '.' in filename and extension in ALLOWED_EXTENSIONS:
             # TODO: need to change path when using EC2
             # consider: duplicate file names
             UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
             Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
-            path = os.path.join(UPLOADS_PATH, filename)
-            webapp.logger.warning(path)
+            path = os.path.join(UPLOADS_PATH, key + "." + extension)
             file.save(path)
-            dbconnection.put_image(key, filename)
+            dbconnection.put_image(key, key + "." + extension)
             # put in cache
             keyToSend = {'key': key}
             fileToSend = {'file': open(path, "rb")}

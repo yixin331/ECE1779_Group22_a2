@@ -26,8 +26,6 @@ def get():
             response = requests.post(url='http://localhost:5001/getKey', data = keyToSend).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Cache loses connection")
-        # result = memcache.get(key)
-        # webapp.logger.warning(result)
         if response is None or response["success"] == "false":
             cursor = dbconnection.get_image(key)
             result = cursor.fetchone()

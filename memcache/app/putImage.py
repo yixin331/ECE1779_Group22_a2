@@ -16,7 +16,7 @@ def putImage():
             status=400,
             mimetype='application/json'
         )
-        return  response
+        return response
     file = request.files['file']
 
     file.seek(0, 2)  # seeks the end of the file
@@ -25,10 +25,10 @@ def putImage():
 
     if item_size > memcache_config['capacity'] * 1024 * 1024:
         # image is too large
-        value = {"success": "false", "error": {"code": 400, "message": "Image is too large to put into cache"}}
+        value = {"success": "false", "error": {"code": 413, "message": "Image is too large to put into cache"}}
         response = webapp.response_class(
             response=json.dumps(value),
-            status=400,
+            status=413,
             mimetype='application/json'
         )
         return response
@@ -56,6 +56,7 @@ def putImage():
     )
 
     return response
+
 
 def free_cache(item_size):
     # remove items until the new image can fit into the cache
