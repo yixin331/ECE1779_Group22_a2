@@ -5,32 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53e8fa9-ec5d-4c23-b2f6-93d0e4e3572f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/Memcache.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/dbconnection.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/dbconnection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/get.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/get.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memcache/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/Memcache.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/clearCache.py" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/app/clearCache.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/dbconnection.py" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/app/dbconnection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/getKey.py" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/app/getKey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/putImage.py" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/app/putImage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/putStat.py" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/app/putStat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/setConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/app/setConfig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/static/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/static/styles/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/._.DS_Store" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/._main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/configure.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/get.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/key.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/put.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/templates/statistics.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,10 +51,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/memcache/app/setConfig.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
+            <state relative-caret-position="435">
               <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
               <folding>
                 <element signature="e#0#78#0" expanded="true" />
@@ -120,10 +95,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/memcache/app/getKey.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="-75">
               <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
@@ -237,13 +212,40 @@
             <path>
               <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="memcache" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="frontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="frontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="frontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="frontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="images" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="frontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="memcache" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -302,8 +304,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2915012" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -314,7 +317,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3285968" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49563146" visible="true" weight="0.40319717" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49563146" visible="true" weight="0.40319717" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50436854" side_tool="true" visible="true" weight="0.40319717" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -555,16 +558,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memcache/app/getKey.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/memcache/app/putImage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -587,10 +580,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/memcache/app/setConfig.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
+        <state relative-caret-position="435">
           <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
           <folding>
             <element signature="e#0#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memcache/app/getKey.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-75">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
           </folding>
         </state>
       </provider>

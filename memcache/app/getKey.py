@@ -1,6 +1,7 @@
 from app import webapp, memcache, memcache_stat, memcache_config
 from flask import request, json
 
+
 @webapp.route('/getKey', methods=['POST'])
 def getKey():
     memcache_stat['num_request'] += 1

@@ -74,7 +74,6 @@ def free_cache(item_size):
 
 
 def invalidate_key(key):
-    memcache_stat['num_request'] += 1
     if key in memcache:
         item_to_remove = io.BytesIO(base64.b64decode(memcache.pop(key)))
         memcache_stat['num_item'] -= 1
