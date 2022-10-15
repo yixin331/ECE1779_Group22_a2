@@ -39,10 +39,7 @@ def main():
 @webapp.route('/api/upload', methods=['POST'])
 def upload():
     key = request.form['key']
-    webapp.logger.warning(key)
-
     file = request.files['file']
-    webapp.logger.warning(file)
 
     if not (key is not None and len(key) > 0):
         value = {"success": "false", "error": {"code": 400, "message": "INVALID_ARGUMENT: KEY"}}
@@ -65,13 +62,22 @@ def upload():
     filename = secure_filename(file.filename)
 
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-    if file and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+    extension = filename.rsplit('.', 1)[1].lower()
+    if file and extension in ALLOWED_EXTENSIONS:
         UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
         Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
-        path = os.path.join(UPLOADS_PATH, filename)
+        path = os.path.join(UPLOADS_PATH, key + "." + extension)
         file.save(path)
-        dbconnection.put_image(key, filename)
-        memcache.put(key, file)
+        dbconnection.put_image(key, key + "." + extension)
+        # put in cache
+        keyToSend = {'key': key}
+        fileToSend = {'file': open(path, "rb")}
+        response = None
+        try:
+            response = requests.post(url='http://localhost:5001/putImage', data=keyToSend, files=fileToSend).json()
+        except requests.exceptions.ConnectionError as err:
+            webapp.logger.warning("Cache loses connection")
+        # put successfully in DB already
         value = {"success": "true"}
         response = webapp.response_class(
             response=json.dumps(value),
@@ -108,12 +114,20 @@ def list_keys():
 @webapp.route('/api/key', methods=['POST'])
 def list_key():
     key = request.form.get('key')
-    webapp.logger.warning(key)
-    result = memcache.get(key)
-    if result == -1:
+    result = ""
+    # find value in cache
+    keyToSend = {'key': key}
+    response = None
+    try:
+        response = requests.post(url='http://localhost:5001/getKey', data=keyToSend).json()
+    except requests.exceptions.ConnectionError as err:
+        webapp.logger.warning("Cache loses connection")
+    if response is None or response["success"] == "false":
+        #  cache miss, get from DB
         cursor = dbconnection.get_image(key)
         result = cursor.fetchone()
         if result is None:
+            # not in both
             value = {"success": "false", "error": {"code": 400, "message": "Key does not exist"}}
             response = webapp.response_class(
                 response=json.dumps(value),
@@ -122,13 +136,21 @@ def list_key():
             )
             return response
         else:
+            webapp.logger.warning("get from DB")
             filename = result[0]
             path = join(dirname(realpath(__file__)), 'static\\images')
-            path = os.path.join(path,filename)
-            webapp.logger.warning(path)
-            f = open(path,"rb")
+            file_path = os.path.join(path, filename)
+            f = open(file_path, "rb")
+            # try to store image inside cache
+            keyToSend = {'key': key}
+            fileToSend = {'file': open(file_path, "rb")}
+            cache_response = None
+            try:
+                cache_response = requests.post(url='http://localhost:5001/putImage', data=keyToSend, files=fileToSend).json()
+            except requests.exceptions.ConnectionError as err:
+                webapp.logger.warning("Cache loses connection")
+            # successfully get key
             image_string = base64.b64encode(f.read())
-            webapp.logger.warning(image_string)
             value = {"success": "true", "content": image_string.decode('utf-8')}
             response = webapp.response_class(
                 response=json.dumps(value),
@@ -137,7 +159,7 @@ def list_key():
             )
             return response
     else:
-        value = {"success": "true", "content": result.decode('utf-8')}
+        value = {"success": "true", "content": response["content"] }
         response = webapp.response_class(
             response=json.dumps(value),
             status=200,
