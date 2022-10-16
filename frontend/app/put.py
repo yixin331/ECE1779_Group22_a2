@@ -35,7 +35,8 @@ def put():
         if file and '.' in filename and extension in ALLOWED_EXTENSIONS:
             # TODO: need to change path when using EC2
             # consider: duplicate file names
-            UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
+            UPLOADS_PATH = join(dirname(realpath(__file__)), 'static')
+            UPLOADS_PATH = os.path.join(UPLOADS_PATH, 'images')
             Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
             path = os.path.join(UPLOADS_PATH, key + "." + extension)
             file.save(path)
