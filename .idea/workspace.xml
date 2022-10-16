@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a53e8fa9-ec5d-4c23-b2f6-93d0e4e3572f" name="Default Changelist" comment="finish clear,setconfiguration endpoints">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memcache/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/memcache/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/static/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/static/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/templates/put.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/templates/put.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,11 +102,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "/Users/jonahruan/Desktop/ECE1779_Group22_a1"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;/Users/jonahruan/Desktop/ECE1779_Group22_a1&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Github\ECE1779_Group22_a1\app" />
