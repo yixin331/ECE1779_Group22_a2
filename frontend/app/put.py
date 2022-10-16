@@ -18,8 +18,9 @@ def teardown_db(exception):
 def put():
     result = ""
     if request.method == 'POST':
+        if ('key' not in request.form):
+            return render_template("put.html", result="Please input a valid key")
         key = request.form.get('key')
-        webapp.logger.warning(key)
         # key invalid
         if not (key is not None and len(key) > 0):
             return render_template("put.html", result="Please input a valid key")
@@ -27,15 +28,13 @@ def put():
         if 'file' not in request.files:
             return render_template("put.html", result="Please select a file")
         file = request.files['file']
-        webapp.logger.warning(file)
         filename = secure_filename(file.filename)
         # check extension
         ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-        extension = filename.rsplit('.', 1)[1].lower()
-        if file and '.' in filename and extension in ALLOWED_EXTENSIONS:
-            # TODO: need to change path when using EC2
-            # consider: duplicate file names
-            UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
+        if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+            extension = filename.rsplit('.', 1)[1].lower()
+            UPLOADS_PATH = join(dirname(realpath(__file__)), 'static')
+            UPLOADS_PATH = os.path.join(UPLOADS_PATH, 'images')
             Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
             path = os.path.join(UPLOADS_PATH, key + "." + extension)
             file.save(path)

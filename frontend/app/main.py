@@ -38,8 +38,15 @@ def main():
 
 @webapp.route('/api/upload', methods=['POST'])
 def upload():
+    if 'key' not in request.form:
+        value = {"success": "false", "error": {"code": 400, "message": "Key not provided"}}
+        response = webapp.response_class(
+            response=json.dumps(value),
+            status=400,
+            mimetype='application/json'
+        )
+        return response
     key = request.form['key']
-    file = request.files['file']
 
     if not (key is not None and len(key) > 0):
         value = {"success": "false", "error": {"code": 400, "message": "INVALID_ARGUMENT: KEY"}}
@@ -50,6 +57,7 @@ def upload():
         )
         return response
 
+    file = request.files['file']
     if 'file' not in request.files or file.filename == '' or '.' not in file.filename:
         value = {"success": "false", "error": {"code": 404, "message": "FILE NOT FOUND"}}
         response = webapp.response_class(
@@ -60,11 +68,11 @@ def upload():
         return response
 
     filename = secure_filename(file.filename)
-
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-    extension = filename.rsplit('.', 1)[1].lower()
-    if file and extension in ALLOWED_EXTENSIONS:
-        UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
+    if file and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        extension = filename.rsplit('.', 1)[1].lower()
+        UPLOADS_PATH = join(dirname(realpath(__file__)), 'static')
+        UPLOADS_PATH = os.path.join(UPLOADS_PATH,'images')
         Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
         path = os.path.join(UPLOADS_PATH, key + "." + extension)
         file.save(path)

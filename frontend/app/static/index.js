@@ -54,3 +54,14 @@ function checkSize(){
             return true;
         }
 }
+
+function checkImage(){
+    var image = document.getElementById("showimg");
+    if(image.style.display=="none"){
+        alert("You need to upload a image!");
+        return false
+    }
+    return true;
+
+
+}
