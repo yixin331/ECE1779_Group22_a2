@@ -30,15 +30,12 @@ def get():
             cursor = dbconnection.get_image(key)
             result = cursor.fetchone()
             if result is None:
-                # not in both
-                # flash('Unknown key')
-                # return redirect(request.url) ==================================================
                 return render_template("get.html", user_image=None)
             else:
                 path = result[0]
                 path = 'images/' + path
-                webapp.logger.warning(path)
-                UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images')
+                UPLOADS_PATH = join(dirname(realpath(__file__)), 'static')
+                UPLOADS_PATH = os.path.join(UPLOADS_PATH,'images')
                 Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
                 file_path = os.path.join(UPLOADS_PATH, result[0])
                 keyToSend = {'key': key}
@@ -53,12 +50,8 @@ def get():
                     result = "Get from database but fail to reload to cache"
                 else:
                     result = "Get from database and reload into cache"
-                 # webapp.logger.warning(os.path.join("../images",path))
-            #     # return render_template("get.html", user_image=path)
                 return render_template("get.html", user_image=url_for('static', filename=path), pathType='db', result=result)
         else:
-            # todo: cache
-
             return render_template("get.html", user_image=response["content"], result="Get from cache")
     else:
         return render_template("get.html", user_image=None, method='get')

@@ -146,7 +146,8 @@ def list_key():
         else:
             webapp.logger.warning("get from DB")
             filename = result[0]
-            path = join(dirname(realpath(__file__)), 'static\\images')
+            path = join(dirname(realpath(__file__)), 'static')
+            path = os.path.join('images')
             file_path = os.path.join(path, filename)
             f = open(file_path, "rb")
             # try to store image inside cache
