@@ -72,7 +72,7 @@ def upload():
     if file and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
         extension = filename.rsplit('.', 1)[1].lower()
         UPLOADS_PATH = join(dirname(realpath(__file__)), 'static')
-        UPLOADS_PATH = os.path.join(UPLOADS_PATH,'images')
+        UPLOADS_PATH = os.path.join(UPLOADS_PATH, 'images')
         Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
         path = os.path.join(UPLOADS_PATH, key + "." + extension)
         file.save(path)
@@ -146,16 +146,21 @@ def list_key():
         else:
             webapp.logger.warning("get from DB")
             filename = result[0]
+            webapp.logger.warning(filename)
             path = join(dirname(realpath(__file__)), 'static')
-            path = os.path.join('images')
+            webapp.logger.warning(path)
+            path = os.path.join(path, 'images')
+            webapp.logger.warning(path)
             file_path = os.path.join(path, filename)
+            webapp.logger.warning(file_path)
             f = open(file_path, "rb")
             # try to store image inside cache
             keyToSend = {'key': key}
             fileToSend = {'file': open(file_path, "rb")}
             cache_response = None
             try:
-                cache_response = requests.post(url='http://localhost:5001/putImage', data=keyToSend, files=fileToSend).json()
+                cache_response = requests.post(url='http://localhost:5001/putImage', data=keyToSend,
+                                               files=fileToSend).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Cache loses connection")
             # successfully get key
@@ -168,12 +173,10 @@ def list_key():
             )
             return response
     else:
-        value = {"success": "true", "content": response["content"] }
+        value = {"success": "true", "content": response["content"]}
         response = webapp.response_class(
             response=json.dumps(value),
             status=200,
             mimetype='application/json'
         )
         return response
-
-
