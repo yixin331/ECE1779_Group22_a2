@@ -47,7 +47,6 @@ def upload():
         )
         return response
     key = request.form['key']
-
     if not (key is not None and len(key) > 0):
         value = {"success": "false", "error": {"code": 400, "message": "INVALID_ARGUMENT: KEY"}}
         response = webapp.response_class(
@@ -56,9 +55,16 @@ def upload():
             mimetype='application/json'
         )
         return response
-
+    if request.files is None or 'file' not in request.files:
+        value = {"success": "false", "error": {"code": 400, "message": "File not provided"}}
+        response = webapp.response_class(
+            response=json.dumps(value),
+            status=400,
+            mimetype='application/json'
+        )
+        return response
     file = request.files['file']
-    if 'file' not in request.files or file.filename == '' or '.' not in file.filename:
+    if file.filename == '' or '.' not in file.filename:
         value = {"success": "false", "error": {"code": 404, "message": "FILE NOT FOUND"}}
         response = webapp.response_class(
             response=json.dumps(value),
@@ -144,15 +150,10 @@ def list_key():
             )
             return response
         else:
-            webapp.logger.warning("get from DB")
             filename = result[0]
-            webapp.logger.warning(filename)
             path = join(dirname(realpath(__file__)), 'static')
-            webapp.logger.warning(path)
             path = os.path.join(path, 'images')
-            webapp.logger.warning(path)
             file_path = os.path.join(path, filename)
-            webapp.logger.warning(file_path)
             f = open(file_path, "rb")
             # try to store image inside cache
             keyToSend = {'key': key}
