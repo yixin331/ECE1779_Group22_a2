@@ -21,6 +21,6 @@ Finally, after all communications end, the frontend will render the information 
 
 ## Run the application
 ```
-start.sh
+./start.sh
 ```
 
