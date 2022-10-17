@@ -4,15 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a53e8fa9-ec5d-4c23-b2f6-93d0e4e3572f" name="Default Changelist" comment="finish clear,setconfiguration endpoints">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/static/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/static/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/templates/put.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/templates/put.html" afterDir="false" />
+    <list default="true" id="a53e8fa9-ec5d-4c23-b2f6-93d0e4e3572f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/A_1/frontend/app/static/images/2323.jpg" beforeDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/start.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="179">
+                <caret line="26" selection-start-line="26" selection-end-line="26" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -57,7 +81,6 @@
         <option value="$PROJECT_DIR$/frontend/app/stat.py" />
         <option value="$PROJECT_DIR$/frontend/app/__init__.py" />
         <option value="$PROJECT_DIR$/frontend/app/main.py" />
-        <option value="$PROJECT_DIR$/frontend/app/dbconnection.py" />
         <option value="$PROJECT_DIR$/memcache/app/__init__.py" />
         <option value="$PROJECT_DIR$/memcache/app/clearCache.py" />
         <option value="$PROJECT_DIR$/memcache/app/putImage.py" />
@@ -65,7 +88,10 @@
         <option value="$PROJECT_DIR$/memcache/app/setConfig.py" />
         <option value="$PROJECT_DIR$/memcache/app/getKey.py" />
         <option value="$PROJECT_DIR$/frontend/app/get.py" />
+        <option value="$PROJECT_DIR$/frontend/app/dbconnection.py" />
+        <option value="$PROJECT_DIR$/memcache/app/dbconnection.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/start.sh" />
       </list>
     </option>
   </component>
@@ -91,6 +117,32 @@
               <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
+            <path>
+              <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="A_1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="A_1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="frontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="A_1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="frontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ECE1779_Group22_a1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Github\ECE1779_Group22_a1" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="A_1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="frontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -102,17 +154,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;last_opened_file_path&quot;: &quot;/Users/jonahruan/Desktop/ECE1779_Group22_a1&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Github\ECE1779_Group22_a1\app" />
     </key>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -137,7 +199,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16123907" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -150,8 +211,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3285968" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3285968" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49563146" visible="true" weight="0.40319717" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50436854" side_tool="true" visible="true" weight="0.40319717" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49483716" visible="true" weight="0.40319717" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50516284" side_tool="true" visible="true" weight="0.40319717" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -163,7 +224,14 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -257,20 +325,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/stat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="150">
           <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/app/dbconnection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="64" column="125" selection-start-line="64" selection-start-column="99" selection-end-line="64" selection-end-column="125" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -292,16 +350,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/app/Memcache.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/app/Memcache.py" />
     <entry file="file://$PROJECT_DIR$/frontend/app/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -343,18 +392,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memcache/app/dbconnection.py">
+    <entry file="file://$PROJECT_DIR$/memcache/app/getKey.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="-75">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/app/config.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/app/put.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/memcache/app/putStat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
+        <state relative-caret-position="165">
           <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
@@ -362,20 +425,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memcache/app/setConfig.py">
+    <entry file="file://$PROJECT_DIR$/memcache/app/dbconnection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+        <state relative-caret-position="915">
+          <caret line="64" column="119" selection-start-line="64" selection-start-column="119" selection-end-line="64" selection-end-column="119" />
           <folding>
-            <element signature="e#0#78#0" expanded="true" />
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memcache/app/getKey.py">
+    <entry file="file://$PROJECT_DIR$/frontend/app/dbconnection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-75">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="915">
+          <caret line="64" column="119" lean-forward="true" selection-start-line="64" selection-start-column="72" selection-end-line="64" selection-end-column="119" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memcache/app/putImage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="76" column="24" selection-start-line="76" selection-start-column="24" selection-end-line="76" selection-end-column="24" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
@@ -392,26 +465,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/app/put.py">
+    <entry file="file://$PROJECT_DIR$/memcache/app/setConfig.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-557">
-          <caret line="4" selection-start-line="4" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memcache/app/putImage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="76" column="24" selection-start-line="76" selection-start-column="24" selection-end-line="76" selection-end-column="24" />
+        <state relative-caret-position="390">
+          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
           <folding>
-            <element signature="e#0#64#0" expanded="true" />
+            <element signature="e#0#78#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/get.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-194">
+        <state relative-caret-position="360">
           <caret line="29" column="40" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
@@ -422,10 +488,17 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="148">
-            <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <first_editor relative-caret-position="179">
+            <caret line="26" selection-start-line="26" selection-end-line="26" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
