@@ -41,7 +41,7 @@ def put():
             webapp.logger.warning('Bucket already exists')
         else:
             try:
-                s3.create_bucket(Bucket=bucket_name, CreateBucketConfiguration={'LocationConstraint': 'us-west-1'})
+                s3.create_bucket(Bucket=bucket_name, CreateBucketConfiguration={'LocationConstraint': 'us-east-1'})
             except ClientError as e:
                 webapp.logger.warning("Fail to create a bucket")
         if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
