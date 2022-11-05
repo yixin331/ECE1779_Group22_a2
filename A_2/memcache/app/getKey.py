@@ -9,8 +9,7 @@ def getKey():
     key = request.form.get('key')
 
     if key in memcache:
-        if memcache_config['policy'] == "LRU":
-            memcache.move_to_end(key)
+        memcache.move_to_end(key)
         value = {"success": "true", "content": memcache[key].decode('utf-8'), "message": "Get from cache"}
         response = webapp.response_class(
             response=json.dumps(value),
