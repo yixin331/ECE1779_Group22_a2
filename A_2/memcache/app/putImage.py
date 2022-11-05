@@ -45,8 +45,7 @@ def putImage():
     image_string = base64.b64encode(file.read())
     memcache[key] = image_string
 
-    if memcache_config['policy'] == "LRU":
-        memcache.move_to_end(key)
+    memcache.move_to_end(key)
 
     value = {"success": "true"}
     response = webapp.response_class(
