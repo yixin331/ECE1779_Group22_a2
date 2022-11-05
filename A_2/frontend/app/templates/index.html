@@ -52,26 +52,31 @@
         </tr>
 
     </table>
-    <br><br><br>
-    <table border="1" >
-        <tr>
-            <td>
-                <a href="{{ url_for('refreshConfiguration')}}">mem-cache configuration</a>
-            </td>
+{#    <br><br><br>#}
+{#    <table border="1" >#}
+{#        <tr>#}
+{#            <td>#}
+{#                <a href="{{ url_for('refreshConfiguration')}}">mem-cache configuration</a>#}
+{#            </td>#}
+{##}
+{#        </tr>#}
+{##}
+{#    </table>#}
+{#    <br><br><br>#}
+{#    <table border="1" >#}
+{#        <tr>#}
+{#            <td>#}
+{#                <a href="{{ url_for('stat')}}">statistics</a>#}
+{#            </td>#}
+{#        </tr>#}
+{##}
+{#    </table>#}
 
-        </tr>
-
-    </table>
-    <br><br><br>
-    <table border="1" >
-        <tr>
-            <td>
-                <a href="{{ url_for('stat')}}">statistics</a>
-            </td>
-        </tr>
-
-    </table>
-
+{% if result %}
+  <h1>{{ result }}!</h1>
+{% else %}
+  <h1></h1>
+{% endif %}
 <iframe id="myIframe" name="hideIframe" style="display:none;"></iframe>
 <script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
 
