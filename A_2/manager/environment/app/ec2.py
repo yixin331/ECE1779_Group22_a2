@@ -8,19 +8,22 @@ from operator import itemgetter
 
 '''
     Part 1
-    
+
     Modify the function ec2_list() so that only instances are displayed for the selected status
-        
+
     Documentation for the EC2 filter function is available at:
-    
+
     https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html
-    
+
     Search in the above URL for the phrase "ec2.instances.filter"
-    
+
     The filter function takes a very large number of options. The key that
     reflects the status of the instance is called "instance-state-name"
 
 '''
+# @webapp.route('/node_configure', methods=['GET'])
+# def node_configure():
+#     return render_template("configure/configure.html",title="Nodes Configure")
 
 
 @webapp.route('/ec2_examples', methods=['GET', 'POST'])
@@ -30,23 +33,25 @@ def ec2_list():
 
     # create connection to ec2
     ec2 = boto3.resource('ec2')
-
+    amount = 0
     if status == "" or status == "all":
         instances = ec2.instances.all()
+        for i in instances:
+            amount = amount + 1
         print("++++++++++++++++")
     else:  # status := pending | running | shutting-down | terminated | stopping | stopped
 
         ########### your code starts here  ################
 
-         instances = ec2.instances.filter(
-         Filters=
-         [{
-            'Name':'instance-state-name',
-             'Values': [status]}])
+        instances = ec2.instances.filter(
+            Filters=
+            [{
+                'Name': 'instance-state-name',
+                'Values': [status]}])
 
-        ########### your code ends here    ################
+    ########### your code ends here    ################
 
-    return render_template("ec2_examples/list.html", title="EC2 Instances", instances=instances)
+    return render_template("ec2_examples/list.html", title="EC2 Instances", instances=instances, amount=amount)
 
 
 @webapp.route('/ec2_examples/<id>', methods=['GET'])

@@ -2,8 +2,13 @@
 {% block content %}
 
     <ul>
-        <li><a href="{{url_for('ec2_list')}}">EC2 Examples</a></li>
-        <li><a href="{{url_for('s3_list')}}">S3 Examples</a></li>
+        <li><a href="{{url_for('ec2_list')}}">Node Stat</a></li><br>
+        <li><a href="{{url_for('s3_list')}}">S3</a></li><br>
+        <li><a href="{{url_for('node_configure')}}">Configure</a></li><br>
+        <li><a href="{{url_for('resize_pool')}}">Resize pool</a></li></br>
+        <li><a href="{{url_for('delete_all')}}">Delete all</a></li></br>
+        <li><a href="{{url_for('clear_memcache')}}">Clear memcache</a></li></br>
+
     </ul>
 
 {% endblock %}
