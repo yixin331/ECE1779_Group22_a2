@@ -1,4 +1,4 @@
-from app import webapp, dbconnection, memcache_stat, node_id
+from app import webapp, memcache_stat, node_id
 from flask import request, json, g
 import boto3
 from app.config import aws_config

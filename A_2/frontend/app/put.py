@@ -66,10 +66,10 @@ def put():
             # file.save(path)
             s3.put_object(Bucket=bucket_name, Key=key, Body=file)
             dbconnection.put_image(key, key + "." + extension)
+            file.seek(0, 0)
             # put in cache
             keyToSend = {'key': key}
-            webapp.logger.warning('try to put in cache')
-            fileToSend = {'file': base64.b64encode(file.read())}
+            fileToSend = {'file': file}
             response = None
             try:
                 # call Manager app to put image

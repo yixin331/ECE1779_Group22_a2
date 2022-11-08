@@ -9,19 +9,12 @@ import random
 def putImage():
     memcache_stat['num_request'] += 1
     key = request.form.get('key')
-    if 'file' not in request.files:
-        value = {"success": "false", "error": {"code": 400, "message": "Please pass a file"}}
-        response = webapp.response_class(
-            response=json.dumps(value),
-            status=400,
-            mimetype='application/json'
-        )
-        return response
     file = request.files['file']
 
     file.seek(0, 2)  # seeks the end of the file
     item_size = file.tell()  # tell at which byte we are
     file.seek(0, 0)  # go back to the beginning of the file
+    webapp.logger.warning(item_size)
 
     if item_size > memcache_config['capacity'] * 1024 * 1024:
         # image is too large
@@ -42,8 +35,7 @@ def putImage():
     memcache_stat['num_item'] += 1
     memcache_stat['total_size'] += item_size
     webapp.logger.warning(memcache_stat['total_size'])
-    image_string = base64.b64encode(file.read())
-    memcache[key] = image_string
+    memcache[key] = base64.b64encode(file.read())
 
     memcache.move_to_end(key)
 
