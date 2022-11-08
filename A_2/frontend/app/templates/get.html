@@ -28,7 +28,7 @@
         {% endif %}
             <td>
               {% if pathType=="db" %}
-              <img id="showimg" src="{{user_image}}"/>
+              <img id="showimg" src="data:image/png;base64,{{user_image}}"/>
               {% else %}
               <img id="showimg" src="data:image/png;base64, {{ user_image }}"/>
               {% endif %}
