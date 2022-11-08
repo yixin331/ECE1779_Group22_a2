@@ -1,4 +1,4 @@
-from app import webapp, memcache, dbconnection, memcache_config, memcache_stat
+from app import webapp, memcache, memcache_config, memcache_stat
 from flask import request, json, g
 import base64
 import io
@@ -17,7 +17,7 @@ def setConfig():
     memcache_stat['num_request'] += 1
     memcache_config['policy'] = request.form['policy']
     memcache_config['capacity'] = int(request.form['size'])
-    dbconnection.put_config(memcache_config['capacity'], memcache_config['policy'])
+    # dbconnection.put_config(memcache_config['capacity'], memcache_config['policy'])
     free_cache(0)
     value = {"success": "true"}
     response = webapp.response_class(

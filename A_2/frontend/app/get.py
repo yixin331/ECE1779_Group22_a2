@@ -4,6 +4,7 @@ import requests
 from os.path import join, dirname, realpath
 from pathlib import Path
 import os
+import io
 import boto3
 import base64
 from app.config import aws_config
@@ -42,12 +43,12 @@ def get():
                 # s3 = boto3.client('s3')
                 bucket_name = '1779a2files'
                 file = s3.get_object(Bucket=bucket_name, Key=key)['Body']
-                encode_str = base64.b64encode(file.read())
-                print(encode_str)
+                file_byte = io.BytesIO(file.read())
                 # reload in cache
                 keyToSend = {'key': key}
-                fileToSend = {'file': encode_str}
+                fileToSend = {'file': file_byte}
                 response = None
+                webapp.logger.warning('reload into cache')
                 try:
                     response = requests.post(url='http://localhost:5002/putImage',
                                              data=keyToSend,
@@ -60,6 +61,9 @@ def get():
                 else:
                     result = "Get from database and reload into cache"
                 # TODO : check if it works
+                file_byte.seek(0,0)
+                encode_str = base64.b64encode(file_byte.read())
+                # webapp.logger.warning(encode_str)
                 return render_template("get.html", user_image=encode_str.decode('utf-8'), pathType='db',
                                        result=result)
         else:

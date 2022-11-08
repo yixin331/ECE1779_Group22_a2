@@ -6,22 +6,22 @@ from pathlib import Path
 import requests
 import os
 import base64
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.interval import IntervalTrigger
-
-scheduler = BackgroundScheduler()
-
-
-@scheduler.scheduled_job(IntervalTrigger(seconds=5))
-def period_update():
-    with webapp.app_context():
-        try:
-            response = requests.post(url='http://localhost:5001/putStat').json()
-        except requests.exceptions.ConnectionError as err:
-            webapp.logger.warning("Cache loses connection")
-
-
-scheduler.start()
+# from apscheduler.schedulers.background import BackgroundScheduler
+# from apscheduler.triggers.interval import IntervalTrigger
+#
+# scheduler = BackgroundScheduler()
+#
+#
+# @scheduler.scheduled_job(IntervalTrigger(seconds=5))
+# def period_update():
+#     with webapp.app_context():
+#         try:
+#             response = requests.post(url='http://localhost:5001/putStat').json()
+#         except requests.exceptions.ConnectionError as err:
+#             webapp.logger.warning("Cache loses connection")
+#
+#
+# scheduler.start()
 
 
 @webapp.teardown_appcontext

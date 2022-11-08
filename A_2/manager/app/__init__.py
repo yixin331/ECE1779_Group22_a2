@@ -10,3 +10,5 @@ from app import node_configure
 from app import resize
 from app import clear_memcache
 from app import delete_all
+from app import putImage
+from app import getKey
