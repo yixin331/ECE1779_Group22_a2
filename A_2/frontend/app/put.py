@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from pathlib import Path
 import os
-from io import BufferedReader
+import base64
 import boto3
 from botocore.exceptions import ClientError
 
@@ -35,13 +35,19 @@ def put():
         # check extension
         ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
         # s3 create bucket
-        s3 = boto3.resource('s3')
-        bucket_name = 'files'
-        if s3.doesBucketExistV2(bucket_name):
-            webapp.logger.warning('Bucket already exists')
-        else:
+        s3 = boto3.client('s3', region_name='us-east-1')
+        response = s3.list_buckets()
+        bucket_name = '1779a2files'
+        created = False
+        for bucket in response['Buckets']:
+            print(bucket["Name"])
+            if bucket["Name"] == bucket_name:
+                created = True
+                webapp.logger.warning('Bucket already exists')
+        if not created:
             try:
-                s3.create_bucket(Bucket=bucket_name, CreateBucketConfiguration={'LocationConstraint': 'us-east-1'})
+                response = s3.create_bucket(Bucket=bucket_name)
+                print(response)
             except ClientError as e:
                 webapp.logger.warning("Fail to create a bucket")
         if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
@@ -55,7 +61,8 @@ def put():
             dbconnection.put_image(key, key + "." + extension)
             # put in cache
             keyToSend = {'key': key}
-            fileToSend = {'file': BufferedReader(file)}
+            webapp.logger.warning('try to put in cache')
+            fileToSend = {'file': base64.b64encode(file.read())}
             response = None
             try:
                 # call Manager app to put image

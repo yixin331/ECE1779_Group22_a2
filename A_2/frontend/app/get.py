@@ -5,7 +5,7 @@ from os.path import join, dirname, realpath
 from pathlib import Path
 import os
 import boto3
-from io import BufferedReader
+import base64
 
 @webapp.teardown_appcontext
 def teardown_db(exception):
@@ -32,14 +32,18 @@ def get():
             if result is None:
                 return render_template("get.html", user_image=None)
             else:
-                s3 = boto3.resource('s3')
-                bucket_name = 'files'
-                file = s3.get_object(Bucket=bucket_name, key=key)
+                s3 = boto3.client('s3')
+                bucket_name = '1779a2files'
+                file = s3.get_object(Bucket=bucket_name, Key=key)['Body']
+                encode_str = base64.b64encode(file.read())
+                print(encode_str)
+                # reload in cache
                 keyToSend = {'key': key}
-                fileToSend = {'file': BufferedReader(file)}
+                fileToSend = {'file': encode_str}
                 response = None
                 try:
-                    response = requests.post(url='http://localhost:5002/putImage', data=keyToSend,
+                    response = requests.post(url='http://localhost:5002/putImage',
+                                             data=keyToSend,
                                              files=fileToSend).json()
                 except requests.exceptions.ConnectionError as err:
                     webapp.logger.warning("Manager app loses connection")
@@ -49,7 +53,7 @@ def get():
                 else:
                     result = "Get from database and reload into cache"
                 # TODO : check if it works
-                return render_template("get.html", user_image=file.read(), pathType='db',
+                return render_template("get.html", user_image=encode_str.decode('utf-8'), pathType='db',
                                        result=result)
         else:
             return render_template("get.html", user_image=response["content"], result="Get from cache")
