@@ -6,6 +6,7 @@ from pathlib import Path
 import os
 import boto3
 import base64
+from app.config import aws_config
 
 @webapp.teardown_appcontext
 def teardown_db(exception):
@@ -32,7 +33,13 @@ def get():
             if result is None:
                 return render_template("get.html", user_image=None)
             else:
-                s3 = boto3.client('s3')
+                s3 = boto3.client(
+                    's3',
+                    aws_config['region'],
+                    aws_access_key_id=aws_config['access_key_id'],
+                    aws_secret_access_key=aws_config['secret_access_key']
+                )
+                # s3 = boto3.client('s3')
                 bucket_name = '1779a2files'
                 file = s3.get_object(Bucket=bucket_name, Key=key)['Body']
                 encode_str = base64.b64encode(file.read())
