@@ -8,6 +8,7 @@ import os
 import base64
 import boto3
 from botocore.exceptions import ClientError
+from app.config import aws_config
 
 
 @webapp.teardown_appcontext
@@ -35,7 +36,13 @@ def put():
         # check extension
         ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
         # s3 create bucket
-        s3 = boto3.client('s3', region_name='us-east-1')
+        s3 = boto3.client(
+            's3',
+            aws_config['region'],
+            aws_access_key_id=aws_config['access_key_id'],
+            aws_secret_access_key=aws_config['secret_access_key']
+        )
+        # s3 = boto3.client('s3', region_name='us-east-1')
         response = s3.list_buckets()
         bucket_name = '1779a2files'
         created = False
