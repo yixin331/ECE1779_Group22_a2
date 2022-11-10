@@ -1,27 +1,39 @@
-from app import webapp, memcache_stat, node_id
+from app import webapp, memcache_stat, node_id, scheduler
 from flask import request, json, g
 import boto3
 from app.config import aws_config
 from datetime import datetime
 
 
-# @webapp.teardown_appcontext
-# def teardown_db(exception):
-#     db = getattr(g, '_database', None)
-#     if db is not None:
-#         db.close()
-
-
 @webapp.route('/putStat', methods=['POST'])
 def putStat():
-    # dbconnection.put_stat(memcache_stat['num_item'], memcache_stat['total_size'], memcache_stat['num_request'], memcache_stat['num_get'], memcache_stat['num_miss'])
-    # value = {"success": "true"}
-    # response = webapp.response_class(
-    #     response=json.dumps(value),
-    #     status=200,
-    #     mimetype='application/json'
-    # )
-    # return response
+    if scheduler.get_job('put_memcache_stat'):
+        scheduler.resume_job('put_memcache_stat')
+    else:
+        scheduler.add_job(id='put_memcache_stat', func=put_memcache_stat, trigger='interval', seconds=5)
+    value = {"success": "true"}
+    response = webapp.response_class(
+        response=json.dumps(value),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+
+@webapp.route('/stopStat', methods=['POST'])
+def stopStat():
+    if scheduler.get_job('put_memcache_stat'):
+        scheduler.pause_job('put_memcache_stat')
+    value = {"success": "true"}
+    response = webapp.response_class(
+        response=json.dumps(value),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+
+def put_memcache_stat():
     if memcache_stat['num_get'] == 0:
         send_metric_data(node_id, 'NumItem', memcache_stat['num_item'])
         send_metric_data(node_id, 'TotalSize', memcache_stat['total_size'])
@@ -35,7 +47,7 @@ def putStat():
         send_metric_data(node_id, 'HitRate', (memcache_stat['num_get'] - memcache_stat['num_miss'])/memcache_stat['num_get'])
         send_metric_data(node_id, 'MissRate', memcache_stat['num_miss']/memcache_stat['num_get'])
     current_time = datetime.now()
-    webapp.logger.warning('Sending metric data finished: ', current_time)
+    webapp.logger.warning('Sending metric data finished: ' + str(current_time))
     value = {"success": "true"}
     response = webapp.response_class(
         response=json.dumps(value),
@@ -67,7 +79,7 @@ def send_metric_data(node_id, metric_name, metric_value):
                 ],
                 'Value': metric_value,
                 'Timestamp': ts,
-                'StorageResolution': 5
+                'StorageResolution': 1
             },
         ]
     )

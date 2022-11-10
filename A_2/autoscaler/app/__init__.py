@@ -9,7 +9,7 @@ global memcache_stat
 
 webapp = Flask(__name__)
 
-memcache_mode = {'num_node': 4, 'max_thr': 1, 'min_thr': 0.5, 'expand_ratio': 2, 'shrink_ratio': 0.5}
+memcache_mode = {'num_node': 1, 'max_thr': 100, 'min_thr': -1, 'expand_ratio': 1, 'shrink_ratio': 1}
 memcache_stat = {}
 memcache_stat['NumItem'] = []
 memcache_stat['TotalSize'] = []
@@ -19,6 +19,7 @@ memcache_stat['MissRate'] = []
 
 
 from app import setMode
+from app import getStats
 
 
 
