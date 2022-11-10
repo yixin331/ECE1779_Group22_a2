@@ -21,10 +21,8 @@ from app import putImage
 from app import clearCache
 from app import setConfig
 from app import putStat
+from app import listKeys
 
-@webapp.before_first_request
-def put_memcache_stat():
-    scheduler.add_job(id='put_memcache_stat', func=putStat, trigger='interval', seconds=5)
 
 
 
