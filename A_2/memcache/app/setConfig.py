@@ -17,7 +17,6 @@ def setConfig():
     memcache_stat['num_request'] += 1
     memcache_config['policy'] = request.form['policy']
     memcache_config['capacity'] = int(request.form['size'])
-    # dbconnection.put_config(memcache_config['capacity'], memcache_config['policy'])
     free_cache(0)
     value = {"success": "true"}
     response = webapp.response_class(
