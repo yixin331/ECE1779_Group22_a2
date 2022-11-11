@@ -24,10 +24,10 @@ def remap():
         if not ip == None:
             try:
                 node_address = 'http://' + ip + ':5001/listKeys'
-                response = requests.post(url=node_address).json()
+                response = requests.get(url=node_address).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Cache loses connection")
-            for key, item in response["content"].items():
+            for key, item in response['content'].items():
                 key_list[key] = item
             # clear cache before remap
             try:
@@ -92,8 +92,8 @@ def remap():
     memcache_mode['num_node'] = num_node
 
     for key, item in key_list.items():
+        keyToSend = {'key': key}
         try:
-            keyToSend = {'key': key}
             response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Cache loses connection")

@@ -1,88 +1,88 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>SetMode</title>-->
-<!--    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">-->
-<!--</head>-->
-<!--<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>-->
-<!--<body onload="check_size({{num_node}},'{{mode}}');">-->
-<!--    <form action="{{url_for('main')}}" method="get">-->
-<!--        <input type="submit" value="return">-->
-<!--    </form>-->
-<!--<form action="{{ url_for('refreshMode')}}" method=post enctype="multipart/form-data">-->
-<!--    <table  border="1" >-->
-<!--        <tr>-->
-<!--          <td>-->
-<!--            <h3>Selecting between two mutually-exclusive options for resizing the memcache pool:</h3>-->
-<!--            <div>-->
-<!--                <form action="{{ url_for('resize_manu')}}" method=post enctype="multipart/form-data">-->
-<!--                    <input type="submit" id="manu" value="manual"></form>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <form action="{{ url_for('resize_auto')}}" method=post enctype="multipart/form-data">-->
-<!--                    <input type="submit" id="auto" value="automatic"></form>-->
-<!--            </div>-->
-<!--          </td>-->
-<!--        </tr>-->
-
-
-
-
-
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <h3>Manual Mode - Change size:</h3>-->
-<!--                <form action="{{ url_for('shrink_pool')}}" enctype="multipart/form-data" method=post>-->
-<!--                    <input type="submit" id="shrink" value="shrink pool"></form>-->
-
-<!--                <p>  {{num_node}}</p>-->
-
-<!--                <form action="{{ url_for('expand_pool')}}" enctype="multipart/form-data" method=post>-->
-<!--                    <input type="submit" id="expand" value="expand pool"></form>-->
-<!--            </td>-->
-<!--        </tr>-->
-
-
-
-
-
-<!--        <tr >-->
-<!--            <td>-->
-<!--                <h3>Automatic Mode:</h3>-->
-<!--                <form action="{{ url_for('auto_mode')}}" method=post enctype="multipart/form-data">-->
-<!--                <table style="border:0px">-->
-
-<!--                    Max Threshold:-->
-<!--                    <input type="number" value="0.3" name="auto" step="0.001">-->
-
-<!--                    Min Threshold:-->
-<!--                    <input type="number" value="0.1" name="auto" step="0.001">-->
-
-<!--                    Expand Ratio:-->
-<!--                    <input type="number"  value="2" name="auto" step="0.001">-->
-
-<!--                    Shrink Ratio:-->
-<!--                    <input type="number" value="0.5" name="auto" step="0.001">-->
-
-<!--                    </br><input type="submit" >-->
-
-<!--                </table>-->
-<!--                </form>-->
-
-<!--            </td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--    <input type="submit" value="submit" onclick="return checkSize()">-->
-
-<!--</form>-->
-<!--{% if result %}-->
-<!--  <h1>{{ result }}!</h1>-->
-<!--{% else %}-->
-<!--  <h1></h1>-->
-<!--{% endif %}-->
-<!--</body>-->
-<!--</html>-->
+{#<!--<!DOCTYPE html>-->#}
+{#<!--<html lang="en">-->#}
+{#<!--<head>-->#}
+{#<!--    <meta charset="UTF-8">-->#}
+{#<!--    <title>SetMode</title>-->#}
+{#<!--    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">-->#}
+{#<!--</head>-->#}
+{#<!--<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>-->#}
+{#<!--<body onload="check_size({{num_node}},'{{mode}}');">-->#}
+{#<!--    <form action="{{url_for('main')}}" method="get">-->#}
+{#<!--        <input type="submit" value="return">-->#}
+{#<!--    </form>-->#}
+{#<!--<form action="{{ url_for('refreshMode')}}" method=post enctype="multipart/form-data">-->#}
+{#<!--    <table  border="1" >-->#}
+{#<!--        <tr>-->#}
+{#<!--          <td>-->#}
+{#<!--            <h3>Selecting between two mutually-exclusive options for resizing the memcache pool:</h3>-->#}
+{#<!--            <div>-->#}
+{#<!--                <form action="{{ url_for('resize_manu')}}" method=post enctype="multipart/form-data">-->#}
+{#<!--                    <input type="submit" id="manu" value="manual"></form>-->#}
+{#<!--            </div>-->#}
+{#<!--            <div>-->#}
+{#<!--                <form action="{{ url_for('resize_auto')}}" method=post enctype="multipart/form-data">-->#}
+{#<!--                    <input type="submit" id="auto" value="automatic"></form>-->#}
+{#<!--            </div>-->#}
+{#<!--          </td>-->#}
+{#<!--        </tr>-->#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#<!--        <tr>-->#}
+{#<!--            <td>-->#}
+{#<!--                <h3>Manual Mode - Change size:</h3>-->#}
+{#<!--                <form action="{{ url_for('shrink_pool')}}" enctype="multipart/form-data" method=post>-->#}
+{#<!--                    <input type="submit" id="shrink" value="shrink pool"></form>-->#}
+{##}
+{#<!--                <p>  {{num_node}}</p>-->#}
+{##}
+{#<!--                <form action="{{ url_for('expand_pool')}}" enctype="multipart/form-data" method=post>-->#}
+{#<!--                    <input type="submit" id="expand" value="expand pool"></form>-->#}
+{#<!--            </td>-->#}
+{#<!--        </tr>-->#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#<!--        <tr >-->#}
+{#<!--            <td>-->#}
+{#<!--                <h3>Automatic Mode:</h3>-->#}
+{#<!--                <form action="{{ url_for('auto_mode')}}" method=post enctype="multipart/form-data">-->#}
+{#<!--                <table style="border:0px">-->#}
+{##}
+{#<!--                    Max Threshold:-->#}
+{#<!--                    <input type="number" value="0.3" name="auto" step="0.001">-->#}
+{##}
+{#<!--                    Min Threshold:-->#}
+{#<!--                    <input type="number" value="0.1" name="auto" step="0.001">-->#}
+{##}
+{#<!--                    Expand Ratio:-->#}
+{#<!--                    <input type="number"  value="2" name="auto" step="0.001">-->#}
+{##}
+{#<!--                    Shrink Ratio:-->#}
+{#<!--                    <input type="number" value="0.5" name="auto" step="0.001">-->#}
+{##}
+{#<!--                    </br><input type="submit" >-->#}
+{##}
+{#<!--                </table>-->#}
+{#<!--                </form>-->#}
+{##}
+{#<!--            </td>-->#}
+{#<!--        </tr>-->#}
+{#<!--    </table>-->#}
+{#<!--    <input type="submit" value="submit" onclick="return checkSize()">-->#}
+{##}
+{#<!--</form>-->#}
+{#<!--{% if result %}-->#}
+{#<!--  <h1>{{ result }}!</h1>-->#}
+{#<!--{% else %}-->#}
+{#<!--  <h1></h1>-->#}
+{#<!--{% endif %}-->#}
+{#<!--</body>-->#}
+{#<!--</html>-->#}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -101,7 +101,7 @@
     <table  border="1" >
         <tr>
           <td>
-            <h3>SelectSelecting between two mutually-exclusive options for resizing the memcache pool:</h3>
+            <h3>Select between two mutually-exclusive options for resizing the memcache pool:</h3>
             <div>
                 <input type="radio" name="mode" value="Manual" checked="true">
                 <label for="mode">Manual</label>
@@ -114,6 +114,7 @@
         </tr>
         <tr id="imageCell" >
             <td>
+                Number of nodes to configure for manual mode:
                 <input type="number" value={{num_node}} id="num_node" name="num_node"/>
 <!--                <h3>Memory Size:</h3>-->
 <!--                <input type="number" name="size" id="memSize">-->

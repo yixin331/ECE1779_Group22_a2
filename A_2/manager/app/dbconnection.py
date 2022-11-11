@@ -86,7 +86,7 @@ def put_mode(num_node, mode, max_thr, min_thr, expand_ratio, shrink_ratio):
     cnx = get_db()
 
     cursor = cnx.cursor()
-    query = "INSERT INTO memcache_config (updated_time, num_node, mode, max_thr, min_thr, expand_ratio, shrink_ratio) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+    query = "INSERT INTO memcache_mode (updated_time, num_node, mode, max_thr, min_thr, expand_ratio, shrink_ratio) VALUES (%s, %s, %s, %s, %s, %s, %s);"
     cursor.execute(query, (datetime.now(), num_node, mode, max_thr, min_thr, expand_ratio, shrink_ratio))
 
     cnx.commit()

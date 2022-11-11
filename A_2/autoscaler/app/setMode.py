@@ -1,5 +1,5 @@
 from flask import request, json
-from app import webapp, scheduler, memcache_mode, memcache_stat, node_ip
+from app import webapp, scheduler, memcache_mode, node_ip
 import requests
 import datetime, timedelta
 import boto3
@@ -84,8 +84,6 @@ def get_stat(metric):
     ts = datetime.now()
     total = 0
 
-
-
     for id, ip in node_ip.items():
         value = client.get_metric_statistics(
             Period=60,
@@ -98,7 +96,7 @@ def get_stat(metric):
         )
 
         if not value['Datapoints']:
-            webapp.logger.warning('No data for node ', id, 'at ' + ts)
+            webapp.logger.warning('No data for node ' + str(id) + 'at ' + str(ts))
         else:
             total += value['Datapoints'][0]['Average']
 
