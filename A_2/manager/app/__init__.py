@@ -33,6 +33,7 @@ from app import putImage
 from app import getKey
 from app import map
 from app import remap
+from app import sizeChange
 
 
 # TODO: need to call this when creating a new memcache instance

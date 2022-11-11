@@ -5,133 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53e8fa9-ec5d-4c23-b2f6-93d0e4e3572f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/A_2/manager/app/showStat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A_2/manager/app/sizeChange.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A_2/manager/app/templates/statistics.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/autoscaler/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/autoscaler/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/autoscaler/app/getStats.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/frontend/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/frontend/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/frontend/app/initializeDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/frontend/app/initializeDB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/frontend/app/sizeChange.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/frontend/app/sizeChange.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/frontend/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/frontend/app/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A_2/manager/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/clear_memcache.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/clear.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/delete_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/deleteAll.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/ec2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/initializeDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/initializeDB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/node_configure.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/refreshConfiguration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/remap.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/remap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/resize.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/refreshMode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/s3_examples.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/API.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/CONTRIBUTING.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/FAQ.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/NEWS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/PLUGINS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/component.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/data-eu-gdp-growth-1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/data-eu-gdp-growth-2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/data-eu-gdp-growth-3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/data-eu-gdp-growth-4.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/data-eu-gdp-growth-5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/data-eu-gdp-growth.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/data-japan-gdp-growth.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/data-usa-gdp-growth.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/ajax/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/annotating/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-interacting/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-multiple/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/date.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/africa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/antarctica" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/asia" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/australasia" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/backward" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/etcetera" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/europe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/factory" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/iso3166.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/leapseconds" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/northamerica" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/pacificnew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/solar87" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/solar88" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/solar89" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/southamerica" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/systemv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/yearistype.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time-zones/tz/zone.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/axes-time/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/basic-options/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/basic-usage/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/canvas/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/categories/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/examples.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/image/hs-2004-27-a-large-web.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/image/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/interacting/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/navigate/arrow-down.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/navigate/arrow-left.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/navigate/arrow-right.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/navigate/arrow-up.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/navigate/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/percentiles/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/realtime/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/resize/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/selection/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/series-errorbars/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/series-pie/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/series-toggle/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/series-types/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/shared/jquery-ui/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/stacking/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/symbols/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/threshold/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/tracking/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/visitors/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/examples/zooming/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/excanvas.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/excanvas.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/flot.jquery.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.colorhelpers.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.canvas.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.categories.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.crosshair.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.errorbars.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.fillbetween.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.image.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.navigate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.pie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.resize.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.selection.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.stack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.symbol.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.threshold.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.flot.time.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/flot/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/static/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/clear/clear_memcache.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/configure/configure.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/delete_all/delete_all.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/ec2_examples/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/ec2_examples/view.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/resize/resize_pool.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/s3_examples/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/s3_examples/view.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -148,6 +22,18 @@
               <caret line="46" column="18" lean-forward="true" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/A_2/manager/app/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -190,18 +76,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/A_2/frontend/app/sizeChange.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="19" column="61" lean-forward="true" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
-              <folding>
-                <element signature="e#0#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/A_2/manager/app/dbconnection.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="114">
@@ -222,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/A_2/manager/app/showStat.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+            <state relative-caret-position="45">
+              <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
@@ -237,8 +111,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/A_2/manager/app/templates/statistics.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="26" column="56" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
+            <state relative-caret-position="428">
+              <caret line="31" column="57" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -328,7 +202,6 @@
         <option value="$PROJECT_DIR$/A_2/autoscaler/app/__init__.py" />
         <option value="$PROJECT_DIR$/A_2/manager/app/refreshConfiguration.py" />
         <option value="$PROJECT_DIR$/A_2/manager/app/templates/main.html" />
-        <option value="$PROJECT_DIR$/A_2/manager/app/templates/statistics.html" />
         <option value="$PROJECT_DIR$/A_2/frontend/app/initializeDB.sql" />
         <option value="$PROJECT_DIR$/A_2/manager/app/initializeDB.sql" />
         <option value="$PROJECT_DIR$/A_2/manager/app/templates/configure.html" />
@@ -336,11 +209,12 @@
         <option value="$PROJECT_DIR$/A_2/manager/app/templates/mode.html" />
         <option value="$PROJECT_DIR$/A_2/frontend/app/sizeChange.py" />
         <option value="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" />
-        <option value="$PROJECT_DIR$/A_2/manager/app/__init__.py" />
         <option value="$PROJECT_DIR$/A_2/manager/app/remap.py" />
         <option value="$PROJECT_DIR$/A_2/manager/app/refreshMode.py" />
         <option value="$PROJECT_DIR$/A_2/manager/app/sizeChange.py" />
+        <option value="$PROJECT_DIR$/A_2/manager/app/templates/statistics.html" />
         <option value="$PROJECT_DIR$/A_2/manager/app/showStat.py" />
+        <option value="$PROJECT_DIR$/A_2/manager/app/__init__.py" />
       </list>
     </option>
   </component>
@@ -518,8 +392,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21445592" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21445592" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -530,7 +405,7 @@
       <window_info anchor="bottom" id="Structure" order="6" weight="0.24866785" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.3285968" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4932486" visible="true" weight="0.42628774" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4932486" visible="true" weight="0.42628774" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5067514" side_tool="true" weight="0.40319717" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -846,16 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/A_2/manager/app/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/A_2/manager/app/templates/mode.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -883,13 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshConfiguration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-315">
-          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/A_2/manager/app/dbconnection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -906,16 +764,6 @@
           <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
           <folding>
             <element signature="e#0#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshMode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="46" column="18" lean-forward="true" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -952,17 +800,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/A_2/manager/app/templates/statistics.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="26" column="56" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
+        <state relative-caret-position="428">
+          <caret line="31" column="57" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/A_2/manager/app/showStat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+        <state relative-caret-position="45">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshConfiguration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-315">
+          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshMode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="46" column="18" lean-forward="true" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A_2/manager/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
