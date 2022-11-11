@@ -10,7 +10,8 @@ from app import clear
 from app import key
 from app import refreshConfiguration
 from app import stat
-
+from app import deleteAll
+from app import sizeChange
 
 
 

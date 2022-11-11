@@ -10,11 +10,11 @@ import random
 def putImage():
     key = request.form.get('key')
     keyToSend = {'key': key}
+    webapp.logger.warning(keyToSend)
     try:
         response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
     except requests.exceptions.ConnectionError as err:
-        webapp.logger.warning("Cache loses connection")
-
+        webapp.logger.warning("Manager app loses connection")
     node_address = 'http://' + response["content"] + ':5001/putImage'
     try:
         # call Manager app to put image
