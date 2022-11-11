@@ -3,7 +3,8 @@ from app import webapp, scheduler, memcache_mode, memcache_stat
 import requests
 import datetime, timedelta
 import boto3
-from config import aws_config
+from app import config
+from app.config import aws_config
 import math
 
 

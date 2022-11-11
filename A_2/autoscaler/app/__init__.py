@@ -1,5 +1,7 @@
 from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
+from app import config
+from app.config import aws_config
 
 scheduler = BackgroundScheduler()
 scheduler.start()

@@ -7,6 +7,7 @@ from datetime import datetime
 
 @webapp.route('/putStat', methods=['POST'])
 def putStat():
+    node_id = request.form.get('InstanceId')
     if scheduler.get_job('put_memcache_stat'):
         scheduler.resume_job('put_memcache_stat')
     else:
