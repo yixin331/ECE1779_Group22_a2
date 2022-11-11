@@ -65,7 +65,7 @@ def put():
             # path = os.path.join(UPLOADS_PATH, key + "." + extension)
             # file.save(path)
             s3.put_object(Bucket=bucket_name, Key=key, Body=file)
-            dbconnection.put_image(key, key + "." + extension)
+            # dbconnection.put_image(key, key + "." + extension)
             file.seek(0, 0)
             # put in cache
             keyToSend = {'key': key}
