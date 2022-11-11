@@ -7,7 +7,7 @@ import io
 
 @webapp.route('/remap', methods=['POST'])
 def remap():
-    num_node = request.form.get('num_node')
+    num_node = int(request.form.get('num_node'))
 
     # get all keys and images in the memcache
     key_list = {}

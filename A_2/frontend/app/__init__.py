@@ -1,5 +1,4 @@
 from flask import Flask
-from app import dbconnection
 
 
 webapp = Flask(__name__)

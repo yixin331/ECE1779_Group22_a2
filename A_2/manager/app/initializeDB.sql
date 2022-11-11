@@ -28,8 +28,8 @@ CREATE TABLE memcache_mode (
 	updated_time TIMESTAMP PRIMARY KEY DEFAULT CURRENT_TIMESTAMP,
 	num_node INT DEFAULT 1,
 	mode VARCHAR(10) DEFAULT 'Manual',
-	max_thr FLOAT DEFAULT 100,
-	min_thr FLOAT DEFAULT -1,
+	max_thr FLOAT DEFAULT 1,
+	min_thr FLOAT DEFAULT 0,
 	expand_ratio FLOAT DEFAULT 1,
 	shrink_ratio FLOAT DEFAULT 1
 );
