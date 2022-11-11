@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DeleteAll</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+</head>
+<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
+<body>
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+    </form>
+    </form>
+    <form action="{{ url_for('deleteAll')}}" method="post">
+        <input type="submit" value="delete all">
+    </form>
+    {% if result %}
+      <h1>{{ result }}!</h1>
+    {% else %}
+      <h1></h1>
+    {% endif %}
+</body>
+</html>

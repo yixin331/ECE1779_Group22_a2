@@ -8,7 +8,7 @@ import io
 
 @webapp.route('/remap', methods=['POST'])
 def remap():
-    num_node = request.form.get('num_node')
+    num_node = int(request.form.get('num_node'))
     if num_node == memcache_mode['num_node']:
         value = {"success": "true"}
         response = webapp.response_class(

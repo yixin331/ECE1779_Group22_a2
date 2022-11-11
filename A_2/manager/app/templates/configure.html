@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Config</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+</head>
+    <script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
+
+<body>
+    <form action="{{url_for('main')}}" method="get">
+        <input type="submit" value="return">
+    </form>
+<form action="{{ url_for('refreshConfiguration')}}" method=post enctype="multipart/form-data">
+    <table  border="1" >
+        <tr>
+          <td>
+            <h3>Select a replacement policy:</h3>
+            <div>
+                <input type="radio" name="policy" value="Random" checked="true">
+                <label for="dewey">Random</label>
+            </div>
+            <div>
+                <input type="radio" name="policy" value="LRU">
+                <label for="dewey">LRU</label>
+            </div>
+          </td>
+        </tr>
+        <tr id="imageCell">
+            <td>
+                <h3>Memory Size:</h3>
+                <input type="number" name="size" id="memSize">
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="submit" onclick="return checkSize();">
+
+</form>
+{% if result %}
+  <h1>{{ result }}!</h1>
+{% else %}
+  <h1></h1>
+{% endif %}
+</body>
+</html>

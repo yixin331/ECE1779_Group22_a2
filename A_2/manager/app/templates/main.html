@@ -1,14 +1,74 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <h1 style="text-align: center;">Manager App</h1>
 
-    <ul>
-{#        <li><a href="{{url_for('ec2_list')}}">Node Stat</a></li><br>#}
-{#        <li><a href="{{url_for('s3_list')}}">S3</a></li><br>#}
-        <li><a href="{{url_for('node_configure')}}">Configure</a></li><br>
-        <li><a href="{{url_for('resize_pool')}}">Resize pool</a></li></br>
-        <li><a href="{{url_for('delete_all')}}">Delete all</a></li></br>
-        <li><a href="{{url_for('clear_memcache')}}">Clear memcache</a></li></br>
+    <table border="1" >
+        <tr>
+            <td>
+                <a href="{{ url_for('refreshConfiguration')}}">configure memcache</a>
+            </td>
+        </tr>
 
-    </ul>
+    </table>
 
-{% endblock %}
+
+    <br><br><br>
+    <table border="1" >
+        <tr>
+            <td>
+                <a href="{{ url_for('refreshMode')}}">configure mode</a>
+            </td>
+        </tr>
+
+
+    </table>
+    <br><br><br>
+    <table border="1" >
+        <tr>
+            <td>
+                <a href="{{ url_for('clear')}}">clear cache</a>
+            </td>
+
+        </tr>
+
+    </table>
+    <br><br><br>
+    <table border="1" >
+        <tr>
+            <td>
+                <a href="{{ url_for('deleteAll')}}">delete all</a>
+            </td>
+
+        </tr>
+
+    </table>
+    <br><br><br>
+    <table border="1" >
+        <tr>
+            <td>
+                <a href="{{ url_for('showStat')}}">show stat</a>
+            </td>
+
+        </tr>
+
+    </table>
+
+{% if result %}
+  <h1>{{ result }}!</h1>
+{% else %}
+  <h1></h1>
+{% endif %}
+<iframe id="myIframe" name="hideIframe" style="display:none;"></iframe>
+<script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
+
+
+
+</body>
+</html>
