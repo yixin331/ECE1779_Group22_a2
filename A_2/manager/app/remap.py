@@ -65,6 +65,12 @@ def remap():
             webapp.logger.warning(node_ip)
         # maybe todo: call stopStat()
         # refer to schedule_cloud_watch(ip)
+        # send node_ip dict to localhost/5003/changeIP
+        nodeToSend = {"node": node_ip}
+        try:
+            response = requests.post(url='http://localhost:5003/changeIP', data=nodeToSend).json()
+        except requests.exceptions.ConnectionError as err:
+            webapp.logger.warning("Autoscaler loses connection")
     else:
         num_start = num_node - memcache_mode['num_node']
         session = boto3.Session(

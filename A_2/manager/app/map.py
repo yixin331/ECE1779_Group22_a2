@@ -13,6 +13,7 @@ def map():
 
     node_id = index % memcache_mode['num_node']
     instance_id = list(node_ip.keys())[node_id]
+    webapp.logger.warning('key belong to instance: ' + str(instance_id))
     ip_address = node_ip.get(instance_id)
     # active_list = []
     # for id, ip in node_ip.items():

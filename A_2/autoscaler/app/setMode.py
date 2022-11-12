@@ -20,7 +20,6 @@ def setMode():
         memcache_mode['min_thr'] = request.form.get('min_thr')
         memcache_mode['expand_ratio'] = request.form.get('expand_ratio')
         memcache_mode['shrink_ratio'] = request.form.get('shrink_ratio')
-        monitor_stats()
         if scheduler.get_job('monitor_stats'):
             scheduler.resume_job('monitor_stats')
         else:
@@ -77,7 +76,7 @@ def get_stat(metric):
         aws_secret_access_key=aws_config['secret_access_key']
     )
 
-    ts = datetime.now()
+    ts = datetime.utcnow()
     total = 0
 
     for id, ip in node_ip.items():
@@ -85,12 +84,12 @@ def get_stat(metric):
             Period=60,
             Namespace='Memcache',
             MetricName=metric,
-            Dimensions=[{'Name': 'NodeId', 'Value': id}],
+            Dimensions=[{'Name': 'NodeId', 'Value': str(id)}],
             StartTime=ts - timedelta(seconds=1 * 60),
             EndTime=ts,
             Statistics=['Average']
         )
-
+        webapp.logger.warning(value)
         if not value['Datapoints']:
             webapp.logger.warning('No data for node ' + str(id) + ' at ' + str(ts))
         else:

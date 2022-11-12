@@ -66,7 +66,7 @@ def send_metric_data(node_id, metric_name, metric_value):
         aws_secret_access_key=aws_config['secret_access_key']
     )
 
-    ts = datetime.now()
+    ts = datetime.utcnow()
     response = client.put_metric_data(
         Namespace='Memcache',
         MetricData=[
