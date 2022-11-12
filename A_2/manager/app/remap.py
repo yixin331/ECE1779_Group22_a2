@@ -29,7 +29,6 @@ def remap():
             mimetype='application/json'
         )
         return response
-
     # get all keys and images in the memcache
     key_list = {}
     for id, ip in node_ip.items():
@@ -62,7 +61,6 @@ def remap():
         # remove key-value pair in node_ip
         for element in id:
             del node_ip[element]
-            webapp.logger.warning(node_ip)
         # maybe todo: call stopStat()
         # refer to schedule_cloud_watch(ip)
         # send node_ip dict to localhost/5003/changeIP
@@ -133,6 +131,10 @@ def remap():
         if response is None or response["success"] == "false":
             webapp.logger.warning("Key: " + str(key) + "cannot remap to cache")
     webapp.logger.warning('remap finished')
+    try:
+        requests.post(url='http://localhost:5003/setMode', data=memcache_mode)
+    except requests.exceptions.ConnectionError as err:
+        webapp.logger.warning("Autoscaler loses connection")
     value = {"success": "true"}
     response = webapp.response_class(
         response=json.dumps(value),

@@ -48,27 +48,27 @@ def monitor_stats():
             webapp.logger.warning(value)
             if value > memcache_mode['max_thr']:
                 num_node = min(math.floor(num_node * memcache_mode['expand_ratio']), 8)
-                if (not memcache_mode['num_node'] == num_node):
+                if not memcache_mode['num_node'] == num_node:
                     webapp.logger.warning("Need to change node from " + str(memcache_mode['num_node']) + " to " + str(num_node))
+                    if scheduler.get_job('monitor_stats'):
+                        scheduler.pause_job('monitor_stats')
                     dataToSend = {"num_node": num_node}
                     try:
                         requests.post(url='http://localhost:5002/sizeChange', data=dataToSend)
                     except requests.exceptions.ConnectionError as err:
                         webapp.logger.warning("Manager loses connection")
-
-                    memcache_mode['num_node'] = num_node
 
             elif value < memcache_mode['min_thr']:
                 num_node = max(math.ceil(num_node * memcache_mode['shrink_ratio']), 1)
-                if (not memcache_mode['num_node'] == num_node):
+                if not memcache_mode['num_node'] == num_node:
                     webapp.logger.warning("Need to change node from " + str(memcache_mode['num_node']) + " to " + str(num_node))
+                    if scheduler.get_job('monitor_stats'):
+                        scheduler.pause_job('monitor_stats')
                     dataToSend = {"num_node": num_node}
                     try:
                         requests.post(url='http://localhost:5002/sizeChange', data=dataToSend)
                     except requests.exceptions.ConnectionError as err:
                         webapp.logger.warning("Manager loses connection")
-
-                    memcache_mode['num_node'] = num_node
 
     value = {"success": "true"}
     response = webapp.response_class(

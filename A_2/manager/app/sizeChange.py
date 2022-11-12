@@ -5,9 +5,15 @@ import requests
 
 @webapp.route('/sizeChange', methods=['POST'])
 def sizeChange():
-    response = None
     try:
-        response = requests.post(url='http://localhost:5000/sizeChange', data=request.form)
+        webapp.logger.warning('size change from manager')
+        requests.post(url='http://localhost:5000/sizeChange', data=request.form)
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Frontend loses connection")
+    value = {"success": "true"}
+    response = webapp.response_class(
+        response=json.dumps(value),
+        status=200,
+        mimetype='application/json'
+    )
     return response
