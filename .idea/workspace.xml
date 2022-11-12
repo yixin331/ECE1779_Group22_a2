@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53e8fa9-ec5d-4c23-b2f6-93d0e4e3572f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/A_2/autoscaler/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/autoscaler/app/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/A_2/manager/app/remap.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/remap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/sizeChange.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/sizeChange.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_2/memcache/app/clearCache.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/memcache/app/clearCache.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/A_2/manager/app/remap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="111" column="62" lean-forward="true" selection-start-line="111" selection-start-column="62" selection-end-line="111" selection-end-column="62" />
+            <state relative-caret-position="220">
+              <caret line="113" column="12" selection-start-line="113" selection-start-column="12" selection-end-line="113" selection-end-column="12" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
               </folding>
@@ -81,13 +79,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/A_2/manager/app/sizeChange.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
               <caret line="9" column="91" lean-forward="true" selection-start-line="9" selection-start-column="91" selection-end-line="9" selection-end-column="91" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/A_2/memcache/app/clearCache.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,15 +111,6 @@
               <folding>
                 <element signature="e#0#60#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/A_2/frontend/app/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="23" selection-start-column="23" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -162,7 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/start.sh" />
         <option value="$PROJECT_DIR$/A_1/memcache/app/putImage.py" />
         <option value="$PROJECT_DIR$/A_1/memcache/app/getKey.py" />
@@ -212,6 +212,7 @@
         <option value="$PROJECT_DIR$/A_2/autoscaler/app/config.py" />
         <option value="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" />
         <option value="$PROJECT_DIR$/A_2/manager/app/sizeChange.py" />
+        <option value="$PROJECT_DIR$/A_2/memcache/app/clearCache.py" />
         <option value="$PROJECT_DIR$/A_2/manager/app/remap.py" />
       </list>
     </option>
@@ -390,8 +391,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21445592" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21445592" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -402,7 +404,7 @@
       <window_info anchor="bottom" id="Structure" order="6" weight="0.24866785" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.3285968" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4932486" visible="true" weight="0.38188276" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4932486" visible="true" weight="0.38188276" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5067514" side_tool="true" weight="0.40319717" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -474,16 +476,6 @@
           <caret line="16" column="43" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="43" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/A_2/memcache/app/clearCache.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="4" column="26" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -822,22 +814,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/A_2/manager/app/remap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="111" column="62" lean-forward="true" selection-start-line="111" selection-start-column="62" selection-end-line="111" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/A_2/manager/app/sizeChange.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="91" lean-forward="true" selection-start-line="9" selection-start-column="91" selection-end-line="9" selection-end-column="91" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A_2/memcache/app/clearCache.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A_2/manager/app/remap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="113" column="12" selection-start-line="113" selection-start-column="12" selection-end-line="113" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#67#0" expanded="true" />
           </folding>
         </state>
       </provider>
