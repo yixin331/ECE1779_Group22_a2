@@ -43,7 +43,7 @@ def remap():
                 key_list[key] = item
             # clear cache before remap
             try:
-                node_address = 'http://' + ip + ':5001/clearCache'
+                node_address = 'http://' + ip + ':5001/clearStats'
                 response = requests.post(url=node_address).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Cache loses connection")
@@ -108,10 +108,10 @@ def remap():
 
             node_ip[instance_id] = public_ip
             # send node_ip dict to localhost/5003/changeIP
-            try:
-                response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
-            except requests.exceptions.ConnectionError as err:
-                webapp.logger.warning("Autoscaler loses connection")
+        try:
+            response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
+        except requests.exceptions.ConnectionError as err:
+            webapp.logger.warning("Autoscaler loses connection")
 
     memcache_mode['num_node'] = num_node
 
