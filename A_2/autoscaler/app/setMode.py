@@ -20,7 +20,7 @@ def setMode():
         memcache_mode['min_thr'] = float(request.form.get('min_thr'))
         memcache_mode['expand_ratio'] = float(request.form.get('expand_ratio'))
         memcache_mode['shrink_ratio'] = float(request.form.get('shrink_ratio'))
-        monitor_stats()
+        # monitor_stats()
         if scheduler.get_job('monitor_stats'):
             scheduler.resume_job('monitor_stats')
         else:
