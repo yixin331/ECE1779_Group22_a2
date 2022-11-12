@@ -87,7 +87,7 @@ def get_stat(metric):
         aws_secret_access_key=aws_config['secret_access_key']
     )
 
-    ts = datetime.now()
+    ts = datetime.utcnow()
     total = 0
 
     for id, ip in node_ip.items():
@@ -95,7 +95,7 @@ def get_stat(metric):
             Period=60,
             Namespace='Memcache',
             MetricName=metric,
-            Dimensions=[{'Name': 'NodeId', 'Value': id}],
+            Dimensions=[{'Name': 'NodeId', 'Value': str(id)}],
             StartTime=ts - timedelta(seconds=1 * 60),
             EndTime=ts,
             Statistics=['Average']
@@ -140,9 +140,9 @@ def initialize_instance():
     node_ip[instance_id] = public_ip
     webapp.logger.warning('wait till instance is ready')
     # send node_ip dict to localhost/5003/changeIP
-    nodeToSend = {"node": node_ip}
+
     try:
-        response = requests.post(url='http://localhost:5003/changeIP', data=nodeToSend).json()
+        response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Autoscaler loses connection")
     time.sleep(180)
