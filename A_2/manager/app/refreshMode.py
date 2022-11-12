@@ -84,5 +84,5 @@ def refreshMode():
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Autoscaler loses connection")
 
-        dbconnection.put_mode(memcache_mode['num_node'], memcache_mode['mode'], memcache_mode['max_thr'], memcache_mode['min_thr'], memcache_mode['expand_ratio'], memcache_mode['shrink_ratio'])
+        dbconnection.put_mode(int(memcache_mode['num_node']), memcache_mode['mode'], memcache_mode['max_thr'], memcache_mode['min_thr'], memcache_mode['expand_ratio'], memcache_mode['shrink_ratio'])
         return render_template("mode.html", num_node=memcache_mode['num_node'], result="Mode has been reset")

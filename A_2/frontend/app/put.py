@@ -54,7 +54,6 @@ def put():
         if not created:
             try:
                 response = s3.create_bucket(Bucket=bucket_name)
-                print(response)
             except ClientError as e:
                 webapp.logger.warning("Fail to create a bucket")
         if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
@@ -65,7 +64,7 @@ def put():
             # path = os.path.join(UPLOADS_PATH, key + "." + extension)
             # file.save(path)
             s3.put_object(Bucket=bucket_name, Key=key, Body=file)
-            # dbconnection.put_image(key, key + "." + extension)
+            dbconnection.put_image(key, key + "." + extension)
             file.seek(0, 0)
             # put in cache
             keyToSend = {'key': key}
