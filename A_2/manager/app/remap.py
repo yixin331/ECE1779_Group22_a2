@@ -66,9 +66,8 @@ def remap():
         # maybe todo: call stopStat()
         # refer to schedule_cloud_watch(ip)
         # send node_ip dict to localhost/5003/changeIP
-        nodeToSend = {"node": node_ip}
         try:
-            response = requests.post(url='http://localhost:5003/changeIP', data=nodeToSend).json()
+            response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Autoscaler loses connection")
     else:
@@ -97,9 +96,9 @@ def remap():
             public_ip = instance.public_ip_address
             node_ip[instance_id] = public_ip
             # send node_ip dict to localhost/5003/changeIP
-            nodeToSend = {"node": node_ip}
+
             try:
-                response = requests.post(url='http://localhost:5003/changeIP', data=nodeToSend).json()
+                response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Autoscaler loses connection")
             webapp.logger.warning('wait till instance is ready')
