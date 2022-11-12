@@ -6,7 +6,7 @@ import requests
 @webapp.route('/sizeChange', methods=['POST'])
 def sizeChange():
     try:
-        webapp.logger.warning('size change from manager')
+        webapp.logger.warning('size change from autoscaler')
         requests.post(url='http://localhost:5000/sizeChange', data=request.form)
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Frontend loses connection")

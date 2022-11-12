@@ -42,7 +42,7 @@ def remap():
                 key_list[key] = item
             # clear cache before remap
             try:
-                node_address = 'http://' + ip + ':5001/clearStats'
+                node_address = 'http://' + ip + ':5001/clearCache'
                 response = requests.post(url=node_address).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Cache loses connection")
