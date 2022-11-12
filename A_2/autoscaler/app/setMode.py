@@ -42,22 +42,18 @@ def monitor_stats():
 
         value = get_stat(metric)
 
-        if len(memcache_stat[metric]) < 30:
-            memcache_stat[metric].append(value)
-        else:
-            memcache_stat[metric].pop(0)
-            memcache_stat[metric].append(value)
-
         if metric == 'MissRate':
             if value > memcache_mode['max_thr']:
-                num_node = min(math.floor(num_node) * memcache_mode['expand_ratio'], 8)
+                num_node = min(math.floor(num_node * memcache_mode['expand_ratio']), 8)
+                webapp.logger.warning("Need to change node from " + str(memcache_mode['num_node']) + " to " + str(num_node))
                 dataToSend = {"num_node": num_node}
                 try:
                     requests.post(url='http://localhost:5002/sizeChange', data=dataToSend)
                 except requests.exceptions.ConnectionError as err:
                     webapp.logger.warning("Manager loses connection")
             elif value < memcache_mode['min_thr']:
-                num_node = max(math.ceil(num_node) * memcache_mode['shrink_ratio'], 1)
+                num_node = max(math.ceil(num_node * memcache_mode['shrink_ratio']), 1)
+                webapp.logger.warning("Need to change node from " + str(memcache_mode['num_node']) + " to " + str(num_node))
                 dataToSend = {"num_node": num_node}
                 try:
                     requests.post(url='http://localhost:5002/sizeChange', data=dataToSend)
@@ -96,7 +92,7 @@ def get_stat(metric):
         )
 
         if not value['Datapoints']:
-            webapp.logger.warning('No data for node ' + str(id) + 'at ' + str(ts))
+            webapp.logger.warning('No data for node ' + str(id) + ' at ' + str(ts))
         else:
             total += value['Datapoints'][0]['Average']
 

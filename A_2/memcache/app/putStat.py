@@ -7,7 +7,7 @@ from datetime import datetime
 
 @webapp.route('/putStat', methods=['POST'])
 def putStat():
-    node_id = request.form.get('InstanceId')
+    node_id['node_id'] = request.form.get('InstanceId')
     if scheduler.get_job('put_memcache_stat'):
         scheduler.resume_job('put_memcache_stat')
     else:
@@ -36,17 +36,17 @@ def stopStat():
 
 def put_memcache_stat():
     if memcache_stat['num_get'] == 0:
-        send_metric_data(node_id, 'NumItem', memcache_stat['num_item'])
-        send_metric_data(node_id, 'TotalSize', memcache_stat['total_size'])
-        send_metric_data(node_id, 'NumRequest', memcache_stat['num_request'])
-        send_metric_data(node_id, 'HitRate', 0)
-        send_metric_data(node_id, 'MissRate', 0)
+        send_metric_data(node_id['node_id'], 'NumItem', memcache_stat['num_item'])
+        send_metric_data(node_id['node_id'], 'TotalSize', memcache_stat['total_size'])
+        send_metric_data(node_id['node_id'], 'NumRequest', memcache_stat['num_request'])
+        send_metric_data(node_id['node_id'], 'HitRate', 0)
+        send_metric_data(node_id['node_id'], 'MissRate', 0)
     else:
-        send_metric_data(node_id, 'NumItem', memcache_stat['num_item'])
-        send_metric_data(node_id, 'TotalSize', memcache_stat['total_size'])
-        send_metric_data(node_id, 'NumRequest', memcache_stat['num_request'])
-        send_metric_data(node_id, 'HitRate', (memcache_stat['num_get'] - memcache_stat['num_miss'])/memcache_stat['num_get'])
-        send_metric_data(node_id, 'MissRate', memcache_stat['num_miss']/memcache_stat['num_get'])
+        send_metric_data(node_id['node_id'], 'NumItem', memcache_stat['num_item'])
+        send_metric_data(node_id['node_id'], 'TotalSize', memcache_stat['total_size'])
+        send_metric_data(node_id['node_id'], 'NumRequest', memcache_stat['num_request'])
+        send_metric_data(node_id['node_id'], 'HitRate', (memcache_stat['num_get'] - memcache_stat['num_miss'])/memcache_stat['num_get'])
+        send_metric_data(node_id['node_id'], 'MissRate', memcache_stat['num_miss']/memcache_stat['num_get'])
     current_time = datetime.now()
     webapp.logger.warning('Sending metric data finished: ' + str(current_time))
     value = {"success": "true"}

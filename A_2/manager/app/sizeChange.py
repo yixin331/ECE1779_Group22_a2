@@ -9,6 +9,6 @@ def sizeChange():
     try:
         response = requests.post(url='http://localhost:5000/sizeChange', data=request.form).json()
     except requests.exceptions.ConnectionError as err:
-        webapp.logger.warning("Cache loses connection")
+        webapp.logger.warning("Frontend loses connection")
 
     return response
