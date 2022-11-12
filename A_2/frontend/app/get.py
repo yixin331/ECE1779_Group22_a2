@@ -60,7 +60,6 @@ def get():
                     result = "Get from database but fail to reload to cache"
                 else:
                     result = "Get from database and reload into cache"
-                # TODO : check if it works
                 file_byte.seek(0,0)
                 encode_str = base64.b64encode(file_byte.read())
                 # webapp.logger.warning(encode_str)

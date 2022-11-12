@@ -4,6 +4,18 @@ from app.config import aws_config
 import requests
 import base64
 import io
+import boto3
+import time
+
+
+def schedule_cloud_watch(ip, id):
+    try:
+        node_address = 'http://' + str(ip) + ':5001/putStat'
+        webapp.logger.warning(node_address)
+        idToSend = {'InstanceId': id}
+        response = requests.post(url=node_address, data=idToSend).json()
+    except requests.exceptions.ConnectionError as err:
+        webapp.logger.warning("Cache loses connection")
 
 
 @webapp.route('/remap', methods=['POST'])
@@ -40,11 +52,17 @@ def remap():
         num_stop = memcache_mode['num_node'] - num_node
         id = list(node_ip.keys())[0:num_stop]
         # terminate instances
-        ec2 = boto3.resource('ec2')
-        ec2.instances.filter(InstanceIds=[id]).terminate()
+        session = boto3.Session(
+            region_name=aws_config['region'],
+            aws_access_key_id=aws_config['access_key_id'],
+            aws_secret_access_key=aws_config['secret_access_key']
+        )
+        ec2 = session.resource('ec2')
+        ec2.instances.filter(InstanceIds=id).terminate()
         # remove key-value pair in node_ip
         for element in id:
             del node_ip[element]
+            webapp.logger.warning(node_ip)
         # maybe todo: call stopStat()
         # refer to schedule_cloud_watch(ip)
     else:
@@ -79,11 +97,11 @@ def remap():
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Autoscaling loses connection")
             webapp.logger.warning('wait till instance is ready')
-            time.sleep(30)
+            time.sleep(180)
             schedule_cloud_watch(public_ip, instance_id)
             # according to memcache_config, set config (send request to corresponding memcache)
             node_address = 'http://' + str(public_ip) + ':5001/setConfig'
-            keyToSend = {'policy': memcache_config['policy'],'size': memcache_config['capacity']}
+            keyToSend = {'policy': memcache_config['policy'], 'size': memcache_config['capacity']}
             try:
                 response = requests.post(url=node_address, data=keyToSend).json()
             except requests.exceptions.ConnectionError as err:
@@ -108,7 +126,7 @@ def remap():
             webapp.logger.warning("Cache loses connection")
         if response is None or response["success"] == "false":
             webapp.logger.warning("Key: " + str(key) + "cannot remap to cache")
-
+    webapp.logger.warning('remap finished')
     value = {"success": "true"}
     response = webapp.response_class(
         response=json.dumps(value),
