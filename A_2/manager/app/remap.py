@@ -95,7 +95,7 @@ def remap():
             try:
                 response = requests.post(url='http://localhost:5003/changeIP', data=nodeToSend).json()
             except requests.exceptions.ConnectionError as err:
-                webapp.logger.warning("Autoscaling loses connection")
+                webapp.logger.warning("Autoscaler loses connection")
             webapp.logger.warning('wait till instance is ready')
             time.sleep(180)
             schedule_cloud_watch(public_ip, instance_id)
@@ -114,7 +114,7 @@ def remap():
         try:
             response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
         except requests.exceptions.ConnectionError as err:
-            webapp.logger.warning("Cache loses connection")
+            webapp.logger.warning("Manager app loses connection")
 
         node_address = 'http://' + response["content"] + ':5001/putImage'
         file = io.BytesIO(base64.b64decode(item))

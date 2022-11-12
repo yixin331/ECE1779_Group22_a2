@@ -11,7 +11,7 @@ def getKey():
     try:
         response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
     except requests.exceptions.ConnectionError as err:
-        webapp.logger.warning("Cache loses connection")
+        webapp.logger.warning("Manager app loses connection")
 
     node_address = 'http://' + response["content"] + ':5001/getKey'
     try:

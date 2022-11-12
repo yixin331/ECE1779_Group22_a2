@@ -102,7 +102,7 @@ def get_stat(metric):
         )
 
         if not value['Datapoints']:
-            webapp.logger.warning('No data for node ' + str(id) + 'at ' + str(ts))
+            webapp.logger.warning('No data for node ' + str(id) + ' at ' + str(ts))
         else:
             total += value['Datapoints'][0]['Average']
 
@@ -131,6 +131,7 @@ def initialize_instance():
     instance_id = instances['Instances'][0]['InstanceId']
     ec2 = boto3.resource('ec2')
     instance = ec2.Instance(instance_id)
+    webapp.logger.warning(instance_id)
     webapp.logger.warning('wait till instance is running')
     instance.wait_until_running()
     instance.reload()
@@ -143,7 +144,7 @@ def initialize_instance():
     try:
         response = requests.post(url='http://localhost:5003/changeIP', data=nodeToSend).json()
     except requests.exceptions.ConnectionError as err:
-        webapp.logger.warning("Autoscaling loses connection")
+        webapp.logger.warning("Autoscaler loses connection")
     time.sleep(180)
     schedule_cloud_watch(public_ip, instance_id)
     scheduler.add_job(id='monitor_stats', func=monitor_stats, trigger='interval', seconds=60)
