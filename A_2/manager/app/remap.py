@@ -94,13 +94,7 @@ def remap():
             webapp.logger.warning('wait till instance is running')
             instance.reload()
             public_ip = instance.public_ip_address
-            node_ip[instance_id] = public_ip
-            # send node_ip dict to localhost/5003/changeIP
 
-            try:
-                response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
-            except requests.exceptions.ConnectionError as err:
-                webapp.logger.warning("Autoscaler loses connection")
             webapp.logger.warning('wait till instance is ready')
             time.sleep(180)
             schedule_cloud_watch(public_ip, instance_id)
@@ -111,6 +105,13 @@ def remap():
                 response = requests.post(url=node_address, data=keyToSend).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Cache loses connection")
+
+            node_ip[instance_id] = public_ip
+            # send node_ip dict to localhost/5003/changeIP
+            try:
+                response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
+            except requests.exceptions.ConnectionError as err:
+                webapp.logger.warning("Autoscaler loses connection")
 
     memcache_mode['num_node'] = num_node
 
