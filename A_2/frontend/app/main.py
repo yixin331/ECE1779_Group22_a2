@@ -1,11 +1,13 @@
 from flask import render_template, url_for, request, redirect, flash, g, json, send_from_directory
 from app import webapp, dbconnection
+from app.config import aws_config
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from pathlib import Path
 import requests
 import os
 import base64
+import boto3
 # from apscheduler.schedulers.background import BackgroundScheduler
 # from apscheduler.triggers.interval import IntervalTrigger
 #
@@ -72,25 +74,40 @@ def upload():
             mimetype='application/json'
         )
         return response
-
     filename = secure_filename(file.filename)
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    # s3 create bucket
+    s3 = boto3.client(
+        's3',
+        aws_config['region'],
+        aws_access_key_id=aws_config['access_key_id'],
+        aws_secret_access_key=aws_config['secret_access_key']
+    )
+    response = s3.list_buckets()
+    bucket_name = '1779a2files'
+    created = False
+    for bucket in response['Buckets']:
+        if bucket["Name"] == bucket_name:
+            created = True
+            webapp.logger.warning('Bucket already exists')
+    if not created:
+        try:
+            response = s3.create_bucket(Bucket=bucket_name)
+        except ClientError as e:
+            webapp.logger.warning("Fail to create a bucket")
     if file and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
         extension = filename.rsplit('.', 1)[1].lower()
-        UPLOADS_PATH = join(dirname(realpath(__file__)), 'static')
-        UPLOADS_PATH = os.path.join(UPLOADS_PATH, 'images')
-        Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
-        path = os.path.join(UPLOADS_PATH, key + "." + extension)
-        file.save(path)
+        s3.put_object(Bucket=bucket_name, Key=key, Body=file)
         dbconnection.put_image(key, key + "." + extension)
+        file.seek(0, 0)
         # put in cache
         keyToSend = {'key': key}
-        fileToSend = {'file': open(path, "rb")}
+        fileToSend = {'file': file}
         response = None
         try:
-            response = requests.post(url='http://localhost:5001/putImage', data=keyToSend, files=fileToSend).json()
+            response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
         except requests.exceptions.ConnectionError as err:
-            webapp.logger.warning("Cache loses connection")
+            webapp.logger.warning("Manager app loses connection")
         # put successfully in DB already
         value = {"success": "true"}
         response = webapp.response_class(
@@ -133,9 +150,9 @@ def list_key():
     keyToSend = {'key': key}
     response = None
     try:
-        response = requests.post(url='http://localhost:5001/getKey', data=keyToSend).json()
+        response = requests.post(url='http://localhost:5002/getKey', data=keyToSend).json()
     except requests.exceptions.ConnectionError as err:
-        webapp.logger.warning("Cache loses connection")
+        webapp.logger.warning("Manager app loses connection")
     if response is None or response["success"] == "false":
         #  cache miss, get from DB
         cursor = dbconnection.get_image(key)
@@ -150,23 +167,27 @@ def list_key():
             )
             return response
         else:
-            filename = result[0]
-            path = join(dirname(realpath(__file__)), 'static')
-            path = os.path.join(path, 'images')
-            file_path = os.path.join(path, filename)
-            f = open(file_path, "rb")
-            # try to store image inside cache
+            s3 = boto3.client(
+                's3',
+                aws_config['region'],
+                aws_access_key_id=aws_config['access_key_id'],
+                aws_secret_access_key=aws_config['secret_access_key']
+            )
+            bucket_name = '1779a2files'
+            file = s3.get_object(Bucket=bucket_name, Key=key)['Body']
+            file_byte = io.BytesIO(file.read())
+            # reload in cache
             keyToSend = {'key': key}
-            fileToSend = {'file': open(file_path, "rb")}
-            cache_response = None
+            fileToSend = {'file': file_byte}
+            webapp.logger.warning('reload into cache')
             try:
-                cache_response = requests.post(url='http://localhost:5001/putImage', data=keyToSend,
-                                               files=fileToSend).json()
+                response = requests.post(url='http://localhost:5002/putImage',data=keyToSend,files=fileToSend).json()
             except requests.exceptions.ConnectionError as err:
-                webapp.logger.warning("Cache loses connection")
+                webapp.logger.warning("Manager app loses connection")
             # successfully get key
-            image_string = base64.b64encode(f.read())
-            value = {"success": "true", "content": image_string.decode('utf-8')}
+            file_byte.seek(0, 0)
+            encode_str = base64.b64encode(file_byte.read())
+            value = {"success": "true", "content": encode_str.decode('utf-8')}
             response = webapp.response_class(
                 response=json.dumps(value),
                 status=200,

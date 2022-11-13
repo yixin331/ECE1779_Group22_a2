@@ -42,12 +42,10 @@ def put():
             aws_access_key_id=aws_config['access_key_id'],
             aws_secret_access_key=aws_config['secret_access_key']
         )
-        # s3 = boto3.client('s3', region_name='us-east-1')
         response = s3.list_buckets()
         bucket_name = '1779a2files'
         created = False
         for bucket in response['Buckets']:
-            print(bucket["Name"])
             if bucket["Name"] == bucket_name:
                 created = True
                 webapp.logger.warning('Bucket already exists')
@@ -58,11 +56,6 @@ def put():
                 webapp.logger.warning("Fail to create a bucket")
         if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
             extension = filename.rsplit('.', 1)[1].lower()
-            # UPLOADS_PATH = join(dirname(realpath(__file__)), 'static')
-            # UPLOADS_PATH = os.path.join(UPLOADS_PATH, 'images')
-            # Path(UPLOADS_PATH).mkdir(parents=True, exist_ok=True)
-            # path = os.path.join(UPLOADS_PATH, key + "." + extension)
-            # file.save(path)
             s3.put_object(Bucket=bucket_name, Key=key, Body=file)
             dbconnection.put_image(key, key + "." + extension)
             file.seek(0, 0)
@@ -71,8 +64,6 @@ def put():
             fileToSend = {'file': file}
             response = None
             try:
-                # call Manager app to put image
-                # pass in key & file
                 response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Manager app loses connection")
