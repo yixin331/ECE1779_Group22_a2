@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53e8fa9-ec5d-4c23-b2f6-93d0e4e3572f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/remap.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/remap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/sizeChange.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/sizeChange.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/memcache/app/clearCache.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/memcache/app/clearCache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_2/manager/app/refreshMode.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/refreshMode.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +36,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshConfiguration.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/A_2/manager/app/remap.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -47,27 +52,6 @@
               <caret line="45" column="65" lean-forward="true" selection-start-line="45" selection-start-column="65" selection-end-line="45" selection-end-column="65" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/A_2/autoscaler/app/config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/A_2/memcache/app/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,13 +90,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/A_2/autoscaler/app/setMode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="60" selection-start-line="60" selection-end-line="61" />
+            <state relative-caret-position="190">
+              <caret line="21" column="79" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="21" selection-end-column="79" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshMode.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="131">
+              <caret line="84" column="25" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -205,7 +201,6 @@
         <option value="$PROJECT_DIR$/A_2/manager/app/static/index.js" />
         <option value="$PROJECT_DIR$/A_2/manager/app/templates/mode.html" />
         <option value="$PROJECT_DIR$/A_2/frontend/app/sizeChange.py" />
-        <option value="$PROJECT_DIR$/A_2/manager/app/refreshMode.py" />
         <option value="$PROJECT_DIR$/A_2/manager/app/templates/statistics.html" />
         <option value="$PROJECT_DIR$/A_2/manager/app/showStat.py" />
         <option value="$PROJECT_DIR$/A_2/memcache/app/putStat.py" />
@@ -217,6 +212,7 @@
         <option value="$PROJECT_DIR$/A_2/manager/app/sizeChange.py" />
         <option value="$PROJECT_DIR$/A_2/memcache/app/clearCache.py" />
         <option value="$PROJECT_DIR$/A_2/autoscaler/app/setMode.py" />
+        <option value="$PROJECT_DIR$/A_2/manager/app/refreshMode.py" />
       </list>
     </option>
   </component>
@@ -395,7 +391,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21445592" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21445592" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -406,7 +402,7 @@
       <window_info anchor="bottom" id="Structure" order="6" weight="0.24866785" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.3285968" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4932486" visible="true" weight="0.38188276" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4932486" visible="true" weight="0.38188276" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5067514" side_tool="true" weight="0.40319717" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -606,13 +602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshConfiguration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <caret line="5" selection-start-line="5" selection-end-line="9" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/A_2/manager/app/putImage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-105">
@@ -755,16 +744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshMode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/A_2/frontend/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -849,11 +828,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/A_2/autoscaler/app/setMode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="60" selection-start-line="60" selection-end-line="61" />
+        <state relative-caret-position="190">
+          <caret line="21" column="79" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="21" selection-end-column="79" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshMode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="84" column="25" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A_2/manager/app/refreshConfiguration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
         </state>
       </provider>
     </entry>
