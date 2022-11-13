@@ -8,6 +8,7 @@ import requests
 import os
 import base64
 import boto3
+import io
 # from apscheduler.schedulers.background import BackgroundScheduler
 # from apscheduler.triggers.interval import IntervalTrigger
 #
