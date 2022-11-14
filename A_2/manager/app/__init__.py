@@ -113,40 +113,27 @@ def get_stat(metric):
 
 
 def initialize_instance():
-    ec2_client = boto3.client(
-        'ec2',
+    session = boto3.Session(
         region_name=aws_config['region'],
         aws_access_key_id=aws_config['access_key_id'],
         aws_secret_access_key=aws_config['secret_access_key']
     )
-    USERDATA_SCRIPT = '''#!/bin/bash
-    cd /home/ubuntu/ECE1779_Group22_a2/A_2/memcache
-    pip install flask
-    pip install apscheduler
-    pip install boto3
-    python3 run.py'''
-    instances = ec2_client.run_instances(ImageId=config.ami_id, MinCount=1, MaxCount=1,
-                                         InstanceType='t2.micro',
-                                         UserData=USERDATA_SCRIPT)
-    instance_id = instances['Instances'][0]['InstanceId']
-    ec2 = boto3.resource('ec2')
-    instance = ec2.Instance(instance_id)
-    webapp.logger.warning(instance_id)
-    webapp.logger.warning('wait till instance is running')
-    instance.wait_until_running()
-    instance.reload()
+    ec2 = session.resource('ec2')
+    # pre-configured 8 nodes
+    instances = ec2.instances.filter(
+        Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
+    for instance in instances:
+        node_ip[instance.instance_id] = None
+    id = list(node_ip.keys())[0]
+    instance = ec2.Instance(id)
     public_ip = instance.public_ip_address
-    webapp.logger.warning(public_ip)
-    node_ip[instance_id] = public_ip
-    webapp.logger.warning('wait till instance is ready')
+    node_ip[id] = public_ip
     # send node_ip dict to localhost/5003/changeIP
-
     try:
         response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Autoscaler loses connection")
-    time.sleep(180)
-    schedule_cloud_watch(public_ip, instance_id)
+    schedule_cloud_watch(public_ip, id)
     scheduler.add_job(id='monitor_stats', func=monitor_stats, trigger='interval', seconds=60)
 
 
