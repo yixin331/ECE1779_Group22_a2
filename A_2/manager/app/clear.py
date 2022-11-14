@@ -7,11 +7,12 @@ import requests
 def clear():
     if request.method == 'POST':
         for id, ip in node_ip.items():
-            node_address = 'http://' + ip + ':5001/clearCache'
-            try:
-                response = requests.post(url=node_address).json()
-            except requests.exceptions.ConnectionError as err:
-                webapp.logger.warning("Cache loses connection")
+            if not ip == None:
+                node_address = 'http://' + ip + ':5001/clearCache'
+                try:
+                    response = requests.post(url=node_address).json()
+                except requests.exceptions.ConnectionError as err:
+                    webapp.logger.warning("Cache loses connection")
         result = "Your cache has been cleared"
         return render_template("clear.html",result=result)
     else:
