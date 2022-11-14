@@ -45,6 +45,7 @@ def remap():
         )
         return response
     # get all keys and images in the memcache
+    webapp.logger.warning('get all keys')
     key_list = {}
     for id, ip in node_ip.items():
         if not ip == None:
@@ -61,7 +62,6 @@ def remap():
                 response = requests.post(url=node_address).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Cache loses connection")
-
     if memcache_mode['num_node'] > num_node:
         num_stop = memcache_mode['num_node'] - num_node
         for id, ip in node_ip.items():
@@ -71,7 +71,6 @@ def remap():
                 stop_cloud_watch(ip)
                 clear_cache_stat(ip)
                 num_stop = num_stop - 1
-
         # send node_ip dict to localhost/5003/changeIP
         try:
             response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
@@ -91,7 +90,7 @@ def remap():
                 public_ip = instance.public_ip_address
                 node_ip[id] = public_ip
                 num_start = num_start - 1
-                schedule_cloud_watch(ip, id)
+                schedule_cloud_watch(public_ip, id)
                 # according to memcache_config, set config (send request to corresponding memcache)
                 node_address = 'http://' + str(public_ip) + ':5001/setConfig'
                 keyToSend = {'policy': memcache_config['policy'], 'size': memcache_config['capacity']}
@@ -106,20 +105,18 @@ def remap():
             webapp.logger.warning("Autoscaler loses connection")
 
     memcache_mode['num_node'] = num_node
-
     # sort key_list by time
     keys_to_sort = list(key_list.keys())
     cursor = dbconnection.sort_by_time(keys_to_sort)
-
     for key in cursor:
-        keyToSend = {'key': key}
+        keyToSend = {'key': key[0]}
         try:
             response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Manager app loses connection")
 
         node_address = 'http://' + response["content"] + ':5001/putImage'
-        file = io.BytesIO(base64.b64decode(key_list[key]))
+        file = io.BytesIO(base64.b64decode(key_list[key[0]]))
         fileToSend = {'file': file}
 
         try:
