@@ -100,3 +100,25 @@ def clear():
     cursor.execute(query)
 
     cnx.commit()
+
+
+def update_image(key):
+    cnx = get_db()
+
+    cursor = cnx.cursor()
+    query = "UPDATE image SET last_edited_time = %s WHERE ID = %s;"
+    cursor.execute(query, (datetime.now(), key))
+
+    cnx.commit()
+
+
+def sort_by_time(key_list):
+    cnx = get_db()
+
+    ids_to_sort = ', '.join(str(id) for id in key_list)
+
+    cursor = cnx.cursor()
+    query = "SELECT ID FROM image WHERE ID IN (%s) ORDER BY last_edited_time;"
+    cursor.execute(query, (ids_to_sort,))
+
+    return cursor

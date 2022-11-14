@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, request, json
-from app import webapp, memcache_mode, node_ip, config, memcache_config
+from app import webapp, memcache_mode, node_ip, config, memcache_config, dbconnection
 from app.config import aws_config
 import requests
 import base64
@@ -107,7 +107,11 @@ def remap():
 
     memcache_mode['num_node'] = num_node
 
-    for key, item in key_list.items():
+    # sort key_list by time
+    keys_to_sort = list(key_list.keys())
+    cursor = dbconnection.sort_by_time(keys_to_sort)
+
+    for key in cursor:
         keyToSend = {'key': key}
         try:
             response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
@@ -115,7 +119,7 @@ def remap():
             webapp.logger.warning("Manager app loses connection")
 
         node_address = 'http://' + response["content"] + ':5001/putImage'
-        file = io.BytesIO(base64.b64decode(item))
+        file = io.BytesIO(base64.b64decode(key_list[key]))
         fileToSend = {'file': file}
 
         try:

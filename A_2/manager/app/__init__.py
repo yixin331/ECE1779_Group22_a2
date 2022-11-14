@@ -91,20 +91,21 @@ def get_stat(metric):
     total = 0
 
     for id, ip in node_ip.items():
-        value = client.get_metric_statistics(
-            Period=60,
-            Namespace='Memcache',
-            MetricName=metric,
-            Dimensions=[{'Name': 'NodeId', 'Value': str(id)}],
-            StartTime=ts - timedelta(seconds=1 * 60),
-            EndTime=ts,
-            Statistics=['Average']
-        )
+        if not ip == None:
+            value = client.get_metric_statistics(
+                Period=60,
+                Namespace='Memcache',
+                MetricName=metric,
+                Dimensions=[{'Name': 'NodeId', 'Value': str(id)}],
+                StartTime=ts - timedelta(seconds=1 * 60),
+                EndTime=ts,
+                Statistics=['Average']
+            )
 
-        if not value['Datapoints']:
-            webapp.logger.warning('No data for node ' + str(id) + ' at ' + str(ts))
-        else:
-            total += value['Datapoints'][0]['Average']
+            if not value['Datapoints']:
+                webapp.logger.warning('No data for node ' + str(id) + ' at ' + str(ts))
+            else:
+                total += value['Datapoints'][0]['Average']
 
     if metric == 'HitRate' or metric == 'MissRate':
         return total / memcache_mode['num_node']

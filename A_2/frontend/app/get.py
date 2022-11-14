@@ -59,6 +59,7 @@ def get():
                     # file is too large to put into cache
                     result = "Get from database but fail to reload to cache"
                 else:
+                    dbconnection.update_image(key)
                     result = "Get from database and reload into cache"
                 file_byte.seek(0,0)
                 encode_str = base64.b64encode(file_byte.read())
@@ -66,6 +67,7 @@ def get():
                 return render_template("get.html", user_image=encode_str.decode('utf-8'), pathType='db',
                                        result=result)
         else:
+            dbconnection.update_image(key)
             return render_template("get.html", user_image=response["content"], result="Get from cache")
     else:
         return render_template("get.html", user_image=None, method='get')
