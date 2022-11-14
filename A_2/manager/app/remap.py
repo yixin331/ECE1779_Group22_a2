@@ -11,9 +11,24 @@ import time
 def schedule_cloud_watch(ip, id):
     try:
         node_address = 'http://' + str(ip) + ':5001/putStat'
-        webapp.logger.warning(node_address)
         idToSend = {'InstanceId': id}
         response = requests.post(url=node_address, data=idToSend).json()
+    except requests.exceptions.ConnectionError as err:
+        webapp.logger.warning("Cache loses connection")
+
+
+def stop_cloud_watch(ip):
+    try:
+        node_address = 'http://' + str(ip) + ':5001/stopStat'
+        response = requests.post(url=node_address).json()
+    except requests.exceptions.ConnectionError as err:
+        webapp.logger.warning("Cache loses connection")
+
+
+def clear_cache_stat(ip):
+    try:
+        node_address = 'http://' + str(ip) + ':5001/clearStats'
+        response = requests.post(url=node_address).json()
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Cache loses connection")
 
@@ -30,6 +45,7 @@ def remap():
         )
         return response
     # get all keys and images in the memcache
+    webapp.logger.warning('get all keys')
     key_list = {}
     for id, ip in node_ip.items():
         if not ip == None:
@@ -46,23 +62,15 @@ def remap():
                 response = requests.post(url=node_address).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Cache loses connection")
-
     if memcache_mode['num_node'] > num_node:
         num_stop = memcache_mode['num_node'] - num_node
-        id = list(node_ip.keys())[0:num_stop]
-        # terminate instances
-        session = boto3.Session(
-            region_name=aws_config['region'],
-            aws_access_key_id=aws_config['access_key_id'],
-            aws_secret_access_key=aws_config['secret_access_key']
-        )
-        ec2 = session.resource('ec2')
-        ec2.instances.filter(InstanceIds=id).terminate()
-        # remove key-value pair in node_ip
-        for element in id:
-            del node_ip[element]
-        # maybe todo: call stopStat()
-        # refer to schedule_cloud_watch(ip)
+        for id, ip in node_ip.items():
+            if ip is not None and num_stop > 0:
+                node_ip[id] = None
+                # stop cache
+                stop_cloud_watch(ip)
+                clear_cache_stat(ip)
+                num_stop = num_stop - 1
         # send node_ip dict to localhost/5003/changeIP
         try:
             response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
@@ -76,56 +84,39 @@ def remap():
             aws_secret_access_key=aws_config['secret_access_key']
         )
         ec2 = session.resource('ec2')
-        USERDATA_SCRIPT = '''#!/bin/bash
-            cd /home/ubuntu/ECE1779_Group22_a2/A_2/memcache
-            pip install flask
-            pip install apscheduler
-            pip install boto3
-            python3 run.py'''
-        instances = ec2.create_instances(ImageId=config.ami_id, MinCount=1, MaxCount=num_start,
-                                         InstanceType='t2.micro',
-                                         UserData=USERDATA_SCRIPT)
-        for instance in instances:
-            instance_id = instance.instance_id
-            webapp.logger.warning(instance_id)
-            instance.wait_until_running()
-            webapp.logger.warning('wait till instance is running')
-            instance.reload()
-            public_ip = instance.public_ip_address
-
-            webapp.logger.warning('wait till instance is ready')
-            time.sleep(180)
-            schedule_cloud_watch(public_ip, instance_id)
-            # according to memcache_config, set config (send request to corresponding memcache)
-            node_address = 'http://' + str(public_ip) + ':5001/setConfig'
-            keyToSend = {'policy': memcache_config['policy'], 'size': memcache_config['capacity']}
-            try:
-                response = requests.post(url=node_address, data=keyToSend).json()
-            except requests.exceptions.ConnectionError as err:
-                webapp.logger.warning("Cache loses connection")
-
-            node_ip[instance_id] = public_ip
-            # send node_ip dict to localhost/5003/changeIP
+        for id, ip in node_ip.items():
+            if ip is None and num_start > 0:
+                instance = ec2.Instance(id)
+                public_ip = instance.public_ip_address
+                node_ip[id] = public_ip
+                num_start = num_start - 1
+                schedule_cloud_watch(public_ip, id)
+                # according to memcache_config, set config (send request to corresponding memcache)
+                node_address = 'http://' + str(public_ip) + ':5001/setConfig'
+                keyToSend = {'policy': memcache_config['policy'], 'size': memcache_config['capacity']}
+                try:
+                    response = requests.post(url=node_address, data=keyToSend).json()
+                except requests.exceptions.ConnectionError as err:
+                    webapp.logger.warning("Cache loses connection")
+        # send node_ip dict to localhost/5003/changeIP
         try:
             response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Autoscaler loses connection")
 
     memcache_mode['num_node'] = num_node
-
     # sort key_list by time
     keys_to_sort = list(key_list.keys())
     cursor = dbconnection.sort_by_time(keys_to_sort)
-
     for key in cursor:
-        keyToSend = {'key': key}
+        keyToSend = {'key': key[0]}
         try:
             response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Manager app loses connection")
 
         node_address = 'http://' + response["content"] + ':5001/putImage'
-        file = io.BytesIO(base64.b64decode(key_list[key]))
+        file = io.BytesIO(base64.b64decode(key_list[key[0]]))
         fileToSend = {'file': file}
 
         try:

@@ -118,7 +118,7 @@ def sort_by_time(key_list):
     ids_to_sort = ', '.join(str(id) for id in key_list)
 
     cursor = cnx.cursor()
-    query = "SELECT ID FROM image WHERE ID IN (%s) ORDER BY last_edited_time;"
-    cursor.execute(query, (ids_to_sort,))
+    query = "SELECT ID FROM image WHERE ID IN ({ids}) ORDER BY last_edited_time;"
+    cursor.execute(query.format(ids=ids_to_sort))
 
     return cursor

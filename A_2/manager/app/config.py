@@ -12,4 +12,4 @@ aws_config = {'access_key_id': 'AKIA2PCHDFH76CEEU5WX',
               'secret_access_key': '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',
               'region': 'us-east-1'}
 
-ami_id = 'ami-072cf267b2a4ed256'
+ami_id = 'ami-0a3ee4380966f8757'
