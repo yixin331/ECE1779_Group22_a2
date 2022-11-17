@@ -53,7 +53,7 @@ def teardown_db(exception):
 def refreshMode():
     if request.method == 'GET':
         num_node = memcache_mode['num_node']
-        return render_template("mode.html", num_node=num_node)
+        return render_template("mode.html", num_node=num_node,mode=memcache_mode['mode'])
     else:
         mode = request.form['mode']
         memcache_mode['mode'] = mode
@@ -85,4 +85,4 @@ def refreshMode():
                 webapp.logger.warning("Autoscaler loses connection")
 
         dbconnection.put_mode(memcache_mode['num_node'], memcache_mode['mode'], memcache_mode['max_thr'], memcache_mode['min_thr'], memcache_mode['expand_ratio'], memcache_mode['shrink_ratio'])
-        return render_template("mode.html", num_node=memcache_mode['num_node'], result="Mode has been reset")
+        return render_template("mode.html", num_node=memcache_mode['num_node'], result="Mode has been reset",mode=memcache_mode['mode'])

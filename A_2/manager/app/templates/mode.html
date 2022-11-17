@@ -93,7 +93,8 @@
 </head>
     <script type="text/javascript" src="{{ url_for('static',filename='index.js') }}"></script>
 
-<body>
+<body onload='select_mode("{{mode}}")'>
+<p id="type" style="display:None">{{mode}}</p>
     <form action="{{url_for('main')}}" method="get">
         <input type="submit" value="return">
     </form>
@@ -103,19 +104,21 @@
           <td>
             <h3>Select between two mutually-exclusive options for resizing the memcache pool:</h3>
             <div>
-                <input type="radio" name="mode" value="Manual" checked="true">
+                <input type="radio" name="mode" value="Manual" onclick='gray("Manual")'>
                 <label for="mode">Manual</label>
             </div>
             <div>
-                <input type="radio" name="mode" value="Auto">
+                <input type="radio" name="mode" value="Auto" onclick = 'gray("Auto")'>
                 <label for="mode">Auto</label>
             </div>
           </td>
         </tr>
         <tr id="imageCell" >
             <td>
-                Number of nodes to configure for manual mode:
+                Number of nodes to configure for manual mode:<br>
+                <input type="button" value="shrink" id="shrink" onclick="change_size('shrink')"/>
                 <input type="number" value={{num_node}} id="num_node" name="num_node"/>
+                <input type="button" value="expand" id="expand" onclick="change_size('expand')"/>
 <!--                <h3>Memory Size:</h3>-->
 <!--                <input type="number" name="size" id="memSize">-->
             </td>
@@ -123,16 +126,16 @@
         <tr>
             <td>
                 Max Threshold:
-                    <input type="number" value="0.9" name="max_thr" id="max_threshold" step="0.001">
+                    <input type="number" value="0.9" name="max_thr" id="max_threshold" step="0.001"><br>
 
                     Min Threshold:
-                    <input type="number" value="0.1" name="min_thr" id="min_threshold" step="0.001">
+                    <input type="number" value="0.1" name="min_thr" id="min_threshold" step="0.001"><br>
 
                     Expand Ratio:
-                    <input type="number"  value="2" name="expand_ratio" id="expand_ratio" step="0.001">
+                    <input type="number"  value="2" name="expand_ratio" id="expand_ratio" step="0.001"><br>
 
                     Shrink Ratio:
-                    <input type="number" value="0.5" name="shrink_ratio" id="shrink_ratio" step="0.001">
+                    <input type="number" value="0.5" name="shrink_ratio" id="shrink_ratio" step="0.001"><br>
 <!--                <h3>Memory Size:</h3>-->
 <!--                <input type="number" name="size" id="memSize">-->
             </td>

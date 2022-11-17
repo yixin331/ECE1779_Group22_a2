@@ -68,40 +68,39 @@ function checkImage(){
 
 
 function gray(mode){
+       document.getElementById('type').innerHTML=mode;
+       var mode = document.getElementById('type').innerHTML;
+       var num_node = document.getElementById('num_node').value
+       check_size(num_node)
+       var max_threshold = document.getElementById("max_threshold");
+       var min_threshold = document.getElementById("min_threshold");
+       var expand_ratio = document.getElementById("expand_ratio");
+       var shrink_ratio = document.getElementById("shrink_ratio");
 
-       if(mode=='all'){
-       var auto_class = document.getElementsByName("auto");
-       for(let i=0;i<auto_class.length;i++){
-            auto_class[i].disabled=true;
-
-       }
-
-       document.getElementById("shrink").disabled=true;
-       document.getElementById("expand").disabled=true;
-
-       }
 
        if(mode=='Auto'){
-       document.getElementById("auto").disabled=true;
 
        document.getElementById("shrink").disabled=true;
        document.getElementById("expand").disabled=true;
+       max_threshold.disabled=false;
+       min_threshold.disabled=false;
+       expand_ratio.disabled=false;
+       shrink_ratio.disabled=false;
        }
 
        if(mode=='Manual'){
-       document.getElementById("manu").disabled=true;
-       var auto_class = document.getElementsByName("auto");
-       for(let i=0;i<auto_class.length;i++){
-            auto_class[i].disabled=true;
 
-       }
+       max_threshold.disabled=true;
+       min_threshold.disabled=true;
+       expand_ratio.disabled=true;
+       shrink_ratio.disabled=true;
 
        }
 
 }
 
 
-function check_size(num_node,mode){
+function check_size(num_node){
 
 
        if(num_node==1){
@@ -117,7 +116,6 @@ function check_size(num_node,mode){
        document.getElementById("expand").disabled=false;
        }
 
-       gray(mode)
 }
 
 
@@ -154,4 +152,31 @@ function checkMode(){
             return true;
         }
     }
+}
+
+function change_size(type){
+    var num_node = document.getElementById('num_node').value
+    if(type=='shrink'){
+        num_node = parseInt(parseInt(num_node) - 1)
+        document.getElementById('num_node').value = num_node
+    }
+     else if(type=='expand'){
+        num_node = parseInt(parseInt(num_node) + 1)
+        document.getElementById('num_node').value = num_node
+    }
+    check_size(num_node)
+
+}
+
+function select_mode(mode){
+    var manual = document.getElementsByName('mode')[0];
+    var auto = document.getElementsByName('mode')[1];
+    if(mode=="Manual"){
+        manual.checked=true;
+
+    }
+    else{
+        auto.checked=true;
+    }
+    gray(mode)
 }
