@@ -48,7 +48,6 @@ def put():
         for bucket in response['Buckets']:
             if bucket["Name"] == bucket_name:
                 created = True
-                webapp.logger.warning('Bucket already exists')
         if not created:
             try:
                 response = s3.create_bucket(Bucket=bucket_name)

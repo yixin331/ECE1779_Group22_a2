@@ -9,6 +9,8 @@ import os
 import base64
 import boto3
 import io
+
+
 # from apscheduler.schedulers.background import BackgroundScheduler
 # from apscheduler.triggers.interval import IntervalTrigger
 #
@@ -143,11 +145,9 @@ def list_keys():
     return response
 
 
-@webapp.route('/api/key', methods=['POST'])
-def list_key():
-    key = request.form.get('key')
+@webapp.route('/api/key/<key>', methods=['POST'])
+def list_key(key):
     result = ""
-    # find value in cache
     keyToSend = {'key': key}
     response = None
     try:
@@ -182,7 +182,7 @@ def list_key():
             fileToSend = {'file': file_byte}
             webapp.logger.warning('reload into cache')
             try:
-                response = requests.post(url='http://localhost:5002/putImage',data=keyToSend,files=fileToSend).json()
+                response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Manager app loses connection")
             # successfully get key
