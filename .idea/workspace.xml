@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53e8fa9-ec5d-4c23-b2f6-93d0e4e3572f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ECE1779_Group22_a1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ECE1779_Group22_a1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/frontend/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/frontend/app/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/refreshMode.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/refreshMode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/static/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/static/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_2/manager/app/templates/mode.html" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/templates/mode.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_2/autoscaler/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/autoscaler/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_2/frontend/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/frontend/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_2/manager/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/manager/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_2/memcache/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_2/memcache/app/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
