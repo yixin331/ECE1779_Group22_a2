@@ -107,7 +107,8 @@ def remap():
     memcache_mode['num_node'] = num_node
     # sort key_list by time
     keys_to_sort = list(key_list.keys())
-    cursor = dbconnection.sort_by_time(keys_to_sort)
+    if len(keys_to_sort) > 0:
+        cursor = dbconnection.sort_by_time(keys_to_sort)
     for key in cursor:
         keyToSend = {'key': key[0]}
         try:
