@@ -47,7 +47,7 @@ def monitor_stats():
         if metric == 'MissRate':
             webapp.logger.warning(value)
             if value > memcache_mode['max_thr']:
-                num_node = min(math.floor(num_node * memcache_mode['expand_ratio']), 8)
+                num_node = min(math.ceil(num_node * memcache_mode['expand_ratio']), 8)
                 if not memcache_mode['num_node'] == num_node:
                     webapp.logger.warning("Need to change node from " + str(memcache_mode['num_node']) + " to " + str(num_node))
                     if scheduler.get_job('monitor_stats'):
@@ -59,7 +59,7 @@ def monitor_stats():
                         webapp.logger.warning("Manager loses connection")
 
             elif value < memcache_mode['min_thr']:
-                num_node = max(math.ceil(num_node * memcache_mode['shrink_ratio']), 1)
+                num_node = max(math.floor(num_node * memcache_mode['shrink_ratio']), 1)
                 if not memcache_mode['num_node'] == num_node:
                     webapp.logger.warning("Need to change node from " + str(memcache_mode['num_node']) + " to " + str(num_node))
                     if scheduler.get_job('monitor_stats'):

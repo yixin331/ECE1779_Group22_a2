@@ -145,11 +145,9 @@ def list_keys():
     return response
 
 
-@webapp.route('/api/key', methods=['POST'])
-def list_key():
-    key = request.form.get('key')
+@webapp.route('/api/key/<key>', methods=['POST'])
+def list_key(key):
     result = ""
-    # find value in cache
     keyToSend = {'key': key}
     response = None
     try:
@@ -184,7 +182,11 @@ def list_key():
             fileToSend = {'file': file_byte}
             webapp.logger.warning('reload into cache')
             try:
+<<<<<<< HEAD
                 response = requests.post(url='http://54.175.104.127:5002/putImage', data=keyToSend, files=fileToSend).json()
+=======
+                response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
+>>>>>>> b30213bcf94ed79d792f6f87cdcd5b629e65cbe5
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Manager app loses connection")
             # successfully get key

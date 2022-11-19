@@ -45,10 +45,10 @@ def remap():
         )
         return response
     # get all keys and images in the memcache
-    webapp.logger.warning('get all keys')
     key_list = {}
+    response = None
     for id, ip in node_ip.items():
-        if not ip == None:
+        if not ip is None:
             try:
                 node_address = 'http://' + ip + ':5001/listKeys'
                 response = requests.get(url=node_address).json()
