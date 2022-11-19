@@ -12,7 +12,7 @@ def putImage():
     keyToSend = {'key': key}
     webapp.logger.warning(keyToSend)
     try:
-        response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
+        response = requests.post(url='http://54.175.104.127:5002/map', data=keyToSend).json()
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Manager app loses connection")
     node_address = 'http://' + response["content"] + ':5001/putImage'

@@ -25,7 +25,7 @@ def get():
         keyToSend = {'key': key}
         response = None
         try:
-            response = requests.post(url='http://localhost:5002/getKey', data=keyToSend).json()
+            response = requests.post(url='http://54.175.104.127:5002/getKey', data=keyToSend).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Manager app loses connection")
         if response is None or response["success"] == "false":
@@ -50,7 +50,7 @@ def get():
                 response = None
                 webapp.logger.warning('reload into cache')
                 try:
-                    response = requests.post(url='http://localhost:5002/putImage',
+                    response = requests.post(url='http://54.175.104.127:5002/putImage',
                                              data=keyToSend,
                                              files=fileToSend).json()
                 except requests.exceptions.ConnectionError as err:

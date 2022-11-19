@@ -1,5 +1,5 @@
 from flask import render_template, url_for, request, redirect, flash, g, json, send_from_directory
-from app import webapp, dbconnection
+from app import webapp, dbconnection, num_n
 from app.config import aws_config
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
@@ -9,6 +9,8 @@ import os
 import base64
 import boto3
 import io
+
+
 # from apscheduler.schedulers.background import BackgroundScheduler
 # from apscheduler.triggers.interval import IntervalTrigger
 #
@@ -106,7 +108,7 @@ def upload():
         fileToSend = {'file': file}
         response = None
         try:
-            response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
+            response = requests.post(url='http://54.175.104.127:5002/putImage', data=keyToSend, files=fileToSend).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Manager app loses connection")
         # put successfully in DB already
@@ -151,7 +153,7 @@ def list_key():
     keyToSend = {'key': key}
     response = None
     try:
-        response = requests.post(url='http://localhost:5002/getKey', data=keyToSend).json()
+        response = requests.post(url='http://54.175.104.127:5002/getKey', data=keyToSend).json()
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Manager app loses connection")
     if response is None or response["success"] == "false":
@@ -182,7 +184,7 @@ def list_key():
             fileToSend = {'file': file_byte}
             webapp.logger.warning('reload into cache')
             try:
-                response = requests.post(url='http://localhost:5002/putImage',data=keyToSend,files=fileToSend).json()
+                response = requests.post(url='http://54.175.104.127:5002/putImage', data=keyToSend, files=fileToSend).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Manager app loses connection")
             # successfully get key
@@ -203,3 +205,20 @@ def list_key():
             mimetype='application/json'
         )
         return response
+
+
+@webapp.route('/pop_up', methods=['GET', 'POST'])
+def pop_up():
+    response = requests.get(url='http://54.175.104.127:5002/pop_up').json()
+    message = {}
+
+    if response['content'] > num_n['old_num']:
+        num_n['old_num'] = response['content']
+
+        message = {"message": "increased", "value": num_n['old_num']}
+    elif response['content']< num_n['old_num']:
+        num_n['old_num'] = response['content']
+        message = {"message": "decreased", "value": num_n['old_num']}
+    else:
+        message = {"message": "unchanged", "value": num_n['old_num']}
+    return message

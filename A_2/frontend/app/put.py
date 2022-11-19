@@ -1,5 +1,5 @@
 from flask import render_template, url_for, request, g
-from app import webapp, dbconnection
+from app import webapp, dbconnection,num_n
 import requests
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
@@ -64,7 +64,7 @@ def put():
             fileToSend = {'file': file}
             response = None
             try:
-                response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
+                response = requests.post(url='http://54.175.104.127:5002/putImage', data=keyToSend, files=fileToSend).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Manager app loses connection")
             if response is None or response["success"] == "false":
@@ -77,3 +77,4 @@ def put():
             return render_template("put.html", result="Please select a valid image file")
     else:
         return render_template("put.html")
+
