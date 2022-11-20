@@ -140,7 +140,7 @@ def initialize_instance():
     node_ip[id] = public_ip
     # send node_ip dict to localhost/5003/changeIP
     try:
-        response = requests.post(url='http://54.164.152.164:5003/changeIP', data=node_ip).json()
+        response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Autoscaler loses connection")
     schedule_cloud_watch(public_ip, id)

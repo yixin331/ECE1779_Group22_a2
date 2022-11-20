@@ -9,7 +9,7 @@ def getKey():
     key = request.form.get('key')
     keyToSend = {'key': key}
     try:
-        response = requests.post(url='http://54.175.104.127:5002/map', data=keyToSend).json()
+        response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Manager app loses connection")
 

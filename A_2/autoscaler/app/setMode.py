@@ -54,7 +54,7 @@ def monitor_stats():
                         scheduler.pause_job('monitor_stats')
                     dataToSend = {"num_node": num_node}
                     try:
-                        requests.post(url='http://54.175.104.127:5002/sizeChange', data=dataToSend)
+                        requests.post(url='http://localhost:5002/sizeChange', data=dataToSend)
                     except requests.exceptions.ConnectionError as err:
                         webapp.logger.warning("Manager loses connection")
 
@@ -66,7 +66,7 @@ def monitor_stats():
                         scheduler.pause_job('monitor_stats')
                     dataToSend = {"num_node": num_node}
                     try:
-                        requests.post(url='http://54.175.104.127:5002/sizeChange', data=dataToSend)
+                        requests.post(url='http://localhost:5002/sizeChange', data=dataToSend)
                     except requests.exceptions.ConnectionError as err:
                         webapp.logger.warning("Manager loses connection")
 

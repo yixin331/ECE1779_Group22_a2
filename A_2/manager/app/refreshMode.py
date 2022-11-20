@@ -61,7 +61,7 @@ def refreshMode():
         if mode == 'Manual':
             # pause scheduler
             try:
-                requests.post(url='http://54.164.152.164:5003/setMode', data=request.form)
+                requests.post(url='http://localhost:5003/setMode', data=request.form)
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Autoscaler loses connection")
 
@@ -69,7 +69,7 @@ def refreshMode():
             if not num_node == memcache_mode['num_node']:
                 try:
                     numToSend = {'num_node': num_node}
-                    requests.post(url='http://35.170.186.67:5000/sizeChange', data=numToSend)
+                    requests.post(url='http://localhost:5000/sizeChange', data=numToSend)
                 except requests.exceptions.ConnectionError as err:
                     webapp.logger.warning("Frontend loses connection")
 
@@ -80,7 +80,7 @@ def refreshMode():
             memcache_mode['shrink_ratio'] = float(request.form.get('shrink_ratio'))
             try:
                 dataToSend = {'num_node': memcache_mode['num_node'], 'mode': request.form['mode'], 'max_thr': request.form['max_thr'], 'min_thr': request.form['min_thr'], 'expand_ratio': request.form['expand_ratio'], 'shrink_ratio': request.form['shrink_ratio']}
-                requests.post(url='http://54.164.152.164:5003/setMode', data=dataToSend)
+                requests.post(url='http://localhost:5003/setMode', data=dataToSend)
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Autoscaler loses connection")
 

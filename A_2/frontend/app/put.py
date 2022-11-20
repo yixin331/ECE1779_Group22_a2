@@ -63,7 +63,7 @@ def put():
             fileToSend = {'file': file}
             response = None
             try:
-                response = requests.post(url='http://54.175.104.127:5002/putImage', data=keyToSend, files=fileToSend).json()
+                response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Manager app loses connection")
             if response is None or response["success"] == "false":

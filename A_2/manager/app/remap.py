@@ -73,7 +73,7 @@ def remap():
                 num_stop = num_stop - 1
         # send node_ip dict to localhost/5003/changeIP
         try:
-            response = requests.post(url='http://54.164.152.164:5003/changeIP', data=node_ip).json()
+            response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Autoscaler loses connection")
     else:
@@ -100,7 +100,7 @@ def remap():
                     webapp.logger.warning("Cache loses connection")
         # send node_ip dict to localhost/5003/changeIP
         try:
-            response = requests.post(url='http://54.164.152.164:5003/changeIP', data=node_ip).json()
+            response = requests.post(url='http://localhost:5003/changeIP', data=node_ip).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Autoscaler loses connection")
 
@@ -112,7 +112,7 @@ def remap():
     for key in cursor:
         keyToSend = {'key': key[0]}
         try:
-            response = requests.post(url='http://54.175.104.127:5002/map', data=keyToSend).json()
+            response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
         except requests.exceptions.ConnectionError as err:
             webapp.logger.warning("Manager app loses connection")
 
@@ -128,7 +128,7 @@ def remap():
             webapp.logger.warning("Key: " + str(key) + "cannot remap to cache")
     webapp.logger.warning('remap finished')
     try:
-        requests.post(url='http://54.164.152.164:5003/setMode', data=memcache_mode)
+        requests.post(url='http://localhost:5003/setMode', data=memcache_mode)
     except requests.exceptions.ConnectionError as err:
         webapp.logger.warning("Autoscaler loses connection")
     value = {"success": "true"}
