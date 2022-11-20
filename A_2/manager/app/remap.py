@@ -127,6 +127,7 @@ def remap():
             if response is None or response["success"] == "false":
                 webapp.logger.warning("Key: " + str(key) + "cannot remap to cache")
     webapp.logger.warning('remap finished')
+    dbconnection.put_mode(memcache_mode['num_node'], memcache_mode['mode'], memcache_mode['max_thr'], memcache_mode['min_thr'], memcache_mode['expand_ratio'], memcache_mode['shrink_ratio'])
     try:
         requests.post(url='http://localhost:5003/setMode', data=memcache_mode)
     except requests.exceptions.ConnectionError as err:
