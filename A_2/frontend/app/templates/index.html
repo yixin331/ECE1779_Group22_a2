@@ -84,5 +84,35 @@
     <a href onclick="window.open('http://localhost:5002/main', 'newwindow', 'height=800, width=800, top=200, left=200')  ">manager app</a>
 </div>
 
+<script>
+setInterval(function() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "pop_up", true);
+    xhr.send();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 ) {
+            if ( xhr.status === 200 ) {
+                console.log(JSON.parse(xhr.responseText) )
+                const response = JSON.parse(xhr.responseText);
+                if(response.message=='increased'){
+                    alert("node increased to " +  response.value);
+
+                }
+                if(response.message=='decreased'){
+                    alert("node decreased to " + response.value);
+
+                }
+
+            }
+            else {
+                console.log(xhr.statusText);
+            }
+        }
+    }
+}
+,2000);
+</script>
+
 </body>
 </html>

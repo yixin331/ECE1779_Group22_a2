@@ -1,5 +1,5 @@
 from flask import render_template, url_for, request, g
-from app import webapp, dbconnection
+from app import webapp, dbconnection,num_n
 import requests
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
@@ -76,3 +76,4 @@ def put():
             return render_template("put.html", result="Please select a valid image file")
     else:
         return render_template("put.html")
+

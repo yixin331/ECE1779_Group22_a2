@@ -14,3 +14,4 @@ def teardown_db(exception):
 def key():
     cursor = dbconnection.list_keys()
     return render_template("key.html", cursor=cursor)
+
