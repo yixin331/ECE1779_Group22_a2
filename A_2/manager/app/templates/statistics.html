@@ -16,6 +16,7 @@
 <table />
          <tr>
             <th>Updated Time</th>
+             <th>Number of Node</th>
             <th>Number of items</th>
              <th>Total Size</th>
             <th>Number of requests sent</th>
@@ -25,11 +26,13 @@
     {% for i in range(cursor['Time'] |length) %}
         <tr>
             <td>{{ cursor['Time'][(cursor['Time'] |length)-1-i]}}</td>
+             <td>{{ cursor['NumNode'][(cursor['Time'] |length)-1-i]}}</td>
         <td>{{ cursor['NumItem'][(cursor['Time'] |length)-1-i]}}</td>
         <td>{{ cursor['TotalSize'][(cursor['Time'] |length)-1-i]}}</td>
         <td>{{ cursor['NumRequest'][(cursor['Time'] |length)-1-i]}}</td>
         <td>{{ cursor['MissRate'][(cursor['Time'] |length)-1-i]}}</td>
         <td>{{ cursor['HitRate'][(cursor['Time'] |length)-1-i]}}</td>
+
         </tr>
     {% endfor %}
     </table>

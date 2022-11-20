@@ -21,6 +21,7 @@ memcache_mode = {'num_node': 1, 'mode': 'Manual', 'max_thr': 1, 'min_thr': 0, 'e
 memcache_config = {'capacity': 128, 'policy': 'LRU'}
 node_ip = {}
 memcache_stat = {}
+memcache_stat['NumNode']=[]
 memcache_stat['Time'] = []
 memcache_stat['NumItem'] = []
 memcache_stat['TotalSize'] = []
@@ -54,17 +55,25 @@ def schedule_cloud_watch(ip, id):
 
 def monitor_stats():
     metric_names = ['NumItem', 'TotalSize', 'NumRequest', 'HitRate', 'MissRate']
-    if len(memcache_stat['Time']) < 30:
+    if len(memcache_stat['Time']) <= 30:
         memcache_stat['Time'].append(datetime.now())
     else:
         memcache_stat['Time'].pop(0)
         memcache_stat['Time'].append(datetime.now())
 
+    if len(memcache_stat['NumNode']) <= 30:
+        memcache_stat['NumNode'].append(memcache_mode['num_node'])
+    else:
+        memcache_stat['NumNode'].pop(0)
+        memcache_stat['NumNode'].append(memcache_mode['num_node'])
+
+
+
     for metric in metric_names:
 
         value = get_stat(metric)
 
-        if len(memcache_stat[metric]) < 30:
+        if len(memcache_stat[metric]) <= 30:
             memcache_stat[metric].append(value)
         else:
             memcache_stat[metric].pop(0)

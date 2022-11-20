@@ -13,6 +13,6 @@ def showStat():
 @webapp.route('/pop', methods=['GET'])
 def pop():
     messageToSend = {'message': 'themessage'}
-    response = requests.post(url='http://35.170.186.67:5000/pop', data=messageToSend).json()
+    response = requests.post(url='http://localhost:5000/pop', data=messageToSend).json()
     return render_template("main.html",title="Manager APP")
 
