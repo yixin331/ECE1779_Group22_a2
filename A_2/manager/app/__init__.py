@@ -100,7 +100,7 @@ def get_stat(metric):
     total = 0
 
     for id, ip in node_ip.items():
-        if not ip == None:
+        if ip is not None:
             value = client.get_metric_statistics(
                 Period=60,
                 Namespace='Memcache',

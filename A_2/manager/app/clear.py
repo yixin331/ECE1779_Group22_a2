@@ -7,7 +7,7 @@ import requests
 def clear():
     if request.method == 'POST':
         for id, ip in node_ip.items():
-            if not ip == None:
+            if ip is not None:
                 node_address = 'http://' + ip + ':5001/clearCache'
                 try:
                     response = requests.post(url=node_address).json()

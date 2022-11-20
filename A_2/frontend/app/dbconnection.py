@@ -58,30 +58,6 @@ def put_config(capacity, policy):
     cnx.commit()
 
 
-# def show_stat():
-#     cnx = get_db()
-#
-#     cursor = cnx.cursor()
-#     query = "SELECT * FROM memcache_stat WHERE updated_time >= DATE_SUB(CONVERT_TZ(NOW(), @@session.time_zone,'-05:00'), INTERVAL 10 MINUTE) ORDER BY updated_time DESC;"
-#     cursor.execute(query)
-#
-#     return cursor
-
-
-# def put_stat(num_item, total_size, num_request, num_get, num_miss):
-#     cnx = get_db()
-#
-#     cursor = cnx.cursor()
-#     if num_get == 0:
-#         query = "INSERT INTO memcache_stat (updated_time, num_item, total_size, num_request, miss_rate, hit_rate) VALUES (%s, %s, %s, %s, %s, %s);"
-#         cursor.execute(query, (datetime.now(), num_item, total_size, num_request, 0, 0))
-#     else:
-#         query = "INSERT INTO memcache_stat (updated_time, num_item, total_size, num_request, miss_rate, hit_rate) VALUES (%s, %s, %s, %s, %s, %s);"
-#         cursor.execute(query, (datetime.now(), num_item, total_size, num_request, num_miss/num_get, (num_get- num_miss)/num_get))
-#
-#     cnx.commit()
-
-
 def put_mode(num_node, mode, max_thr, min_thr, expand_ratio, shrink_ratio):
     cnx = get_db()
 
