@@ -9,44 +9,6 @@ def teardown_db(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
-#
-# @webapp.route('/resize_pool', methods=['GET','POST'])
-# def resize_pool(type='all',result=None):
-#
-#     ec2 = boto3.resource('ec2')
-#     instances = ec2.instances.all()
-#     size=0
-#     for i in instances:
-#         size = size + 1
-#     size=size-1
-#     return render_template("resize/resize_pool.html",title="Resize Pool",size=size,type=type,result=result)
-#
-# @webapp.route('/shrink_pool', methods=['GET','POST'])
-# def shrink_pool():
-#     size=1#requests.post(url='http://localhost:5003/getSize').json()
-#     #size=size['value']
-#     return resize_pool(type='manu',result='manual mode')
-#
-# @webapp.route('/shrink_pool', methods=['GET','POST'])
-# def expand_pool():
-#     size=1#requests.post(url='http://localhost:5003/getSize').json()
-#     #size=size['value']
-#     return resize_pool(type='manu',result='manual mode')
-#
-#
-# @webapp.route('/resize_manu', methods=['GET', 'POST'])
-# def resize_manu():
-#     return render_template("mode.html", mode="Manual")
-#
-#
-# @webapp.route('/resize_auto', methods=['GET', 'POST'])
-# def resize_auto():
-#     return render_template("mode.html", mode="Auto")
-#
-#
-# @webapp.route('/auto_mode', methods=['GET', 'POST'])
-# def auto_mode():
-#     return resize_pool(type='auto',result='Auto mode')
 
 
 @webapp.route('/refreshMode', methods=['GET', 'POST'])

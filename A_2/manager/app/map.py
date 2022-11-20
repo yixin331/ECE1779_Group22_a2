@@ -14,7 +14,7 @@ def map():
     node_id = index % memcache_mode['num_node']
     active_list = []
     for id, ip in node_ip.items():
-        if not ip == None:
+        if ip is not None:
             active_list.append((id, ip))
     instance_id = active_list[node_id][0]
     webapp.logger.warning('key belong to instance: ' + str(instance_id))

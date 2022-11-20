@@ -7,7 +7,6 @@ def listKeys():
     memcache_stat['num_request'] += 1
     dataToSend = {}
     for key, item in memcache.items():
-        # webapp.logger.warning(type(item.decode('utf-8')))
         dataToSend[key] = item.decode('utf-8')
     value = {"success": "true", "content": dataToSend}
     response = webapp.response_class(

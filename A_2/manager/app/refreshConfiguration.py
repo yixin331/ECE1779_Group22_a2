@@ -25,7 +25,7 @@ def refreshConfiguration():
         response = None
         msg = ""
         for id, ip in node_ip.items():
-            if not ip == None:
+            if ip is not None:
                 # TODO: populate it to all memcache
                 node_address = 'http://' + ip + ':5001/setConfig'
                 try:
