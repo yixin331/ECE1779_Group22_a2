@@ -5,7 +5,6 @@ mysql mysql --host=ece1779-a2.cedgw5dhsseo.us-east-1.rds.amazonaws.com --port=33
 tmux new -d -s autoscaler "python3 A_2/autoscaler/run.py"
 tmux new -d -s frontend "python3 A_2/frontend/run.py"
 
-
 python3 A_2/manager/run.py
 pkill -f tmux
 echo "Server ended!"
