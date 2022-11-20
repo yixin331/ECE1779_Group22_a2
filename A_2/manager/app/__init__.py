@@ -55,13 +55,13 @@ def schedule_cloud_watch(ip, id):
 
 def monitor_stats():
     metric_names = ['NumItem', 'TotalSize', 'NumRequest', 'HitRate', 'MissRate']
-    if len(memcache_stat['Time']) <= 30:
+    if len(memcache_stat['Time']) < 30:
         memcache_stat['Time'].append(datetime.now())
     else:
         memcache_stat['Time'].pop(0)
         memcache_stat['Time'].append(datetime.now())
 
-    if len(memcache_stat['NumNode']) <= 30:
+    if len(memcache_stat['NumNode']) < 30:
         memcache_stat['NumNode'].append(memcache_mode['num_node'])
     else:
         memcache_stat['NumNode'].pop(0)
@@ -73,7 +73,7 @@ def monitor_stats():
 
         value = get_stat(metric)
 
-        if len(memcache_stat[metric]) <= 30:
+        if len(memcache_stat[metric]) < 30:
             memcache_stat[metric].append(value)
         else:
             memcache_stat[metric].pop(0)
