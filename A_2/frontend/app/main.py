@@ -165,7 +165,6 @@ def list_key(key):
             webapp.logger.warning('reload into cache')
             try:
                 response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
-                response = requests.post(url='http://localhost:5002/putImage', data=keyToSend, files=fileToSend).json()
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Manager app loses connection")
             # successfully get key
