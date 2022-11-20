@@ -132,8 +132,22 @@ def initialize_instance():
     # pre-configured 8 nodes
     instances = ec2.instances.filter(
         Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
+    response = None
     for instance in instances:
         node_ip[instance.instance_id] = None
+        webapp.logger.warning(instance.public_ip_address)
+        # clear cache stats and set default config
+        node_address = 'http://' + str(instance.public_ip_address) + ':5001/clearStats'
+        try:
+            response = requests.post(url=node_address).json()
+        except requests.exceptions.ConnectionError as err:
+            webapp.logger.warning("Cache loses connection")
+        config_address = 'http://' + str(instance.public_ip_address) + ':5001/setConfig'
+        keyToSend = {'policy': memcache_config['policy'], 'size': memcache_config['capacity']}
+        try:
+            response = requests.post(url=node_address, data=keyToSend).json()
+        except requests.exceptions.ConnectionError as err:
+            webapp.logger.warning("Cache loses connection")
     id = list(node_ip.keys())[0]
     instance = ec2.Instance(id)
     public_ip = instance.public_ip_address
