@@ -2,7 +2,7 @@ from flask import request, g, json
 from app import webapp
 import requests
 import boto3
-
+from app.config import aws_config
 
 @webapp.route('/deleteAll', methods=['POST'])
 def deleteAll():
