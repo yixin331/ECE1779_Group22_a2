@@ -109,23 +109,23 @@ def remap():
     keys_to_sort = list(key_list.keys())
     if len(keys_to_sort) > 0:
         cursor = dbconnection.sort_by_time(keys_to_sort)
-    for key in cursor:
-        keyToSend = {'key': key[0]}
-        try:
-            response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
-        except requests.exceptions.ConnectionError as err:
-            webapp.logger.warning("Manager app loses connection")
+        for key in cursor:
+            keyToSend = {'key': key[0]}
+            try:
+                response = requests.post(url='http://localhost:5002/map', data=keyToSend).json()
+            except requests.exceptions.ConnectionError as err:
+                webapp.logger.warning("Manager app loses connection")
 
-        node_address = 'http://' + response["content"] + ':5001/putImage'
-        file = io.BytesIO(base64.b64decode(key_list[key[0]]))
-        fileToSend = {'file': file}
+            node_address = 'http://' + response["content"] + ':5001/putImage'
+            file = io.BytesIO(base64.b64decode(key_list[key[0]]))
+            fileToSend = {'file': file}
 
-        try:
-            response = requests.post(url=node_address, data=keyToSend, files=fileToSend).json()
-        except requests.exceptions.ConnectionError as err:
-            webapp.logger.warning("Cache loses connection")
-        if response is None or response["success"] == "false":
-            webapp.logger.warning("Key: " + str(key) + "cannot remap to cache")
+            try:
+                response = requests.post(url=node_address, data=keyToSend, files=fileToSend).json()
+            except requests.exceptions.ConnectionError as err:
+                webapp.logger.warning("Cache loses connection")
+            if response is None or response["success"] == "false":
+                webapp.logger.warning("Key: " + str(key) + "cannot remap to cache")
     webapp.logger.warning('remap finished')
     try:
         requests.post(url='http://localhost:5003/setMode', data=memcache_mode)
