@@ -34,6 +34,8 @@ def refreshMode():
                     requests.post(url='http://localhost:5000/sizeChange', data=numToSend)
                 except requests.exceptions.ConnectionError as err:
                     webapp.logger.warning("Frontend loses connection")
+            else:
+                dbconnection.put_mode(memcache_mode['num_node'], memcache_mode['mode'], memcache_mode['max_thr'], memcache_mode['min_thr'], memcache_mode['expand_ratio'], memcache_mode['shrink_ratio'])
 
         elif mode == 'Auto':
             memcache_mode['max_thr'] = float(request.form.get('max_thr'))
@@ -46,5 +48,5 @@ def refreshMode():
             except requests.exceptions.ConnectionError as err:
                 webapp.logger.warning("Autoscaler loses connection")
 
-        dbconnection.put_mode(memcache_mode['num_node'], memcache_mode['mode'], memcache_mode['max_thr'], memcache_mode['min_thr'], memcache_mode['expand_ratio'], memcache_mode['shrink_ratio'])
+            dbconnection.put_mode(memcache_mode['num_node'], memcache_mode['mode'], memcache_mode['max_thr'], memcache_mode['min_thr'], memcache_mode['expand_ratio'], memcache_mode['shrink_ratio'])
         return render_template("mode.html", num_node=memcache_mode['num_node'], result="Mode has been reset",mode=memcache_mode['mode'])
