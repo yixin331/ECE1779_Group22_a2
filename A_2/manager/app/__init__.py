@@ -41,6 +41,24 @@ from app import map
 from app import remap
 from app import sizeChange
 
+# call this at first
+@webapp.route('/ec2_create', methods=['POST'])
+def create_instances():
+    ec2_client = boto3.client(
+        'ec2',
+        region_name=aws_config['region'],
+        aws_access_key_id=aws_config['access_key_id'],
+        aws_secret_access_key=aws_config['secret_access_key']
+    )
+    USERDATA_SCRIPT = '''#!/bin/bash
+    cd /home/ubuntu/ECE1779_Group22_a2/A_2/memcache
+    pip install flask
+    pip install apscheduler
+    pip install boto3
+    python3 run.py'''
+    instances = ec2_client.run_instances(ImageId=config.ami_id, MinCount=1, MaxCount=8,
+                                         InstanceType='t2.micro',
+                                         UserData=USERDATA_SCRIPT)
 
 # TODO: need to call this when creating a new memcache instance
 def schedule_cloud_watch(ip, id):
